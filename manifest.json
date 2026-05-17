@@ -1,0 +1,43 @@
+{
+  "name": "AMweb — Agence Digitale Premium Maroc",
+  "short_name": "AMweb",
+  "description": "Agence digitale premium au Maroc. Création de sites web haut de gamme, SEO et marketing digital à Casablanca.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0a0a0a",
+  "theme_color": "#c9a84c",
+  "orientation": "portrait-primary",
+  "lang": "fr-MA",
+  "scope": "/",
+  "categories": ["business", "productivity", "utilities"],
+  "icons": [
+    {
+      "src": "favicon.ico",
+      "sizes": "64x64 32x32 24x24 16x16",
+      "type": "image/x-icon",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "amweb.webp",
+      "sizes": "512x512",
+      "type": "image/webp",
+      "purpose": "any maskable"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Nos Offres",
+      "short_name": "Offres",
+      "description": "Voir nos forfaits et tarifs de création de site web au Maroc",
+      "url": "/offres.html",
+      "icons": [{"src": "favicon.ico", "sizes": "64x64"}]
+    },
+    {
+      "name": "Contact WhatsApp",
+      "short_name": "WhatsApp",
+      "description": "Nous contacter directement sur WhatsApp",
+      "url": "https://wa.me/212780611376",
+      "icons": [{"src": "favicon.ico", "sizes": "64x64"}]
+    }
+  ]
+}

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- ============================================================
+     SITEMAP.XML — AMweb.ma
+     Généré pour Google Search Console
+     Mise à jour : 2026-05-08
+     ============================================================ -->
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml">
+
+  <!-- [SEO] Page d'accueil — Priorité maximale -->
+  <url>
+    <loc>https://www.amweb.ma/</loc>
+    <lastmod>2026-05-08</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+    <!-- [SEO] Hreflang — version bilingue FR / EN -->
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.amweb.ma/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.amweb.ma/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.amweb.ma/"/>
+  </url>
+
+  <!-- [SEO] Page Offres & Tarifs — Priorité haute -->
+  <url>
+    <loc>https://www.amweb.ma/offres.html</loc>
+    <lastmod>2026-05-08</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.amweb.ma/offres.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.amweb.ma/offres.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.amweb.ma/offres.html"/>
+  </url>
+
+</urlset>

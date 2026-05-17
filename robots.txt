@@ -1,0 +1,52 @@
+# ============================================================
+# ROBOTS.TXT — AMweb.ma
+# Agence Digitale Premium | Casablanca, Maroc
+# ============================================================
+
+# [SEO] Autoriser tous les robots Google & Bing
+User-agent: *
+Allow: /
+
+# [SEO] Autoriser spécifiquement Google Bot
+User-agent: Googlebot
+Allow: /
+Crawl-delay: 1
+
+# [SEO] Autoriser Google Images
+User-agent: Googlebot-Image
+Allow: /
+
+# [SEO] Autoriser Bingbot
+User-agent: Bingbot
+Allow: /
+
+# [SEO] Autoriser DuckDuckBot
+User-agent: DuckDuckBot
+Allow: /
+
+# [SEO] Bloquer les bots indésirables
+User-agent: AhrefsBot
+Disallow: /
+
+User-agent: SemrushBot
+Disallow: /
+
+User-agent: MJ12bot
+Disallow: /
+
+User-agent: DotBot
+Disallow: /
+
+# ============================================================
+# [SEO] Fichiers à ne pas indexer
+# ============================================================
+Disallow: /node_modules/
+Disallow: /.git/
+Disallow: /wp-admin/
+Disallow: /cgi-bin/
+Disallow: /*.json$
+
+# ============================================================
+# [SEO] Sitemap XML — Indique l'URL à Google Search Console
+# ============================================================
+Sitemap: https://www.amweb.ma/sitemap.xml
