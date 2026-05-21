@@ -1,7 +1,7 @@
 {
-  "name": "AMweb — Agence Digitale Premium Maroc",
+  "name": "AMweb — service Digitale Premium Maroc",
   "short_name": "AMweb",
-  "description": "Agence digitale premium au Maroc. Création de sites web haut de gamme, SEO et marketing digital à Casablanca.",
+  "description": "service digitale premium au Maroc. Création de sites web haut de gamme, SEO et marketing digital à Casablanca.",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#0a0a0a",

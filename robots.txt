@@ -1,6 +1,6 @@
 # ============================================================
 # ROBOTS.TXT — AMweb.ma
-# Agence Digitale Premium | Casablanca, Maroc
+# service Digitale Premium | Casablanca, Maroc
 # ============================================================
 
 # [SEO] Autoriser tous les robots Google & Bing
