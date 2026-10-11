@@ -841,7 +841,7 @@ button.sat:hover { border-color: var(--accent-fg); background: var(--surface-2);
 .link-inline { font-size: inherit; color: inherit; text-decoration: underline; text-underline-offset: 3px; }
 .footer-legal { display: inline-flex; gap: 18px; flex-wrap: wrap; }
 .footer-legal a:hover, .link-inline:hover { color: var(--text); }
-.footer-grid { grid-template-columns: 1.3fr 1fr 1fr 1fr; }
+.footer-grid { grid-template-columns: 1.4fr 1fr 1fr; }
 
 /* ---------- Free audit ---------- */
 .audit { display: grid; grid-template-columns: 1fr 1.05fr; gap: clamp(32px, 6vw, 100px); align-items: start; }
@@ -903,6 +903,7 @@ button.sat:hover { border-color: var(--accent-fg); background: var(--surface-2);
 @media (max-width: 1023px) {
   .audit, .maint { grid-template-columns: 1fr; }
   .footer-grid { grid-template-columns: 1fr 1fr; }
+  .footer-grid > :first-child { grid-column: 1 / -1; }
   .quotes { grid-template-columns: 1fr; }
 }
 @media (max-width: 767px) {
