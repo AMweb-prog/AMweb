@@ -63,7 +63,7 @@
       if (!running) draw((performance.now() - t0) / 1000);
     }
     function project(ring, a) {
-      const R = ring.r * Math.min(W, H * 1.15);
+      const R = ring.r * Math.min(W, H * 1.15) * (W < 520 ? .86 : 1);
       const t = (ring.tilt + my * 9) * Math.PI / 180;
       const rz = (ring.rot + mx * 7) * Math.PI / 180;
       const x = R * Math.cos(a), z = R * Math.sin(a);
@@ -116,7 +116,8 @@
         const p = project(r0, a);
         const [w, h] = satSize[i] || [0, 0];
         const sc = .82 + .22 * (p.z + 1) / 2;
-        s.style.transform = `translate3d(${(p.x - w / 2).toFixed(1)}px, ${(p.y - h / 2).toFixed(1)}px, 0) scale(${sc.toFixed(3)})`;
+        const sx = Math.min(Math.max(p.x - w / 2, 6), W - w - 6);
+        s.style.transform = `translate3d(${sx.toFixed(1)}px, ${(p.y - h / 2).toFixed(1)}px, 0) scale(${sc.toFixed(3)})`;
         s.style.opacity = p.z >= 0 ? 1 : .42;
         s.classList.toggle('is-front', p.z >= 0);
       });
@@ -359,7 +360,7 @@
     document.querySelectorAll('.hero').forEach(hero => {
       const stage = hero.querySelector('.stage');
       const copy = hero.querySelector('.hero-copy');
-      mm.add('(min-width: 768px)', () => {
+      mm.add('(min-width: 1024px)', () => {
         gsap.set(stage, { yPercent: -50 });
         gsap.to(stage, { scale: 1.18, opacity: .2, ease: 'none', scrollTrigger: { trigger: hero, start: 'top top', end: 'bottom top', scrub: true } });
         gsap.to(copy, { y: -90, opacity: 0, ease: 'none', scrollTrigger: { trigger: hero, start: '20% top', end: 'bottom top', scrub: true } });
@@ -886,7 +887,7 @@
     const bar = document.getElementById('mbar');
     if (!bar) return;
     const seen = new Set();
-    const targets = document.querySelectorAll('form, .footer');
+    const targets = document.querySelectorAll('form, .footer, .hero');
     const io = new IntersectionObserver(entries => {
       entries.forEach(en => (en.isIntersecting ? seen.add(en.target) : seen.delete(en.target)));
       bar.classList.toggle('is-hidden', seen.size > 0);
