@@ -887,7 +887,7 @@
     const bar = document.getElementById('mbar');
     if (!bar) return;
     const seen = new Set();
-    const targets = document.querySelectorAll('form, .footer, .hero');
+    const targets = document.querySelectorAll('form, .footer, .hero, .page-head, .page-hero');
     const io = new IntersectionObserver(entries => {
       entries.forEach(en => (en.isIntersecting ? seen.add(en.target) : seen.delete(en.target)));
       bar.classList.toggle('is-hidden', seen.size > 0);

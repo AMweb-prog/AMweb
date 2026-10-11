@@ -1167,3 +1167,43 @@ h1, h2, h3, .display { overflow-wrap: break-word; }
   .pcard { min-height: 0; }
   .pcard-media, .pcard-orbit { min-height: 300px; }
 }
+
+/* ---------- QA pass 3: real-device checks (landscape phones, small phones) ---------- */
+/* Landscape phones: text left, orbit right, everything above the fold */
+@media (orientation: landscape) and (max-height: 540px) and (max-width: 1023px) {
+  .hero { min-height: 100dvh; flex-direction: row; align-items: center; padding-top: calc(var(--nav-h) + 12px); padding-bottom: 16px; }
+  .hero-grid { display: block; }
+  .stage, [dir="rtl"] .stage { position: absolute; order: 0; top: 50%; right: -2vw; left: auto; transform: translateY(-50%); width: min(44vw, 82dvh); max-width: none; aspect-ratio: 1; margin: 0; }
+  [dir="rtl"] .stage { right: auto; left: 0; }
+  .stage-mark { width: 52%; }
+  .hero-copy { max-width: 56%; }
+  .hero-title { font-size: clamp(1.6rem, 8.5dvh, 2.6rem); margin-bottom: 12px; }
+  .hero-sub { font-size: .95rem; margin-bottom: 18px; }
+  .hero-actions .btn { flex: 0 0 auto; }
+  .page-head { padding-top: calc(var(--nav-h) + 6px); }
+  .page-head .page-title { font-size: clamp(1.6rem, 9dvh, 2.4rem); margin-bottom: 10px; }
+  .page-head .lead { font-size: .95rem; margin-bottom: 14px; }
+  .crumbs { margin-bottom: 8px; }
+}
+/* Landscape phones: the contact bar becomes a small pill in the corner instead of a full-width strip */
+@media (max-width: 767px) and (orientation: landscape) and (max-height: 540px) {
+  .mbar { inset: auto calc(12px + env(safe-area-inset-right)) calc(8px + env(safe-area-inset-bottom)) auto; padding: 4px; }
+  .mbar-wa { height: 40px; padding: 0 12px; }
+  .mbar-wa span { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
+  .mbar-cta { --h: 40px; flex: 0 0 auto; font-size: 14px; }
+  body { padding-bottom: 56px; }
+}
+/* Short portrait phones (iPhone SE and similar): smaller orbit so the button stays visible */
+@media (max-width: 767px) and (orientation: portrait) and (max-height: 700px) {
+  .stage, [dir="rtl"] .stage { aspect-ratio: 1 / .62; }
+  .stage-mark { width: 40%; }
+  .hero { padding-top: calc(var(--nav-h) + 12px); }
+  .hero-title { margin-bottom: 16px; }
+  .hero-sub { margin-bottom: 22px; }
+}
+/* Very narrow phones: lighter satellites so they do not crowd the logo */
+@media (max-width: 380px) {
+  .stage-mark { width: 42%; }
+  .sat { font-size: 10.5px; padding: 6px 9px 6px 6px; gap: 6px; }
+  .sat i { width: 18px; height: 18px; font-size: 11px; }
+}
