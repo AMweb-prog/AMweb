@@ -1,6 +1,6 @@
 # ============================================================
-# ROBOTS.TXT — AMweb.ma
-# service Digitale Premium | Casablanca, Maroc
+# ROBOTS.TXT - AMweb.ma
+# Studio web & digital | Kénitra, Maroc
 # ============================================================
 
 # [SEO] Autoriser tous les robots Google & Bing
@@ -47,6 +47,6 @@ Disallow: /cgi-bin/
 Disallow: /*.json$
 
 # ============================================================
-# [SEO] Sitemap XML — Indique l'URL à Google Search Console
+# [SEO] Sitemap XML - Indique l'URL à Google Search Console
 # ============================================================
 Sitemap: https://www.amweb.ma/sitemap.xml
