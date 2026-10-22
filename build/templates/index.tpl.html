@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html lang="{{LANG}}" dir="{{DIR}}" data-theme="dark">
+<head>
+  {{GTM_HEAD}}
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  {{BOOT}}
+
+  <!-- [SEO] Balises principales -->
+  {{HEADMETA}}
+  <meta name="author" content="AMweb" />
+  <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
+  <meta name="geo.region" content="MA" />
+  <meta name="geo.placename" content="Kénitra, Maroc" />
+  <meta name="geo.position" content="34.2610;-6.5802" />
+  <meta name="ICBM" content="34.2610, -6.5802" />
+
+  <!-- [SEO] Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="https://www.amweb.ma/assets/img/og-image.jpg" />
+  <meta property="og:image:alt" content="Logo AMweb, studio web et digital" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:site_name" content="AMweb" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:image" content="https://www.amweb.ma/assets/img/og-image.jpg" />
+  <meta name="twitter:site" content="@amweb_ma" />
+
+  {{ASSETS_HEAD}}
+
+  <!-- [SEO] Données structurées -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "LocalBusiness",
+        "@id": "https://www.amweb.ma/#localbusiness",
+        "name": "AMweb",
+        "alternateName": "AMweb Studio web & digital",
+        "description": "Studio web et digital basé à Kénitra : sites vitrines, e-commerce, applications et CRM sur mesure, référencement SEO et marketing digital.",
+        "url": "https://www.amweb.ma/",
+        "logo": { "@type": "ImageObject", "url": "https://www.amweb.ma/assets/img/icon-512.png", "width": 512, "height": 512 },
+        "image": "https://www.amweb.ma/assets/img/og-image.jpg",
+        "telephone": "+212780611376",
+        "email": "contact@amweb.ma",
+        "contactPoint": [
+          { "@type": "ContactPoint", "contactType": "sales", "email": "contact@amweb.ma", "telephone": "+212780611376", "availableLanguage": ["fr", "ar", "en"] },
+          { "@type": "ContactPoint", "contactType": "customer support", "email": "support@amweb.ma" },
+          { "@type": "ContactPoint", "contactType": "customer service", "email": "projet@amweb.ma" }
+        ],
+        "address": { "@type": "PostalAddress", "addressLocality": "Kénitra", "addressRegion": "Rabat-Salé-Kénitra", "addressCountry": "MA" },
+        "geo": { "@type": "GeoCoordinates", "latitude": 34.2610, "longitude": -6.5802 },
+        "areaServed": { "@type": "Country", "name": "Maroc" },
+        "serviceArea": [
+          {"@type": "City", "name": "Kénitra"},
+          {"@type": "City", "name": "Rabat"},
+          {"@type": "City", "name": "Salé"},
+          {"@type": "Country", "name": "Maroc"}
+        ],
+        "priceRange": "MAD {{prixnum:vitrine}} - MAD {{prixnum:premium}}+",
+        "currenciesAccepted": "MAD",
+        "openingHours": "Mo-Fr 09:00-18:00",
+        "sameAs": ["https://www.instagram.com/amweb.ma/", "https://www.tiktok.com/@amweb.ma"],
+        "hasOfferCatalog": {
+          "@type": "OfferCatalog",
+          "name": "Services digitaux AMweb",
+          "itemListElement": [
+            { "@type": "Offer", "name": "Site Vitrine", "price": "{{prixnum:vitrine}}", "priceCurrency": "MAD", "description": "Site vitrine professionnel de 3 pages, design responsive, SEO de base et hébergement 1 an." },
+            { "@type": "Offer", "name": "Site E-commerce", "price": "{{prixnum:ecommerce}}", "priceCurrency": "MAD", "description": "Boutique en ligne complète avec paiement intégré, tableau de bord et SEO avancé." },
+            { "@type": "Offer", "name": "Site Premium", "priceSpecification": { "@type": "PriceSpecification", "minPrice": "{{prixnum:premium}}", "priceCurrency": "MAD" }, "description": "Solution sur mesure : application, CRM, SEO avancé et design haut de gamme. Prix à partir de {{prix:premium}} MAD, défini en rendez-vous." }
+          ]
+        }
+      },
+      {
+        "@type": "WebSite",
+        "@id": "https://www.amweb.ma/#website",
+        "url": "https://www.amweb.ma/",
+        "name": "AMweb",
+        "description": "Studio web et digital à Kénitra : création de site web, SEO, marketing digital.",
+        "publisher": { "@id": "https://www.amweb.ma/#localbusiness" },
+        "inLanguage": ["fr-MA", "en"]
+      },
+      {
+        "@type": "Organization",
+        "@id": "https://www.amweb.ma/#organization",
+        "name": "AMweb",
+        "url": "https://www.amweb.ma/",
+        "logo": "https://www.amweb.ma/assets/img/icon-512.png",
+        "contactPoint": { "@type": "ContactPoint", "telephone": "+212780611376", "contactType": "customer service", "availableLanguage": ["French", "Arabic", "English"] },
+        "sameAs": ["https://www.instagram.com/amweb.ma/", "https://www.tiktok.com/@amweb.ma"]
+      },
+      {
+        "@type": "WebPage",
+        "@id": "https://www.amweb.ma/#webpage",
+        "url": "https://www.amweb.ma/",
+        "name": "AMweb | Studio web & digital à Kénitra",
+        "isPartOf": {"@id": "https://www.amweb.ma/#website"},
+        "about": {"@id": "https://www.amweb.ma/#localbusiness"},
+        "breadcrumb": { "@type": "BreadcrumbList", "itemListElement": [ { "@type": "ListItem", "position": 1, "name": "Accueil", "item": "https://www.amweb.ma/" } ] }
+      }
+    ]
+  }
+  </script>
+
+  {{GA}}
+</head>
+<body data-page="index">
+  {{GTM_BODY}}
+  {{SPRITE}}
+  {{NAV}}
+
+  <main id="main">
+
+    <!-- ===================== HERO ===================== -->
+    <section class="hero" id="hero" aria-labelledby="hero-title">
+      <div class="wrap hero-grid">
+        <div class="hero-copy">
+          <h1 class="hero-title display" id="hero-title">
+            <span class="line"><span>[[Votre marque,|Your brand,]]</span></span>
+            <span class="line"><span class="accent">[[en orbite.|in orbit.]]</span></span>
+          </h1>
+          <p class="hero-sub">[[Studio web & digital à Kénitra. Sites, boutiques en ligne et applications qui vous ramènent des clients.|Web & digital studio in Kénitra. Websites, online stores and apps that bring you customers.]]</p>
+          <div class="hero-actions">
+            <a href="#contact" class="btn btn-primary magnetic">[[Démarrer un projet|Start a project]] <i class="ph ph-arrow-right" aria-hidden="true"></i></a>
+            <a href="{{HOME}}offres.html" class="btn btn-ghost magnetic">[[Voir les offres|See the offers]]</a>
+          </div>
+        </div>
+
+        <div class="stage" data-orbit aria-hidden="true">
+          <canvas class="stage-back"></canvas>
+          <div class="stage-mark">{{MARK:hero}}</div>
+          <canvas class="stage-front"></canvas>
+          <button class="sat" type="button" tabindex="-1" data-go="panel:1"><i class="ph ph-browser"></i>[[Sites web|Websites]]</button>
+          <button class="sat" type="button" tabindex="-1" data-go="panel:2"><i class="ph ph-squares-four"></i>[[Apps & CRM|Apps & CRM]]</button>
+          <button class="sat" type="button" tabindex="-1" data-go="panel:3"><i class="ph ph-magnifying-glass"></i>SEO</button>
+          <button class="sat" type="button" tabindex="-1" data-go="panel:4"><i class="ph ph-megaphone"></i>[[Marketing|Marketing]]</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== MARQUEE ===================== -->
+    <div class="marquee" aria-hidden="true">
+      <div class="marquee-track" id="marquee">
+        <div class="marquee-group">
+          <div class="marquee-item"><span>[[Sites vitrines|Showcase sites]]</span><svg viewBox="0 0 182 96"><use href="#lg-mark"/></svg></div>
+          <div class="marquee-item"><span>E-commerce</span><svg viewBox="0 0 182 96"><use href="#lg-mark"/></svg></div>
+          <div class="marquee-item"><span>[[Applications|Applications]]</span><svg viewBox="0 0 182 96"><use href="#lg-mark"/></svg></div>
+          <div class="marquee-item"><span>CRM</span><svg viewBox="0 0 182 96"><use href="#lg-mark"/></svg></div>
+          <div class="marquee-item"><span>SEO</span><svg viewBox="0 0 182 96"><use href="#lg-mark"/></svg></div>
+          <div class="marquee-item"><span>[[Marketing digital|Digital marketing]]</span><svg viewBox="0 0 182 96"><use href="#lg-mark"/></svg></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===================== ABOUT ===================== -->
+    <section class="section" id="about" aria-labelledby="about-title">
+      <div class="wrap">
+        <h2 class="sr-only" id="about-title">[[À propos d'AMweb|About AMweb]]</h2>
+        <p class="manifesto" id="manifesto">[[Un beau site ne suffit plus. Il doit vous trouver des clients. Chez AMweb, on conçoit, on développe et on propulse votre marque sur Google et les réseaux, de A à Z.|A beautiful website is no longer enough. It has to find you customers. At AMweb, we design, build and launch your brand on Google and social media, from A to Z.]]</p>
+
+        <div class="about-row">
+          <figure class="about-media" style="margin:0">
+            <div class="art"><img src="{{ROOT}}assets/img/art/about.webp" alt="[[Illustration 3D : sphère chromée en orbite dans des anneaux menthe|3D illustration: chrome sphere orbiting in mint rings]]" width="1200" height="1500" loading="lazy" decoding="async" data-parallax /></div>
+          </figure>
+          <div class="about-stats" role="list">
+            <div class="stat" role="listitem">
+              <span class="stat-num"><span data-count="50">50</span><sup>+</sup></span>
+              <span class="stat-label">[[Projets livrés pour des entreprises au Maroc|Projects delivered for businesses in Morocco]]</span>
+            </div>
+            <div class="stat" role="listitem">
+              <span class="stat-num"><span data-count="100">100</span><sup>%</sup></span>
+              <span class="stat-label">[[Clients satisfaits|Satisfied clients]]</span>
+            </div>
+            <div class="stat" role="listitem">
+              <span class="stat-num"><span data-count="3">3</span><sup>+</sup></span>
+              <span class="stat-label">[[Années à construire des sites qui performent|Years building sites that perform]]</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== MARKET (real data, DataReportal Digital 2026) ===================== -->
+    <section class="section" id="maroc" aria-labelledby="market-title" style="padding-top:0">
+      <div class="wrap">
+        <div class="market">
+          <div class="market-mark" aria-hidden="true"><svg viewBox="0 0 182 96"><use href="#lg-mark"/></svg></div>
+          <h2 class="market-title display" id="market-title" data-reveal>[[Vos clients sont déjà en ligne. Est-ce qu'ils vous trouvent ?|Your customers are already online. Can they find you?]]</h2>
+          <div class="market-grid">
+            <div class="mfig">
+              <span class="mfig-num display"><span data-count="35.5" data-dec="1">35,5</span><small>M</small></span>
+              <p>[[Marocains sur internet, soit 92 % de la population.|Moroccans online, that is 92% of the population.]]</p>
+            </div>
+            <div class="mfig">
+              <span class="mfig-num display"><span data-count="22.8" data-dec="1">22,8</span><small>M</small></span>
+              <p>[[comptes actifs sur les réseaux sociaux au Maroc.|active social media users in Morocco.]]</p>
+            </div>
+            <div class="mfig">
+              <span class="mfig-num display"><span data-count="57.1" data-dec="1">57,1</span><small>M</small></span>
+              <p>[[connexions mobiles : plus que d'habitants.|mobile connections: more than the population.]]</p>
+            </div>
+          </div>
+          <p class="market-src">[[Source :|Source:]] <a href="https://datareportal.com/reports/digital-2026-morocco" target="_blank" rel="noopener">DataReportal, Digital 2026 Morocco</a></p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== SERVICES (horizontal pan) ===================== -->
+    <section class="services" id="services" aria-labelledby="services-title">
+      <div class="hpan" id="hpan">
+        <div class="hpan-track" id="hpanTrack">
+          <div class="panel panel-intro">
+            <h2 class="h2 display" id="services-title">[[Ce qu'on fait.|What we do.]]</h2>
+            <p class="lead">[[Quatre expertises, une seule équipe. De la première maquette jusqu'à votre premier client.|Four areas of expertise, one team. From the first mockup to your first customer.]]</p>
+          </div>
+
+          <article class="panel">
+            <div class="panel-body">
+              <div>
+                <div class="panel-ico" aria-hidden="true"><i class="ph ph-browser"></i></div>
+                <h3 class="h3 display">[[Création de site web|Website creation]]</h3>
+                <p>[[Sites vitrines et boutiques en ligne sur mesure : rapides, superbes sur mobile, faciles à gérer et pensés pour transformer chaque visite en demande.|Custom showcase sites and online stores: fast, stunning on mobile, easy to manage and built to turn every visit into an enquiry.]]</p>
+              </div>
+              <div class="tags"><span class="tag">[[Site vitrine|Showcase site]]</span><span class="tag">[[E-commerce|E-commerce]]</span><span class="tag">[[Responsive|Responsive]]</span></div>
+            </div>
+            <div class="panel-media"><div class="art"><img src="{{ROOT}}assets/img/art/web.webp" alt="[[Illustration 3D : écrans de verre flottants|3D illustration: floating glass screens]]" width="1200" height="1400" loading="lazy" decoding="async" /></div></div>
+          </article>
+
+          <article class="panel panel--mint panel--flip">
+            <div class="panel-body">
+              <div>
+                <div class="panel-ico" aria-hidden="true"><i class="ph ph-squares-four"></i></div>
+                <h3 class="h3 display">[[Applications & CRM|Apps & CRM]]</h3>
+                <p>[[Applications web et mobiles, CRM et outils de gestion taillés pour votre métier. Vos clients, vos ventes et vos équipes au même endroit.|Web and mobile apps, CRMs and management tools built around your business. Your customers, sales and teams in one place.]]</p>
+              </div>
+              <div class="tags"><span class="tag">[[Application|Application]]</span><span class="tag">CRM</span><span class="tag">[[Automatisation|Automation]]</span></div>
+            </div>
+            <div class="panel-media"><div class="art"><img src="{{ROOT}}assets/img/art/apps.webp" alt="[[Illustration 3D : modules cubiques assemblés|3D illustration: assembled cube modules]]" width="1200" height="1400" loading="lazy" decoding="async" /></div></div>
+          </article>
+
+          <article class="panel">
+            <div class="panel-body">
+              <div>
+                <div class="panel-ico" aria-hidden="true"><i class="ph ph-magnifying-glass"></i></div>
+                <h3 class="h3 display">[[Référencement SEO|SEO]]</h3>
+                <p>[[Apparaissez au moment où vos clients cherchent : SEO technique, contenus optimisés, fiche Google Business et suivi des positions.|Show up the moment customers search: technical SEO, optimised content, Google Business profile and rank tracking.]]</p>
+              </div>
+              <div class="tags"><span class="tag">[[SEO local|Local SEO]]</span><span class="tag">Google Business</span><span class="tag">[[Analytics|Analytics]]</span></div>
+            </div>
+            <div class="panel-media"><div class="art"><img src="{{ROOT}}assets/img/art/seo.webp" alt="[[Illustration 3D : colonnes chromées qui montent vers une sphère lumineuse|3D illustration: chrome columns rising toward a glowing sphere]]" width="1200" height="1400" loading="lazy" decoding="async" /></div></div>
+          </article>
+
+          <article class="panel panel--flip">
+            <div class="panel-body">
+              <div>
+                <div class="panel-ico" aria-hidden="true"><i class="ph ph-megaphone"></i></div>
+                <h3 class="h3 display">[[Marketing digital|Digital marketing]]</h3>
+                <p>[[Campagnes Instagram, TikTok, Facebook et Google Ads qui ciblent les bons profils et transforment l'attention en ventes.|Instagram, TikTok, Facebook and Google Ads campaigns that target the right people and turn attention into sales.]]</p>
+              </div>
+              <div class="tags"><span class="tag">Meta Ads</span><span class="tag">TikTok</span><span class="tag">Google Ads</span></div>
+            </div>
+            <div class="panel-media"><div class="art"><img src="{{ROOT}}assets/img/art/marketing.webp" alt="[[Illustration 3D : explosion de sphères depuis un cône chromé|3D illustration: spheres bursting from a chrome cone]]" width="1200" height="1400" loading="lazy" decoding="async" /></div></div>
+          </article>
+        </div>
+        <div class="hpan-progress" id="hpanProgress" aria-hidden="true"></div>
+      </div>
+    </section>
+
+    <!-- ===================== PROCESS (sticky stack) ===================== -->
+    <section class="section" id="process" aria-labelledby="process-title">
+      <div class="wrap">
+        <div class="process-head">
+          <span class="eyebrow">[[Méthode|Method]]</span>
+          <h2 class="h2 display" id="process-title" data-reveal>[[Du premier rendez-vous au lancement, sans zone grise.|From the first meeting to launch, no grey areas.]]</h2>
+        </div>
+
+        <div class="stack" id="stack">
+          <article class="pcard" style="--i:0">
+            <div class="pcard-body">
+              <h3 class="pcard-verb display">[[Écouter|Listen]]</h3>
+              <div>
+                <p>[[Un rendez-vous pour comprendre votre activité, vos clients et vos objectifs. Vous repartez avec un plan clair et un devis précis.|A meeting to understand your business, customers and goals. You leave with a clear plan and a precise quote.]]</p>
+                <div class="pcard-out" style="margin-top:24px"><i class="ph ph-check-circle" aria-hidden="true"></i>[[Plan d'action et devis gratuit|Action plan and free quote]]</div>
+              </div>
+            </div>
+            <div class="pcard-media"><div class="art"><img src="{{ROOT}}assets/img/art/method-ecouter.webp" alt="[[Illustration 3D : bulles de conversation et checklist du premier rendez-vous|3D illustration: conversation bubbles and first-meeting checklist]]" width="1200" height="1000" loading="lazy" decoding="async" /></div></div>
+          </article>
+
+          <article class="pcard pcard--mint" style="--i:1">
+            <div class="pcard-body">
+              <h3 class="pcard-verb display">[[Concevoir|Design]]</h3>
+              <div>
+                <p>[[On dessine votre site écran par écran. Vous validez chaque page avant la première ligne de code.|We design your site screen by screen. You approve every page before the first line of code.]]</p>
+                <div class="pcard-out" style="margin-top:24px"><i class="ph ph-check-circle" aria-hidden="true"></i>[[Maquettes validées par vous|Mockups approved by you]]</div>
+              </div>
+            </div>
+            <div class="pcard-media"><div class="art"><img src="{{ROOT}}assets/img/art/method-concevoir.webp" alt="[[Illustration 3D : maquettes d'un site sur ordinateur et mobile|3D illustration: website mockups on desktop and mobile]]" width="1200" height="1000" loading="lazy" decoding="async" /></div></div>
+          </article>
+
+          <article class="pcard" style="--i:2">
+            <div class="pcard-body">
+              <h3 class="pcard-verb display">[[Développer|Build]]</h3>
+              <div>
+                <p>[[Un code propre, rapide et optimisé pour Google, testé sur mobile, tablette et ordinateur.|Clean, fast code optimised for Google, tested on mobile, tablet and desktop.]]</p>
+                <div class="pcard-out" style="margin-top:24px"><i class="ph ph-check-circle" aria-hidden="true"></i>[[Site testé et prêt à lancer|Site tested and ready to launch]]</div>
+              </div>
+            </div>
+            <div class="pcard-media"><div class="art"><img src="{{ROOT}}assets/img/art/method-developper.webp" alt="[[Illustration 3D : ordinateur portable avec du code|3D illustration: laptop with code on screen]]" width="1200" height="1000" loading="lazy" decoding="async" /></div></div>
+          </article>
+
+          <article class="pcard pcard--deep" style="--i:3">
+            <div class="pcard-body">
+              <h3 class="pcard-verb display">[[Lancer|Launch]]</h3>
+              <div>
+                <p>[[Mise en ligne, hébergement, formation et suivi. On reste à vos côtés bien après le lancement.|Go-live, hosting, training and follow-up. We stay by your side long after launch.]]</p>
+                <div class="pcard-out" style="margin-top:24px"><i class="ph ph-check-circle" aria-hidden="true"></i>[[Site en ligne, équipe formée|Site live, team trained]]</div>
+              </div>
+            </div>
+            <div class="pcard-media"><div class="art"><img src="{{ROOT}}assets/img/art/method-lancer.webp" alt="[[Illustration 3D : fusée qui décolle|3D illustration: rocket lifting off]]" width="1200" height="1000" loading="lazy" decoding="async" /></div></div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== REALISATIONS (filled from assets/data/realisations.js, hidden while empty) ===================== -->
+    <section class="section" id="realisations" aria-labelledby="real-title" hidden style="padding-top:0">
+      <div class="wrap">
+        <h2 class="h2 display" id="real-title" style="max-width:16ch;margin-bottom:clamp(36px,5vw,64px)">[[Ils nous ont fait confiance.|They trusted us.]]</h2>
+        <div class="real-grid" id="realGrid"></div>
+        <div class="quotes" id="quoteGrid" hidden></div>
+      </div>
+    </section>
+
+    <!-- ===================== OFFERS (bento) ===================== -->
+    <section class="section" id="offers" aria-labelledby="offers-title" style="padding-top:0">
+      <div class="wrap">
+        <div class="offers-head">
+          <h2 class="h2 display" id="offers-title" data-reveal>[[Des offres claires, dès {{prix:vitrine}} MAD.|Clear offers, from {{prix:vitrine}} MAD.]]</h2>
+          <p class="pay-note"><i class="ph ph-hand-coins" aria-hidden="true"></i>[[Facilités de paiement disponibles sur toutes les formules.|Payment plans available on every package.]]</p>
+        </div>
+        <div class="bento">
+          <article class="tile tile-feature">
+            <a class="tile-link" href="{{HOME}}offres.html#ecommerce" aria-label="[[Voir l'offre Site E-commerce|See the E-commerce Site plan]]"></a>
+            <div class="tile-top">
+              <span class="tile-kicker">[[Professionnel|Professional]]</span>
+              <span class="tile-badge">[[Le plus populaire|Most popular]]</span>
+            </div>
+            <div>
+              <h3 class="tile-name display">[[Site E-commerce|E-commerce site]]</h3>
+              <ul class="tile-list" style="margin-top:22px">
+                <li><i class="ph ph-check"></i>[[Boutique en ligne complète|Full online store]]</li>
+                <li><i class="ph ph-check"></i>[[Paiement en ligne intégré|Integrated payments]]</li>
+                <li><i class="ph ph-check"></i>[[Tableau de bord admin|Admin dashboard]]</li>
+                <li><i class="ph ph-check"></i>[[SEO avancé|Advanced SEO]]</li>
+              </ul>
+            </div>
+            <div class="tile-top" style="align-items:flex-end">
+              <div class="price"><span class="price-amt">{{prix:ecommerce}}</span><span class="price-cur">MAD</span></div>
+              <span class="tile-arrow" aria-hidden="true"><i class="ph ph-arrow-up-right"></i></span>
+            </div>
+          </article>
+
+          <article class="tile">
+            <a class="tile-link" href="{{HOME}}offres.html#vitrine" aria-label="[[Voir l'offre Site Vitrine|See the Showcase Site plan]]"></a>
+            <span class="tile-kicker">[[Essentiel|Essential]]</span>
+            <h3 class="tile-name display">[[Site Vitrine|Showcase site]]</h3>
+            <p style="color:var(--muted);font-size:15.5px">[[3 pages sur mesure, formulaire de contact, SEO de base et hébergement 1 an inclus.|3 custom pages, contact form, basic SEO and 1 year hosting included.]]</p>
+            <div class="tile-top" style="margin-top:auto;align-items:flex-end">
+              <div class="price"><span class="price-amt">{{prix:vitrine}}</span><span class="price-cur">MAD</span></div>
+              <span class="tile-arrow" aria-hidden="true"><i class="ph ph-arrow-up-right"></i></span>
+            </div>
+          </article>
+
+          <article class="tile">
+            <a class="tile-link" href="{{HOME}}offres.html#premium" aria-label="[[Voir l'offre Site Premium|See the Premium Site plan]]"></a>
+            <span class="tile-kicker">[[Premium sur mesure|Custom premium]]</span>
+            <h3 class="tile-name display">[[Site Premium|Premium site]]</h3>
+            <p style="color:var(--muted);font-size:15.5px">[[Application, CRM, SEO avancé et design haut de gamme. Prix défini ensemble en rendez-vous.|App, CRM, advanced SEO and high-end design. Price set together in a meeting.]]</p>
+            <div class="tile-top" style="margin-top:auto;align-items:flex-end">
+              <div class="price"><span class="price-from">[[dès|from]]</span><span class="price-amt">{{prix:premium}}</span><span class="price-cur">MAD</span></div>
+              <span class="tile-arrow" aria-hidden="true"><i class="ph ph-arrow-up-right"></i></span>
+            </div>
+          </article>
+
+          <article class="tile tile-cta">
+            <h3 class="tile-name display">[[Pas sûr de votre formule ? Quatre questions suffisent.|Not sure which package? Four questions is all it takes.]]</h3>
+            <a href="{{HOME}}offres.html#finder" class="btn btn-primary magnetic">[[Trouver mon forfait|Find my package]] <i class="ph ph-arrow-right" aria-hidden="true"></i></a>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== FREE AUDIT ===================== -->
+    <section class="section" id="audit" aria-labelledby="audit-title" style="padding-top:0">
+      <div class="wrap">
+        <div class="audit">
+          <div class="audit-copy">
+            <h2 class="audit-title display" id="audit-title" data-reveal>[[Audit gratuit de votre site en 48h.|Free website audit in 48 hours.]]</h2>
+            <p class="lead">[[Découvrez ce qui vous fait perdre des clients. Pas encore de site ? On vous montre ce que vos concurrents ont, et pas vous.|Find out what is costing you customers. No website yet? We show you what your competitors have that you don't.]]</p>
+            <ul class="audit-list">
+              <li><i class="ph ph-lightning" aria-hidden="true"></i>[[Vitesse de chargement|Loading speed]]</li>
+              <li><i class="ph ph-device-mobile" aria-hidden="true"></i>[[Affichage sur mobile|Mobile display]]</li>
+              <li><i class="ph ph-magnifying-glass" aria-hidden="true"></i>[[Visibilité sur Google|Visibility on Google]]</li>
+              <li><i class="ph ph-lock-key" aria-hidden="true"></i>[[Sécurité HTTPS|HTTPS security]]</li>
+              <li><i class="ph ph-cursor-click" aria-hidden="true"></i>[[Ce qui bloque les demandes|What blocks enquiries]]</li>
+            </ul>
+          </div>
+          <form class="form audit-form" id="auditForm" novalidate aria-label="[[Demande d'audit gratuit|Free audit request]]">
+            <div class="hp" aria-hidden="true"><label>Website<input type="text" name="website" tabindex="-1" autocomplete="off" /></label></div>
+            <div class="field">
+              <label for="auSite">[[Adresse de votre site|Your website address]]</label>
+              <input id="auSite" type="text" inputmode="url" autocomplete="url" placeholder="www.monentreprise.ma" aria-describedby="auSite-err" />
+              <span class="err" id="auSite-err">[[Indiquez l'adresse de votre site, ou cochez la case ci-dessous.|Enter your website address, or tick the box below.]]</span>
+            </div>
+            <label class="check"><input type="checkbox" id="auNoSite" /><span>[[Je n'ai pas encore de site|I don't have a website yet]]</span></label>
+            <div class="form-row">
+              <div class="field">
+                <label for="auName">[[Nom|Name]]</label>
+                <input id="auName" type="text" autocomplete="name" required aria-describedby="auName-err" />
+                <span class="err" id="auName-err">[[Indiquez votre nom.|Please enter your name.]]</span>
+              </div>
+              <div class="field">
+                <label for="auPhone">WhatsApp</label>
+                <input id="auPhone" type="tel" autocomplete="tel" required placeholder="+212 6XX XXX XXX" aria-describedby="auPhone-err" />
+                <span class="err" id="auPhone-err">[[Indiquez un numéro valide.|Enter a valid number.]]</span>
+              </div>
+            </div>
+            <div class="field">
+              <label for="auSector">[[Votre activité|Your business]] <span class="opt">[[(facultatif)|(optional)]]</span></label>
+              <input id="auSector" type="text" placeholder="[[Restaurant, clinique, boutique...|Restaurant, clinic, shop...]]" />
+            </div>
+            <button type="submit" class="btn btn-primary btn-full"><i class="ph ph-paper-plane-tilt" aria-hidden="true"></i> [[Recevoir mon audit gratuit|Get my free audit]]</button>
+            <p class="form-note">[[Réponse sous 48h sur WhatsApp. Sans engagement.|Reply within 48 hours on WhatsApp. No commitment.]]</p>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== CONTACT ===================== -->
+    <section class="section" id="contact" aria-labelledby="contact-title" style="padding-top:clamp(40px,6vw,80px)">
+      <div class="wrap contact-grid">
+        <div>
+          <h2 class="contact-title display" id="contact-title" data-reveal>[[Parlons de votre projet.|Let's talk about your project.]]</h2>
+          <p class="status" data-status></p>
+          <address class="contact-list" style="font-style:normal">
+            <div class="cl-row"><a href="mailto:contact@amweb.ma"><i class="ph ph-envelope-simple" aria-hidden="true"></i><span><small>Email</small>contact@amweb.ma</span></a><button type="button" class="copy-btn" data-copy="contact@amweb.ma" aria-label="[[Copier l'adresse email|Copy email address]]"><i class="ph ph-copy" aria-hidden="true"></i></button></div>
+            <a href="https://wa.me/212780611376" rel="noopener"><i class="ph ph-whatsapp-logo" aria-hidden="true"></i><span><small>WhatsApp</small>+212 780 611 376</span></a>
+            <div><i class="ph ph-map-pin" aria-hidden="true"></i><span><small>[[Studio|Studio]]</small>[[Kénitra, Maroc|Kénitra, Morocco]]</span></div>
+          </address>
+          <button type="button" class="book-link" data-book><i class="ph ph-calendar-check" aria-hidden="true"></i><span>[[Vous préférez un rendez-vous ? Réservez un créneau|Prefer a meeting? Book a slot]]</span><i class="ph ph-arrow-right" aria-hidden="true"></i></button>
+          <div class="socials">
+            <a class="social" href="https://instagram.com/amweb.ma" target="_blank" rel="noopener noreferrer" aria-label="[[AMweb sur Instagram|AMweb on Instagram]]"><i class="ph ph-instagram-logo" aria-hidden="true"></i></a>
+            <a class="social" href="https://tiktok.com/@amweb.ma" target="_blank" rel="noopener noreferrer" aria-label="[[AMweb sur TikTok|AMweb on TikTok]]"><i class="ph ph-tiktok-logo" aria-hidden="true"></i></a>
+          </div>
+        </div>
+
+        <form class="form" id="contactForm" novalidate aria-label="[[Formulaire de contact AMweb|AMweb contact form]]">
+            <div class="hp" aria-hidden="true"><label>Website<input type="text" name="website" tabindex="-1" autocomplete="off" /></label></div>
+          <div class="plan-chip" id="planChip" role="status">
+            <span>[[Forfait choisi :|Selected package:]] <strong id="planName"></strong></span>
+            <button type="button" id="planClear" aria-label="[[Retirer le forfait|Remove plan]]"><i class="ph ph-x" aria-hidden="true"></i></button>
+          </div>
+          <div class="form-row">
+            <div class="field">
+              <label for="nom">[[Nom|Last name]]</label>
+              <input type="text" id="nom" name="nom" required autocomplete="family-name" aria-required="true" aria-describedby="nom-err" placeholder="Alaoui" />
+              <span class="err" id="nom-err">[[Indiquez votre nom.|Please enter your last name.]]</span>
+            </div>
+            <div class="field">
+              <label for="prenom">[[Prénom|First name]]</label>
+              <input type="text" id="prenom" name="prenom" required autocomplete="given-name" aria-required="true" aria-describedby="prenom-err" placeholder="Yasmine" />
+              <span class="err" id="prenom-err">[[Indiquez votre prénom.|Please enter your first name.]]</span>
+            </div>
+          </div>
+          <div class="field">
+            <label for="email">[[Adresse email|Email address]]</label>
+            <input type="email" id="email" name="email" required autocomplete="email" aria-required="true" aria-describedby="email-err" placeholder="yasmine@exemple.ma" />
+            <span class="err" id="email-err">[[Saisissez une adresse email valide.|Enter a valid email address.]]</span>
+          </div>
+          <div class="field">
+            <label for="adresse">[[Adresse|Address]] <span class="opt">[[(facultatif)|(optional)]]</span></label>
+            <input type="text" id="adresse" name="adresse" autocomplete="street-address" placeholder="[[Avenue Mohammed V, Kénitra|Avenue Mohammed V, Kénitra]]" />
+          </div>
+          <div class="form-row">
+            <div class="field">
+              <label for="entreprise">[[Nom d'entreprise|Company name]] <span class="opt">[[(facultatif)|(optional)]]</span></label>
+              <input type="text" id="entreprise" name="entreprise" autocomplete="organization" placeholder="[[Ma société|My company]]" />
+            </div>
+            <div class="field">
+              <label for="tel">[[Téléphone|Phone]] <span class="opt">[[(facultatif)|(optional)]]</span></label>
+              <input type="tel" id="tel" name="tel" autocomplete="tel" placeholder="+212 6XX XXX XXX" />
+            </div>
+          </div>
+          <button type="submit" class="btn btn-primary btn-full"><i class="ph ph-paper-plane-tilt" aria-hidden="true"></i> [[Envoyer ma demande|Send my request]]</button>
+          <p class="form-note">[[On vous répond sous 24h ouvrées. Sans engagement.|We reply within one business day. No commitment.]]</p>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  {{FOOTER}}
+  {{SCRIPTS}}
+</body>
+</html>

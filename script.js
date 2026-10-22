@@ -156,6 +156,54 @@
     premium: { fr: 'Site Premium', en: 'Premium site', ar: 'موقع بريميوم' },
     maintenance: { fr: 'Maintenance mensuelle', en: 'Monthly maintenance', ar: 'الصيانة الشهرية' }
   };
+  /* ---------------- Send a form to the AMweb admin (/api/submit). WhatsApp stays available as a fallback. ---------------- */
+  function sendLead(payload, opts) {
+    const form = opts.form;
+    const btn = form.querySelector('[type="submit"]');
+    const hp = form.querySelector('[name="website"]');
+    payload.website = hp ? hp.value : '';
+    payload.lang = lang;
+    payload.page = location.pathname;
+    form.querySelectorAll('.form-done, .form-fail').forEach(n => n.remove());
+    const label = btn ? btn.innerHTML : '';
+    if (btn) { btn.disabled = true; btn.setAttribute('aria-busy', 'true'); btn.innerHTML = '<span class="spin" aria-hidden="true"></span> ' + T3('Envoi…', 'Sending…', 'جارٍ الإرسال…'); }
+    const restore = () => { if (btn) { btn.disabled = false; btn.removeAttribute('aria-busy'); btn.innerHTML = label; } };
+    const place = box => { (opts.anchor || btn || form).insertAdjacentElement('afterend', box); };
+    const ctrl = typeof AbortController === 'function' ? new AbortController() : null;
+    const timer = setTimeout(() => ctrl && ctrl.abort(), 15000);
+    return fetch('/api/submit', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload), signal: ctrl ? ctrl.signal : undefined })
+      .then(r => r.json().catch(() => ({})).then(j => ({ status: r.status, ok: r.ok && j.ok })))
+      .catch(() => ({ status: 0, ok: false }))
+      .then(res => {
+        clearTimeout(timer);
+        restore();
+        if (res.ok) {
+          const box = document.createElement('div');
+          box.className = 'form-done';
+          box.setAttribute('role', 'status');
+          box.innerHTML = '<i class="ph ph-check-circle" aria-hidden="true"></i><div><strong></strong><span></span></div>';
+          box.querySelector('strong').textContent = opts.okTitle || T3("Merci, c'est bien reçu !", 'Thank you, we got it!', 'شكراً، توصلنا بطلبك!');
+          box.querySelector('span').textContent = opts.okText || T3('On vous répond sous 24h ouvrées.', 'We will reply within one business day.', 'سنرد عليك خلال 24 ساعة عمل.');
+          if (!opts.noBox) place(box);
+          if (opts.onDone) opts.onDone();
+          return true;
+        }
+        const box = document.createElement('div');
+        box.className = 'form-fail';
+        box.setAttribute('role', 'alert');
+        box.innerHTML = '<i class="ph ph-warning-circle" aria-hidden="true"></i><div><strong></strong><span></span><button type="button" class="btn btn-ghost btn-sm"><i class="ph ph-whatsapp-logo" aria-hidden="true"></i> </button></div>';
+        box.querySelector('strong').textContent = res.status === 429
+          ? T3('Trop de demandes envoyées.', 'Too many requests sent.', 'تم إرسال طلبات كثيرة.')
+          : T3("L'envoi n'a pas fonctionné.", 'Sending did not work.', 'لم ينجح الإرسال.');
+        box.querySelector('span').textContent = T3('Envoyez-la sur WhatsApp : votre message est déjà rédigé.', 'Send it on WhatsApp: your message is already written.', 'أرسله عبر واتساب: رسالتك جاهزة.');
+        const b = box.querySelector('button');
+        b.appendChild(document.createTextNode(T3('Envoyer sur WhatsApp', 'Send on WhatsApp', 'إرسال عبر واتساب')));
+        b.addEventListener('click', () => { openWA(opts.waMsg); track('whatsapp_fallback', { form: payload.type }); });
+        place(box);
+        return false;
+      });
+  }
+
   function initForm() {
     const form = document.getElementById('contactForm');
     if (!form) return;
@@ -227,11 +275,18 @@
         `Bonjour AMweb 👋\n\nJe souhaite démarrer un projet avec vous.\n\n${p ? `*Forfait :* ${p}\n` : ''}${plan === 'premium' ? '*Objet :* prendre rendez-vous pour définir le projet\n' : ''}*Nom :* ${n}\n*Email :* ${val('email')}\n*Adresse :* ${val('adresse')}\n*Entreprise :* ${val('entreprise')}\n*Téléphone :* ${val('tel')}\n\nMerci de me recontacter !`,
         `Hello AMweb 👋\n\nI would like to start a project with you.\n\n${p ? `*Package:* ${p}\n` : ''}${plan === 'premium' ? '*Request:* book a meeting to scope the project\n' : ''}*Name:* ${n}\n*Email:* ${val('email')}\n*Address:* ${val('adresse')}\n*Company:* ${val('entreprise')}\n*Phone:* ${val('tel')}\n\nPlease get back to me!`,
         `مرحباً AMweb 👋\n\nأرغب في بدء مشروع معكم.\n\n${p ? `*العرض:* ${p}\n` : ''}${plan === 'premium' ? '*الطلب:* حجز موعد لتحديد المشروع\n' : ''}*الاسم:* ${n}\n*البريد الإلكتروني:* ${val('email')}\n*العنوان:* ${val('adresse')}\n*الشركة:* ${val('entreprise')}\n*الهاتف:* ${val('tel')}\n\nشكراً على التواصل معي!`);
-      openWA(msg);
-      track('generate_lead', { method: 'contact_form', plan: plan || 'none' });
-      form.reset();
-      try { localStorage.removeItem(DKEY); } catch (err) { /* ignore */ }
-      toast(T3('Demande prête dans WhatsApp', 'Request ready in WhatsApp', 'طلبك جاهز في WhatsApp'));
+      sendLead({
+        type: plan === 'premium' ? 'rdv' : 'contact', nom: n, email: val('email'), telephone: val('tel'), entreprise: val('entreprise'),
+        details: { forfait: p || null, adresse: val('adresse') || null },
+      }, {
+        form, waMsg: msg,
+        okText: T3('On revient vers vous très vite, par email ou par téléphone.', 'We will get back to you very soon, by email or phone.', 'سنعود إليك قريباً جداً عبر البريد أو الهاتف.'),
+        onDone: () => {
+          track('generate_lead', { method: 'contact_form', plan: plan || 'none' });
+          form.reset();
+          try { localStorage.removeItem(DKEY); } catch (err) { /* ignore */ }
+        },
+      });
     });
   }
 
@@ -605,6 +660,14 @@
       ecommerce: { price: '7 500', time: { fr: 'Livré en 3 à 4 semaines', en: 'Delivered in 3 to 4 weeks', ar: 'التسليم خلال 3 إلى 4 أسابيع' } },
       premium: { price: '10 000', from: true, time: { fr: 'Prix et délai définis en rendez-vous', en: 'Price and timeline set in a meeting', ar: 'السعر والمدة يُحدَّدان خلال موعد' } }
     };
+    // Prices and timelines published from the admin (assets/data/realisations.js) override the defaults above
+    const OFFERS = window.AMWEB_OFFERS || {};
+    Object.keys(META).forEach(k => {
+      const o = OFFERS[k];
+      if (!o) return;
+      if (o.price && o.price[lang]) META[k].price = o.price[lang];
+      if (o.time && o.time[lang]) META[k].time = Object.assign({}, META[k].time, { [lang]: o.time[lang] });
+    });
     const R = {
       vitrine: [
         { fr: '3 pages sur mesure, idéal pour présenter votre activité', en: '3 custom pages, ideal to present your business', ar: '3 صفحات حسب الطلب، مثالية لتقديم نشاطك' },
@@ -785,10 +848,19 @@
         `Bonjour AMweb 👋\n\nJe souhaite réserver un rendez-vous.\n\n${plan ? `*Forfait :* ${plan}\n` : ''}*Date :* ${day.dataset.label}\n*Heure :* ${time.dataset.time}\n*Format :* ${modeTxt}\n*Nom :* ${name.value.trim()}\n*Téléphone :* ${phone.value.trim()}\n\nMerci de confirmer !`,
         `Hello AMweb 👋\n\nI would like to book a meeting.\n\n${plan ? `*Package:* ${plan}\n` : ''}*Date:* ${day.dataset.label}\n*Time:* ${time.dataset.time}\n*Format:* ${modeTxt}\n*Name:* ${name.value.trim()}\n*Phone:* ${phone.value.trim()}\n\nPlease confirm!`,
         `مرحباً AMweb 👋\n\nأرغب في حجز موعد.\n\n${plan ? `*العرض:* ${plan}\n` : ''}*التاريخ:* ${day.dataset.label}\n*الساعة:* ${time.dataset.time}\n*الطريقة:* ${modeTxt}\n*الاسم:* ${name.value.trim()}\n*الهاتف:* ${phone.value.trim()}\n\nالمرجو التأكيد!`);
-      openWA(msg);
-      track('book_meeting', { plan: dlg.dataset.plan || 'none' });
-      close();
-      toast(T3('Demande de rendez-vous prête dans WhatsApp', 'Meeting request ready in WhatsApp', 'طلب الموعد جاهز في WhatsApp'));
+      sendLead({
+        type: 'rdv', nom: name.value.trim(), telephone: phone.value.trim(),
+        details: { forfait: plan || null, date: day.dataset.label, heure: time.dataset.time, format: modeTxt || null },
+      }, {
+        form, waMsg: msg, noBox: true,
+        onDone: () => {
+          track('book_meeting', { plan: dlg.dataset.plan || 'none' });
+          form.reset();
+          form.querySelectorAll('.chip.is-on').forEach(c => { c.classList.remove('is-on'); c.setAttribute('aria-pressed', 'false'); });
+          close();
+          toast(T3('Rendez-vous demandé : on vous confirme rapidement.', 'Meeting requested: we will confirm quickly.', 'تم طلب الموعد: سنؤكده لك بسرعة.'));
+        },
+      });
     });
   }
 
@@ -813,10 +885,14 @@
         `Bonjour AMweb 👋\n\nJe souhaite recevoir l'audit gratuit de mon site.\n\n*Site :* ${s}\n*Activité :* ${sector || '-'}\n*Nom :* ${name.value.trim()}\n*WhatsApp :* ${phone.value.trim()}\n\nMerci !`,
         `Hello AMweb 👋\n\nI would like my free website audit.\n\n*Website:* ${s}\n*Business:* ${sector || '-'}\n*Name:* ${name.value.trim()}\n*WhatsApp:* ${phone.value.trim()}\n\nThank you!`,
         `مرحباً AMweb 👋\n\nأرغب في الحصول على التدقيق المجاني لموقعي.\n\n*الموقع:* ${s}\n*النشاط:* ${sector || '-'}\n*الاسم:* ${name.value.trim()}\n*WhatsApp:* ${phone.value.trim()}\n\nشكراً!`);
-      openWA(msg);
-      track('audit_request', { has_site: !none.checked });
-      form.reset(); site.disabled = false;
-      toast(T3("Demande d'audit prête dans WhatsApp", 'Audit request ready in WhatsApp', 'طلب التدقيق جاهز في WhatsApp'));
+      sendLead({
+        type: 'audit', nom: name.value.trim(), telephone: phone.value.trim(),
+        details: { site: s, activite: sector || null },
+      }, {
+        form, waMsg: msg,
+        okText: T3('Votre audit arrive sous 48h sur WhatsApp.', 'Your audit arrives within 48 hours on WhatsApp.', 'يصلك التدقيق خلال 48 ساعة عبر واتساب.'),
+        onDone: () => { track('audit_request', { has_site: !none.checked }); form.reset(); site.disabled = false; },
+      });
     });
   }
 
@@ -833,11 +909,19 @@
         if (q.value.trim().length < 5) { q.closest('.field').classList.add('has-error'); bad = bad || q; }
         if (bad) { bad.focus(); return; }
         const topic = form.dataset.topic || '';
-        const msg = `Bonjour AMweb 👋\n\nJ'ai une question${topic ? ` à propos de l'article « ${topic} »` : ''} :\n\n${q.value.trim()}\n\n*Nom :* ${name.value.trim()}\n*Contact :* ${contact.value.trim()}`;
-        openWA(msg);
-        track('ask_question', { topic: topic || 'general' });
-        form.reset();
-        toast('Question prête dans WhatsApp');
+        const about = topic ? T3(` à propos de l'article « ${topic} »`, ` about the article "${topic}"`, ` حول مقال «${topic}»`) : '';
+        const msg = T3(
+          `Bonjour AMweb 👋\n\nJ'ai une question${about} :\n\n${q.value.trim()}\n\n*Nom :* ${name.value.trim()}\n*Contact :* ${contact.value.trim()}`,
+          `Hello AMweb 👋\n\nI have a question${about}:\n\n${q.value.trim()}\n\n*Name:* ${name.value.trim()}\n*Contact:* ${contact.value.trim()}`,
+          `مرحباً AMweb 👋\n\nلدي سؤال${about}:\n\n${q.value.trim()}\n\n*الاسم:* ${name.value.trim()}\n*التواصل:* ${contact.value.trim()}`);
+        sendLead({
+          type: 'question', nom: name.value.trim(), email: contact.value.trim(), message: q.value.trim(),
+          details: { article: topic || null },
+        }, {
+          form, waMsg: msg,
+          okText: T3('On vous répond personnellement, très vite.', 'We will reply personally, very soon.', 'سنجيبك شخصياً في أقرب وقت.'),
+          onDone: () => { track('ask_question', { topic: topic || 'general' }); form.reset(); },
+        });
       });
     });
   }

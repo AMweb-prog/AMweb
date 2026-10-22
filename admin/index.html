@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="robots" content="noindex, nofollow" />
+  <meta name="theme-color" content="#0B0F1A" />
+  <title>Admin AMweb</title>
+  <link rel="icon" href="/favicon.ico" />
+  <link rel="preload" href="/admin/vendor/phosphor/admin-icons.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="stylesheet" href="/admin/vendor/phosphor/admin-icons.css" />
+  <link rel="stylesheet" href="/admin/admin.css" />
+</head>
+<body>
+  <!-- loading -->
+  <div class="boot" id="boot" role="status"><span class="spin" aria-hidden="true"></span><span>Chargement…</span></div>
+
+  <!-- setup problem (missing env vars) -->
+  <section class="auth" id="setupView" hidden>
+    <div class="auth-card">
+      <div class="brand"><span class="brand-am">AM</span><span class="brand-web">web</span><span class="brand-tag">admin</span></div>
+      <h1>Configuration incomplète</h1>
+      <p class="muted">L'admin ne trouve pas les réglages Supabase. Ajoutez <code>SUPABASE_URL</code> et <code>SUPABASE_ANON_KEY</code> dans Vercel (Settings &gt; Environment Variables), puis redéployez. Tout est expliqué dans <code>GUIDE-ADMIN.md</code>.</p>
+    </div>
+  </section>
+
+  <!-- login / password reset -->
+  <section class="auth" id="authView" hidden>
+    <div class="auth-card">
+      <div class="brand"><span class="brand-am">AM</span><span class="brand-web">web</span><span class="brand-tag">admin</span></div>
+
+      <form id="loginForm" class="stack" novalidate>
+        <h1>Connexion</h1>
+        <label class="field"><span class="label">Email</span>
+          <input type="email" name="email" autocomplete="username" required inputmode="email" /></label>
+        <label class="field"><span class="label">Mot de passe</span>
+          <span class="pw"><input type="password" name="password" autocomplete="current-password" required />
+          <button type="button" class="icon-btn" data-toggle-pw aria-label="Afficher le mot de passe"><i class="ph ph-eye" aria-hidden="true"></i></button></span></label>
+        <p class="form-msg" role="alert" hidden></p>
+        <button class="btn btn-primary btn-block" type="submit"><i class="ph ph-sign-in" aria-hidden="true"></i> Se connecter</button>
+        <button class="link-btn" type="button" id="forgotBtn">Mot de passe oublié ?</button>
+      </form>
+
+      <form id="forgotForm" class="stack" novalidate hidden>
+        <h1>Mot de passe oublié</h1>
+        <p class="muted">Entrez votre email : vous recevrez un lien pour choisir un nouveau mot de passe.</p>
+        <label class="field"><span class="label">Email</span>
+          <input type="email" name="email" autocomplete="username" required inputmode="email" /></label>
+        <p class="form-msg" role="alert" hidden></p>
+        <button class="btn btn-primary btn-block" type="submit"><i class="ph ph-paper-plane-tilt" aria-hidden="true"></i> Recevoir le lien</button>
+        <button class="link-btn" type="button" data-back-login>Retour à la connexion</button>
+      </form>
+
+      <form id="recoveryForm" class="stack" novalidate hidden>
+        <h1>Nouveau mot de passe</h1>
+        <p class="muted">Choisissez un mot de passe d'au moins 10 caractères.</p>
+        <label class="field"><span class="label">Nouveau mot de passe</span>
+          <input type="password" name="password" autocomplete="new-password" minlength="10" required /></label>
+        <p class="form-msg" role="alert" hidden></p>
+        <button class="btn btn-primary btn-block" type="submit"><i class="ph ph-check" aria-hidden="true"></i> Enregistrer</button>
+      </form>
+    </div>
+  </section>
+
+  <!-- application -->
+  <div class="app" id="appView" hidden>
+    <header class="topbar">
+      <a class="brand" href="#demandes" aria-label="Admin AMweb, accueil"><span class="brand-am">AM</span><span class="brand-web">web</span><span class="brand-tag">admin</span></a>
+      <div class="pub">
+        <span class="pub-state" id="pubState" aria-live="polite"></span>
+        <button class="btn btn-primary btn-sm" type="button" id="publishBtn"><i class="ph ph-rocket-launch" aria-hidden="true"></i><span>Publier le site</span></button>
+      </div>
+      <div class="menu">
+        <a class="icon-btn" href="/" target="_blank" rel="noopener" title="Voir le site" aria-label="Voir le site"><i class="ph ph-arrow-square-out" aria-hidden="true"></i></a>
+        <button class="icon-btn" type="button" id="logoutBtn" title="Se déconnecter" aria-label="Se déconnecter"><i class="ph ph-sign-out" aria-hidden="true"></i></button>
+      </div>
+    </header>
+
+    <nav class="sidenav" aria-label="Sections">
+      <a href="#demandes" data-nav="demandes"><i class="ph ph-tray" aria-hidden="true"></i><span>Demandes</span><b class="badge" id="newBadge" hidden></b></a>
+      <a href="#offres" data-nav="offres"><i class="ph ph-tag" aria-hidden="true"></i><span>Offres</span></a>
+      <a href="#realisations" data-nav="realisations"><i class="ph ph-images" aria-hidden="true"></i><span>Réalisations</span></a>
+      <a href="#avis" data-nav="avis"><i class="ph ph-chat-centered-text" aria-hidden="true"></i><span>Avis</span></a>
+      <a href="#articles" data-nav="articles"><i class="ph ph-article" aria-hidden="true"></i><span>Articles</span></a>
+      <p class="sidenav-user" id="userEmail"></p>
+    </nav>
+
+    <main class="main" id="view" tabindex="-1"></main>
+  </div>
+
+  <!-- generic dialogs -->
+  <dialog class="modal modal-sm" id="confirmDlg" aria-labelledby="confirmTitle">
+    <form method="dialog" class="modal-body stack">
+      <h2 id="confirmTitle"></h2>
+      <p class="muted" id="confirmText"></p>
+      <div class="row-end">
+        <button class="btn btn-ghost" value="cancel">Annuler</button>
+        <button class="btn btn-primary" value="ok" id="confirmOk">Confirmer</button>
+      </div>
+    </form>
+  </dialog>
+  <dialog class="modal" id="editDlg" aria-labelledby="editTitle"></dialog>
+
+  <div class="toasts" id="toasts" aria-live="polite"></div>
+
+  <script src="/admin/vendor/supabase.js"></script>
+  <script src="/admin/admin.js"></script>
+</body>
+</html>

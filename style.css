@@ -1208,3 +1208,25 @@ h1, h2, h3, .display { overflow-wrap: break-word; }
   .sat { font-size: 10.5px; padding: 6px 9px 6px 6px; gap: 6px; }
   .sat i { width: 18px; height: 18px; font-size: 11px; }
 }
+
+/* Footer: secondary email addresses with a small label */
+.footer-grid li.mail-sub { display: grid; gap: 0; margin-top: 4px; }
+.footer-grid li.mail-sub small { font-family: var(--font-mono); font-size: 10.5px; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
+[lang="ar"] .footer-grid li.mail-sub small { font-family: inherit; letter-spacing: 0; text-transform: none; font-size: 12px; }
+.footer-grid li.mail-sub a { padding-block: 2px 6px; }
+
+/* ---------------- Form sending (admin inbox) ---------------- */
+.hp { position: absolute !important; left: -10000px; width: 1px; height: 1px; overflow: hidden; }
+.spin { display: inline-block; width: 1em; height: 1em; border: 2px solid currentColor; border-right-color: transparent; border-radius: 50%; animation: amw-spin .7s linear infinite; vertical-align: -.15em; }
+@keyframes amw-spin { to { transform: rotate(360deg); } }
+[aria-busy="true"] { cursor: progress; opacity: .85; }
+.form-done, .form-fail { display: flex; gap: 12px; align-items: flex-start; margin-top: 16px; padding: 14px 16px; border-radius: var(--r-input); border: 1px solid var(--line-strong); background: var(--surface-2); color: var(--text); font-size: .95rem; line-height: 1.45; text-align: start; }
+.form-done > i, .form-fail > i { font-size: 22px; flex: none; margin-top: 1px; }
+.form-done > i { color: var(--accent-fg); }
+.form-fail > i { color: var(--error); }
+.form-done div, .form-fail div { display: flex; flex-direction: column; gap: 4px; min-width: 0; }
+.form-done span, .form-fail span { color: var(--muted); }
+.form-fail button { align-self: flex-start; margin-top: 8px; }
+.form-done { border-color: color-mix(in srgb, var(--accent) 45%, transparent); }
+.form-fail { border-color: color-mix(in srgb, var(--error) 45%, transparent); }
+@media (prefers-reduced-motion: reduce) { .spin { animation-duration: 2s; } }

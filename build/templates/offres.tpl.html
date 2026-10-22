@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="{{LANG}}" dir="{{DIR}}" data-theme="dark">
+<head>
+  {{GTM_HEAD}}
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  {{BOOT}}
+  {{HEADMETA}}
+  <meta name="author" content="AMweb" />
+  <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large" />
+  <meta name="geo.region" content="MA" />
+  <meta name="geo.placename" content="Kénitra, Maroc" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="https://www.amweb.ma/assets/img/og-image.jpg" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:site_name" content="AMweb" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:image" content="https://www.amweb.ma/assets/img/og-image.jpg" />
+  <meta name="twitter:site" content="@amweb_ma" />
+
+  {{ASSETS_HEAD}}
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebPage",
+        "@id": "https://www.amweb.ma/offres.html#webpage",
+        "url": "https://www.amweb.ma/offres.html",
+        "name": "Offres & tarifs | AMweb",
+        "description": "Forfaits de création de site web au Maroc proposés par AMweb : Site Vitrine, E-commerce et Premium. Tarifs clairs dès {{prix:vitrine}} MAD, facilités de paiement.",
+        "isPartOf": {"@id": "https://www.amweb.ma/#website"},
+        "breadcrumb": {
+          "@type": "BreadcrumbList",
+          "itemListElement": [
+            { "@type": "ListItem", "position": 1, "name": "Accueil", "item": "https://www.amweb.ma/" },
+            { "@type": "ListItem", "position": 2, "name": "Nos offres", "item": "https://www.amweb.ma/offres.html" }
+          ]
+        }
+      },
+      {
+        "@type": "ItemList",
+        "name": "Forfaits création de site web AMweb",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "item": { "@type": "Product", "name": "Site Vitrine", "description": "Site vitrine professionnel de 3 pages sur mesure, design responsive, formulaire de contact, SEO de base, hébergement 1 an inclus.", "brand": {"@type": "Brand", "name": "AMweb"}, "offers": { "@type": "Offer", "price": "{{prixnum:vitrine}}", "priceCurrency": "MAD", "availability": "https://schema.org/InStock", "seller": {"@id": "https://www.amweb.ma/#localbusiness"} } } },
+          { "@type": "ListItem", "position": 2, "item": { "@type": "Product", "name": "Site E-commerce", "description": "Boutique en ligne complète avec pages illimitées, paiement intégré, tableau de bord admin, SEO avancé, hébergement 1 an et support 3 mois.", "brand": {"@type": "Brand", "name": "AMweb"}, "offers": { "@type": "Offer", "price": "{{prixnum:ecommerce}}", "priceCurrency": "MAD", "availability": "https://schema.org/InStock", "seller": {"@id": "https://www.amweb.ma/#localbusiness"} } } },
+          { "@type": "ListItem", "position": 3, "item": { "@type": "Product", "name": "Site Premium", "description": "Solution sur mesure : application web ou mobile, CRM et outils de gestion, SEO avancé, design UI/UX haut de gamme, hébergement 2 ans et support VIP 6 mois. Prix défini en rendez-vous.", "brand": {"@type": "Brand", "name": "AMweb"}, "offers": { "@type": "AggregateOffer", "lowPrice": "{{prixnum:premium}}", "priceCurrency": "MAD", "availability": "https://schema.org/InStock", "seller": {"@id": "https://www.amweb.ma/#localbusiness"} } } }
+        ]
+      },
+      {
+        "@type": "FAQPage",
+        "mainEntity": [
+          { "@type": "Question", "name": "Quel est le prix d'un site web au Maroc ?", "acceptedAnswer": { "@type": "Answer", "text": "Chez AMweb, un site vitrine de 3 pages coûte {{prix:vitrine}} MAD, un site e-commerce {{prix:ecommerce}} MAD, et une solution premium (application, CRM, SEO avancé) démarre à {{prix:premium}} MAD, avec un prix défini ensemble en rendez-vous. L'hébergement est inclus." } },
+          { "@type": "Question", "name": "Proposez-vous des facilités de paiement ?", "acceptedAnswer": { "@type": "Answer", "text": "Oui. Toutes nos formules peuvent être réglées en plusieurs fois, selon un échéancier défini ensemble avant le démarrage du projet." } },
+          { "@type": "Question", "name": "Que comprend le Site Premium ?", "acceptedAnswer": { "@type": "Answer", "text": "Le Site Premium est une solution sur mesure : application web ou mobile, CRM et outils de gestion, SEO avancé, design haut de gamme et intégrations API. Le prix démarre à {{prix:premium}} MAD et se définit avec vous lors d'un rendez-vous." } },
+          { "@type": "Question", "name": "L'hébergement est-il inclus dans le forfait ?", "acceptedAnswer": { "@type": "Answer", "text": "Oui : 1 an pour le Site Vitrine et le Site E-commerce, 2 ans pour le Site Premium." } },
+          { "@type": "Question", "name": "Combien de temps faut-il pour créer un site web avec AMweb ?", "acceptedAnswer": { "@type": "Answer", "text": "Un site vitrine est livré en {{duree:vitrine}} et un site e-commerce en {{duree:ecommerce}}. Pour le Site Premium, le délai est fixé ensemble lors du rendez-vous, selon le périmètre." } }
+        ]
+      }
+    ]
+  }
+  </script>
+
+  {{GA}}
+</head>
+<body data-page="offres">
+  {{GTM_BODY}}
+  {{SPRITE}}
+  {{NAV}}
+
+  <main id="main">
+    <!-- ===================== HERO ===================== -->
+    <section class="hero page-hero" id="top" aria-labelledby="offres-title">
+      <div class="wrap hero-grid">
+        <div class="hero-copy">
+          <h1 class="hero-title display" id="offres-title">
+            <span class="line"><span>[[Des forfaits clairs,|Clear packages,]]</span></span>
+            <span class="line"><span class="accent">[[sans surprise.|no surprises.]]</span></span>
+          </h1>
+          <p class="hero-sub">[[Prix clairs, hébergement inclus et facilités de paiement. Choisissez la formule qui colle à votre projet.|Clear prices, hosting included and payment plans. Pick the package that fits your project.]]</p>
+          <div class="hero-actions">
+            <a href="#pricing" class="btn btn-primary magnetic">[[Comparer les forfaits|Compare packages]] <i class="ph ph-arrow-down" aria-hidden="true"></i></a>
+          </div>
+        </div>
+        <div class="stage" data-orbit aria-hidden="true">
+          <canvas class="stage-back"></canvas>
+          <div class="stage-mark">{{MARK:hero}}</div>
+          <canvas class="stage-front"></canvas>
+          <button class="sat" type="button" tabindex="-1" data-go="plan:vitrine"><i class="ph ph-browser"></i>{{prix:vitrine}} MAD</button>
+          <button class="sat" type="button" tabindex="-1" data-go="plan:ecommerce"><i class="ph ph-shopping-cart"></i>{{prix:ecommerce}} MAD</button>
+          <button class="sat" type="button" tabindex="-1" data-go="plan:premium"><i class="ph ph-diamond"></i>{{prix:premium}}+ MAD</button>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ===================== PLAN FINDER ===================== -->
+    <section class="section" id="finder" aria-labelledby="finder-title" style="padding-top:clamp(40px,6vw,80px)">
+      <div class="wrap finder-grid">
+        <div class="finder-intro">
+          <span class="eyebrow">[[Simulateur|Plan finder]]</span>
+          <h2 class="h2 display" id="finder-title" data-reveal>[[Pas sûr ? Quatre questions suffisent.|Not sure? Four questions is all it takes.]]</h2>
+          <p class="lead" style="margin-top:22px">[[Répondez et on vous recommande la formule adaptée, avec son prix et son délai réels.|Answer and we recommend the right package, with its real price and timeline.]]</p>
+        </div>
+        <div class="finder" id="finderCard" aria-live="polite">
+          <div class="finder-top">
+            <div class="fsteps-bar" aria-hidden="true"><span></span><span></span><span></span><span></span></div>
+            <span class="finder-count mono" id="finderCount">1 / 4</span>
+          </div>
+          <div class="fsteps">
+            <fieldset class="fstep is-active" data-key="sell">
+              <legend class="fstep-q display">[[Vous vendez en ligne ?|Do you sell online?]]</legend>
+              <div class="fopts"><button class="fopt" type="button" data-value="sell"><span class="fopt-dot" aria-hidden="true"></span><span class="fopt-txt"><strong>[[Oui, une boutique|Yes, a store]]</strong><small>[[Produits, panier, paiement|Products, cart, payment]]</small></span></button><button class="fopt" type="button" data-value="show"><span class="fopt-dot" aria-hidden="true"></span><span class="fopt-txt"><strong>[[Non, je présente mon activité|No, I present my business]]</strong><small>[[Services, contact, réputation|Services, contact, reputation]]</small></span></button><button class="fopt" type="button" data-value="later"><span class="fopt-dot" aria-hidden="true"></span><span class="fopt-txt"><strong>[[Pas encore, plus tard|Not yet, later]]</strong><small>[[On garde la porte ouverte|We keep the door open]]</small></span></button></div>
+            </fieldset>
+            <fieldset class="fstep" data-key="pages">
+              <legend class="fstep-q display">[[Combien de pages ?|How many pages?]]</legend>
+              <div class="fopts"><button class="fopt" type="button" data-value="s"><span class="fopt-dot" aria-hidden="true"></span><span class="fopt-txt"><strong>[[Jusqu'à 3|Up to 3]]</strong><small>[[Accueil, services, contact|Home, services, contact]]</small></span></button><button class="fopt" type="button" data-value="m"><span class="fopt-dot" aria-hidden="true"></span><span class="fopt-txt"><strong>[[4 à 15|4 to 15]]</strong><small>[[Plusieurs offres ou catégories|Several offers or categories]]</small></span></button><button class="fopt" type="button" data-value="l"><span class="fopt-dot" aria-hidden="true"></span><span class="fopt-txt"><strong>[[Plus de 15|More than 15]]</strong><small>[[Catalogue, blog, ressources|Catalogue, blog, resources]]</small></span></button></div>
+            </fieldset>
+            <fieldset class="fstep" data-key="custom">
+              <legend class="fstep-q display">[[Besoin de sur-mesure ?|Need custom features?]]</legend>
+              <div class="fopts"><button class="fopt" type="button" data-value="yes"><span class="fopt-dot" aria-hidden="true"></span><span class="fopt-txt"><strong>[[Oui|Yes]]</strong><small>[[Application, CRM, espace client, outils de gestion|App, CRM, client area, management tools]]</small></span></button><button class="fopt" type="button" data-value="no"><span class="fopt-dot" aria-hidden="true"></span><span class="fopt-txt"><strong>[[Non|No]]</strong><small>[[Un site solide et efficace suffit|A solid, effective site is enough]]</small></span></button><button class="fopt" type="button" data-value="unsure"><span class="fopt-dot" aria-hidden="true"></span><span class="fopt-txt"><strong>[[Je ne sais pas encore|Not sure yet]]</strong><small>[[On en discutera ensemble|We will discuss it together]]</small></span></button></div>
+            </fieldset>
+            <fieldset class="fstep" data-key="time">
+              <legend class="fstep-q display">[[Votre délai idéal ?|Your ideal timeline?]]</legend>
+              <div class="fopts"><button class="fopt" type="button" data-value="fast"><span class="fopt-dot" aria-hidden="true"></span><span class="fopt-txt"><strong>[[Moins de 2 semaines|Under 2 weeks]]</strong></span></button><button class="fopt" type="button" data-value="month"><span class="fopt-dot" aria-hidden="true"></span><span class="fopt-txt"><strong>[[Environ 1 mois|About a month]]</strong></span></button><button class="fopt" type="button" data-value="flex"><span class="fopt-dot" aria-hidden="true"></span><span class="fopt-txt"><strong>[[Flexible|Flexible]]</strong></span></button></div>
+            </fieldset>
+            <div class="fresult" id="finderResult" hidden>
+              <span class="tile-kicker accent"><i class="ph ph-sparkle" aria-hidden="true"></i> [[Notre recommandation|Our recommendation]]</span>
+              <h3 class="fresult-name display" id="frName"></h3>
+              <div class="fresult-meta">
+                <div class="price"><span class="price-from" id="frFrom" hidden>[[dès|from]]</span><span class="price-amt" id="frPrice"></span><span class="price-cur">MAD</span></div>
+                <span class="plan-time"><i class="ph ph-clock" aria-hidden="true"></i><span id="frTime"></span></span>
+              </div>
+              <ul class="tile-list" id="frReasons"></ul>
+              <p class="fresult-note" id="frNote" hidden></p>
+              <p class="fresult-pay"><i class="ph ph-hand-coins" aria-hidden="true"></i> [[Facilités de paiement disponibles.|Payment plans available.]]</p>
+              <div class="fresult-actions">
+                <a href="{{HOME}}index.html#contact" class="btn btn-primary magnetic" id="frChoose">[[Choisir ce forfait|Choose this package]] <i class="ph ph-arrow-right" aria-hidden="true"></i></a>
+                <button type="button" class="btn btn-ghost" id="frDetail">[[Voir le détail|See details]]</button>
+              </div>
+            </div>
+          </div>
+          <div class="finder-foot">
+            <button type="button" class="link-btn" id="finderBack" hidden><i class="ph ph-arrow-left" aria-hidden="true"></i> [[Retour|Back]]</button>
+            <button type="button" class="link-btn" id="finderReset" hidden><i class="ph ph-arrow-counter-clockwise" aria-hidden="true"></i> [[Recommencer|Start over]]</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== PLANS ===================== -->
+    <section class="section" id="pricing" aria-labelledby="pricing-title" style="padding-top:clamp(40px,6vw,80px)">
+      <div class="wrap">
+        <div class="pricing-head">
+          <h2 class="h2 display" id="pricing-title" data-reveal style="max-width:18ch">[[Trois formules. Un seul niveau d'exigence.|Three packages. One standard.]]</h2>
+          <div class="seg" role="group" aria-label="[[Affichage des forfaits|Plan display]]">
+            <button type="button" class="seg-btn is-on" data-view="one" aria-pressed="true"><i class="ph ph-cards" aria-hidden="true"></i> [[Une formule|One at a time]]</button>
+            <button type="button" class="seg-btn" data-view="all" aria-pressed="false"><i class="ph ph-columns" aria-hidden="true"></i> [[Tout comparer|Compare all]]</button>
+          </div>
+        </div>
+
+        <div class="plans" id="plans">
+          <div class="plan" id="vitrine" data-plan="vitrine">
+            <button class="plan-head" type="button" aria-expanded="false" aria-controls="vitrine-detail">
+              <span class="tile-kicker">[[Essentiel|Essential]]</span>
+              <span class="plan-name">[[Site Vitrine|Showcase site]]</span>
+              <span class="price"><span class="price-amt">{{prix:vitrine}}</span><span class="price-cur">MAD</span></span>
+              <span class="plan-time"><i class="ph ph-clock" aria-hidden="true"></i>[[Livré en {{duree:vitrine}}|Delivered in {{duree:vitrine}}]]</span>
+            </button>
+            <div class="plan-detail" id="vitrine-detail" role="region" aria-label="[[Détail Site Vitrine|Showcase Site details]]">
+              <span class="tile-kicker" style="color:var(--accent-fg)">[[Essentiel|Essential]]</span>
+              <h3 class="tile-name display" style="margin-top:10px">[[Site Vitrine|Showcase site]]</h3>
+              <span class="price"><span class="price-amt">{{prix:vitrine}}</span><span class="price-cur">[[MAD / projet|MAD / project]]</span></span>
+              <p class="plan-pitch">[[L'essentiel pour exister en ligne et inspirer confiance dès le premier clic.|The essentials to exist online and earn trust from the first click.]]</p>
+              <ul class="feat">
+                <li><i class="ph ph-check"></i>[[3 pages sur mesure|3 custom pages]]</li>
+                <li><i class="ph ph-check"></i>[[Design responsive|Responsive design]]</li>
+                <li><i class="ph ph-check"></i>[[Formulaire de contact|Contact form]]</li>
+                <li><i class="ph ph-check"></i>[[Optimisation SEO de base|Basic SEO optimisation]]</li>
+                <li><i class="ph ph-check"></i>[[Hébergement 1 an inclus|1 year hosting included]]</li>
+                <li><i class="ph ph-check"></i>[[Facilités de paiement|Payment plans]]</li>
+                <li class="off"><i class="ph ph-x"></i>[[Boutique en ligne|Online store]]</li>
+                <li class="off"><i class="ph ph-x"></i>[[Tableau de bord admin|Admin dashboard]]</li>
+                </ul>
+              <a href="{{HOME}}index.html?plan=vitrine#contact" class="btn btn-primary btn-full magnetic">[[Choisir ce forfait|Choose this package]] <i class="ph ph-arrow-right" aria-hidden="true"></i></a>
+            </div>
+          </div>
+          <div class="plan is-active" id="ecommerce" data-plan="ecommerce">
+            <button class="plan-head" type="button" aria-expanded="true" aria-controls="ecommerce-detail">
+              <span class="tile-kicker">[[Professionnel|Professional]] <span class="plan-pop">[[Le plus populaire|Most popular]]</span></span>
+              <span class="plan-name">[[Site E-commerce|E-commerce site]]</span>
+              <span class="price"><span class="price-amt">{{prix:ecommerce}}</span><span class="price-cur">MAD</span></span>
+              <span class="plan-time"><i class="ph ph-clock" aria-hidden="true"></i>[[Livré en {{duree:ecommerce}}|Delivered in {{duree:ecommerce}}]]</span>
+            </button>
+            <div class="plan-detail" id="ecommerce-detail" role="region" aria-label="[[Détail Site E-commerce|E-commerce Site details]]">
+              <span class="tile-kicker" style="color:var(--accent-fg)">[[Professionnel|Professional]]</span>
+              <h3 class="tile-name display" style="margin-top:10px">[[Site E-commerce|E-commerce site]]</h3>
+              <span class="price"><span class="price-amt">{{prix:ecommerce}}</span><span class="price-cur">[[MAD / projet|MAD / project]]</span></span>
+              <p class="plan-pitch">[[Votre boutique ouverte 24h/24 : vous vendez même quand vous dormez.|Your store open 24/7: you sell even while you sleep.]]</p>
+              <ul class="feat">
+                <li><i class="ph ph-check"></i>[[Pages illimitées|Unlimited pages]]</li>
+                <li><i class="ph ph-check"></i>[[Boutique en ligne complète|Full online store]]</li>
+                <li><i class="ph ph-check"></i>[[Paiement en ligne intégré|Integrated online payment]]</li>
+                <li><i class="ph ph-check"></i>[[Tableau de bord admin|Admin dashboard]]</li>
+                <li><i class="ph ph-check"></i>[[SEO avancé|Advanced SEO]]</li>
+                <li><i class="ph ph-check"></i>[[Hébergement 1 an inclus|1 year hosting included]]</li>
+                <li><i class="ph ph-check"></i>[[Support prioritaire 3 mois|3 months priority support]]</li>
+                <li><i class="ph ph-check"></i>[[Facilités de paiement|Payment plans]]</li>
+                </ul>
+              <a href="{{HOME}}index.html?plan=ecommerce#contact" class="btn btn-primary btn-full magnetic">[[Choisir ce forfait|Choose this package]] <i class="ph ph-arrow-right" aria-hidden="true"></i></a>
+            </div>
+          </div>
+          <div class="plan" id="premium" data-plan="premium">
+            <button class="plan-head" type="button" aria-expanded="false" aria-controls="premium-detail">
+              <span class="tile-kicker">[[Premium sur mesure|Custom premium]]</span>
+              <span class="plan-name">[[Site Premium|Premium site]]</span>
+              <span class="price"><span class="price-from">[[dès|from]]</span><span class="price-amt">{{prix:premium}}</span><span class="price-cur">MAD</span></span>
+              <span class="plan-time"><i class="ph ph-clock" aria-hidden="true"></i>[[Délai défini en rendez-vous|Timeline set in a meeting]]</span>
+            </button>
+            <div class="plan-detail" id="premium-detail" role="region" aria-label="[[Détail Site Premium|Premium Site details]]">
+              <span class="tile-kicker" style="color:var(--accent-fg)">[[Premium sur mesure|Custom premium]]</span>
+              <h3 class="tile-name display" style="margin-top:10px">[[Site Premium|Premium site]]</h3>
+              <span class="price"><span class="price-from">[[dès|from]]</span><span class="price-amt">{{prix:premium}}</span><span class="price-cur">[[MAD / projet|MAD / project]]</span></span>
+              <p class="plan-pitch">[[Application, CRM, SEO : une solution construite autour de votre métier. Prix et délai définis ensemble en rendez-vous.|App, CRM, SEO: a solution built around your business. Price and timeline set together in a meeting.]]</p>
+              <ul class="feat">
+                <li><i class="ph ph-check"></i>[[Application web ou mobile sur mesure|Custom web or mobile app]]</li>
+                <li><i class="ph ph-check"></i>[[CRM et outils de gestion|CRM and management tools]]</li>
+                <li><i class="ph ph-check"></i>[[SEO avancé et stratégie de contenu|Advanced SEO and content strategy]]</li>
+                <li><i class="ph ph-check"></i>[[Design UI/UX haut de gamme|High-end UI/UX design]]</li>
+                <li><i class="ph ph-check"></i>[[Intégrations API sur mesure|Custom API integrations]]</li>
+                <li><i class="ph ph-check"></i>[[Hébergement 2 ans inclus|2 years hosting included]]</li>
+                <li><i class="ph ph-check"></i>[[Support VIP 6 mois et formation|6 months VIP support and training]]</li>
+                <li><i class="ph ph-check"></i>[[Facilités de paiement|Payment plans]]</li>
+                </ul>
+              <a href="{{HOME}}index.html?plan=premium#contact" data-book="premium" class="btn btn-primary btn-full magnetic">[[Réserver un rendez-vous|Book a meeting]] <i class="ph ph-arrow-right" aria-hidden="true"></i></a>
+            </div>
+          </div>
+        </div>
+        <div class="compare" id="compare" hidden>
+          <div class="cmp-scroll">
+            <table class="cmp">
+              <caption class="sr-only">[[Comparaison des forfaits AMweb|AMweb package comparison]]</caption>
+              <thead><tr><td></td><th scope="col"><span class="tile-kicker accent">[[Essentiel|Essential]]</span><span class="cmp-name display">[[Site Vitrine|Showcase site]]</span><span class="price"><span class="price-amt">{{prix:vitrine}}</span><span class="price-cur">MAD</span></span></th><th scope="col" class="is-pop"><span class="tile-kicker accent">[[Professionnel|Professional]]</span> <span class="plan-pop">[[Le plus populaire|Most popular]]</span><span class="cmp-name display">[[Site E-commerce|E-commerce site]]</span><span class="price"><span class="price-amt">{{prix:ecommerce}}</span><span class="price-cur">MAD</span></span></th><th scope="col"><span class="tile-kicker accent">[[Premium|Premium]]</span><span class="cmp-name display">[[Site Premium|Premium site]]</span><span class="price"><span class="price-from">[[dès|from]]</span><span class="price-amt">{{prix:premium}}</span><span class="price-cur">MAD</span></span></th></tr></thead>
+              <tbody><tr class="cmp-grp"><th colspan="4" scope="colgroup">[[Contenu et design|Content and design]]</th></tr><tr><th scope="row">[[Pages|Pages]]</th><td>[[3 pages|3 pages]]</td><td class="is-pop">[[Illimitées|Unlimited]]</td><td>[[Sur mesure|Custom]]</td></tr><tr><th scope="row">[[Design responsive|Responsive design]]</th><td><i class="ph ph-check cmp-y" aria-label="[[Inclus|Included]]"></i></td><td class="is-pop"><i class="ph ph-check cmp-y" aria-label="[[Inclus|Included]]"></i></td><td><i class="ph ph-check cmp-y" aria-label="[[Inclus|Included]]"></i></td></tr><tr><th scope="row">[[Design UI/UX haut de gamme|High-end UI/UX design]]</th><td><i class="ph ph-minus cmp-n" aria-label="[[Non inclus|Not included]]"></i></td><td class="is-pop"><i class="ph ph-minus cmp-n" aria-label="[[Non inclus|Not included]]"></i></td><td><i class="ph ph-check cmp-y" aria-label="[[Inclus|Included]]"></i></td></tr><tr class="cmp-grp"><th colspan="4" scope="colgroup">[[Fonctionnalités|Features]]</th></tr><tr><th scope="row">[[Formulaire de contact|Contact form]]</th><td><i class="ph ph-check cmp-y" aria-label="[[Inclus|Included]]"></i></td><td class="is-pop"><i class="ph ph-check cmp-y" aria-label="[[Inclus|Included]]"></i></td><td><i class="ph ph-check cmp-y" aria-label="[[Inclus|Included]]"></i></td></tr><tr><th scope="row">[[Boutique en ligne|Online store]]</th><td><i class="ph ph-minus cmp-n" aria-label="[[Non inclus|Not included]]"></i></td><td class="is-pop"><i class="ph ph-check cmp-y" aria-label="[[Inclus|Included]]"></i></td><td><i class="ph ph-check cmp-y" aria-label="[[Inclus|Included]]"></i></td></tr><tr><th scope="row">[[Paiement en ligne intégré|Integrated online payment]]</th><td><i class="ph ph-minus cmp-n" aria-label="[[Non inclus|Not included]]"></i></td><td class="is-pop"><i class="ph ph-check cmp-y" aria-label="[[Inclus|Included]]"></i></td><td><i class="ph ph-check cmp-y" aria-label="[[Inclus|Included]]"></i></td></tr><tr><th scope="row">[[Tableau de bord admin|Admin dashboard]]</th><td><i class="ph ph-minus cmp-n" aria-label="[[Non inclus|Not included]]"></i></td><td class="is-pop"><i class="ph ph-check cmp-y" aria-label="[[Inclus|Included]]"></i></td><td><i class="ph ph-check cmp-y" aria-label="[[Inclus|Included]]"></i></td></tr><tr><th scope="row">[[Application web ou mobile|Web or mobile app]]</th><td><i class="ph ph-minus cmp-n" aria-label="[[Non inclus|Not included]]"></i></td><td class="is-pop"><i class="ph ph-minus cmp-n" aria-label="[[Non inclus|Not included]]"></i></td><td><i class="ph ph-check cmp-y" aria-label="[[Inclus|Included]]"></i></td></tr><tr><th scope="row">[[CRM et outils de gestion|CRM and management tools]]</th><td><i class="ph ph-minus cmp-n" aria-label="[[Non inclus|Not included]]"></i></td><td class="is-pop"><i class="ph ph-minus cmp-n" aria-label="[[Non inclus|Not included]]"></i></td><td><i class="ph ph-check cmp-y" aria-label="[[Inclus|Included]]"></i></td></tr><tr><th scope="row">[[Intégrations API sur mesure|Custom API integrations]]</th><td><i class="ph ph-minus cmp-n" aria-label="[[Non inclus|Not included]]"></i></td><td class="is-pop"><i class="ph ph-minus cmp-n" aria-label="[[Non inclus|Not included]]"></i></td><td><i class="ph ph-check cmp-y" aria-label="[[Inclus|Included]]"></i></td></tr><tr class="cmp-grp"><th colspan="4" scope="colgroup">[[Visibilité et accompagnement|Visibility and support]]</th></tr><tr><th scope="row">[[Référencement SEO|SEO]]</th><td>[[De base|Basic]]</td><td class="is-pop">[[Avancé|Advanced]]</td><td>[[Avancé + contenu|Advanced + content]]</td></tr><tr><th scope="row">[[Hébergement inclus|Hosting included]]</th><td>[[1 an|1 year]]</td><td class="is-pop">[[1 an|1 year]]</td><td>[[2 ans|2 years]]</td></tr><tr><th scope="row">[[Support|Support]]</th><td><i class="ph ph-minus cmp-n" aria-label="[[Non inclus|Not included]]"></i></td><td class="is-pop">[[Prioritaire, 3 mois|Priority, 3 months]]</td><td>[[VIP, 6 mois|VIP, 6 months]]</td></tr><tr><th scope="row">[[Formation personnalisée|Personalised training]]</th><td><i class="ph ph-minus cmp-n" aria-label="[[Non inclus|Not included]]"></i></td><td class="is-pop"><i class="ph ph-minus cmp-n" aria-label="[[Non inclus|Not included]]"></i></td><td><i class="ph ph-check cmp-y" aria-label="[[Inclus|Included]]"></i></td></tr><tr><th scope="row">[[Facilités de paiement|Payment plans]]</th><td><i class="ph ph-check cmp-y" aria-label="[[Inclus|Included]]"></i></td><td class="is-pop"><i class="ph ph-check cmp-y" aria-label="[[Inclus|Included]]"></i></td><td><i class="ph ph-check cmp-y" aria-label="[[Inclus|Included]]"></i></td></tr><tr><th scope="row">[[Délai de livraison|Delivery time]]</th><td>[[{{duree:vitrine}}|{{duree:vitrine}}]]</td><td class="is-pop">[[{{duree:ecommerce}}|{{duree:ecommerce}}]]</td><td>[[Défini en rendez-vous|Set in a meeting]]</td></tr></tbody>
+              <tfoot><tr><td></td>
+                <td><a class="btn btn-ghost btn-sm" href="{{HOME}}index.html?plan=vitrine#contact">[[Choisir|Choose]]</a></td>
+                <td class="is-pop"><a class="btn btn-primary btn-sm" href="{{HOME}}index.html?plan=ecommerce#contact">[[Choisir|Choose]]</a></td>
+                <td><a class="btn btn-ghost btn-sm" data-book="premium" href="{{HOME}}index.html?plan=premium#contact">[[Rendez-vous|Meeting]]</a></td>
+              </tr></tfoot>
+            </table>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== MAINTENANCE ===================== -->
+    <section class="section" id="maintenance" aria-labelledby="maint-title" style="padding-top:0">
+      <div class="wrap">
+        <div class="maint">
+          <div>
+            <h2 class="maint-title display" id="maint-title" data-reveal>[[Maintenance & sérénité.|Maintenance & peace of mind.]]</h2>
+            <p class="lead">[[Votre site reste rapide, sécurisé et à jour pendant que vous vous occupez de vos clients.|Your site stays fast, secure and up to date while you look after your customers.]]</p>
+            <div class="maint-price">{{maintenance}}</div>
+            <a href="{{HOME}}index.html?plan=maintenance#contact" class="btn btn-primary magnetic">[[Demander un devis|Request a quote]] <i class="ph ph-arrow-right" aria-hidden="true"></i></a>
+          </div>
+          <ul class="maint-list">
+            <li><i class="ph ph-shield-check" aria-hidden="true"></i><span><strong>[[Mises à jour et sécurité|Updates and security]]</strong>[[Correctifs appliqués avant qu'ils ne deviennent des problèmes.|Fixes applied before they become problems.]]</span></li>
+            <li><i class="ph ph-database" aria-hidden="true"></i><span><strong>[[Sauvegardes régulières|Regular backups]]</strong>[[Votre site peut être restauré rapidement en cas de souci.|Your site can be restored quickly if anything goes wrong.]]</span></li>
+            <li><i class="ph ph-pencil-simple" aria-hidden="true"></i><span><strong>[[Petites modifications|Small edits]]</strong>[[Textes, photos, prix : on s'en charge pour vous.|Text, photos, prices: we handle it for you.]]</span></li>
+            <li><i class="ph ph-chart-line-up" aria-hidden="true"></i><span><strong>[[Suivi des performances|Performance tracking]]</strong>[[Vitesse et visibilité Google surveillées chaque mois.|Speed and Google visibility checked every month.]]</span></li>
+            <li><i class="ph ph-whatsapp-logo" aria-hidden="true"></i><span><strong>[[Support WhatsApp|WhatsApp support]]</strong>[[Une question ? Un message suffit.|A question? One message is enough.]]</span></li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== INCLUDED ===================== -->
+    <section class="section" id="inclus" aria-labelledby="inclus-title" style="padding-top:0">
+      <div class="wrap">
+        <h2 class="h2 display" id="inclus-title" data-reveal style="max-width:16ch;margin-bottom:clamp(36px,5vw,64px)">[[Inclus dans chaque projet.|Included in every project.]]</h2>
+        <div class="inc-grid">
+            <div class="inc-item"><span class="inc-ico" aria-hidden="true"><i class="ph ph-device-mobile"></i></span><h3>[[Pensé mobile d'abord|Mobile first]]</h3><p>[[Impeccable sur téléphone, là où vos clients passent leur temps.|Flawless on phones, where your customers spend their time.]]</p></div>
+            <div class="inc-item"><span class="inc-ico" aria-hidden="true"><i class="ph ph-hand-coins"></i></span><h3>[[Facilités de paiement|Payment plans]]</h3><p>[[Réglez en plusieurs fois, selon un échéancier défini ensemble.|Pay in instalments, on a schedule we set together.]]</p></div>
+            <div class="inc-item"><span class="inc-ico" aria-hidden="true"><i class="ph ph-handshake"></i></span><h3>[[Devis gratuit|Free quote]]</h3><p>[[Un rendez-vous sans engagement pour cadrer votre projet.|A no-commitment meeting to scope your project.]]</p></div>
+            <div class="inc-item"><span class="inc-ico" aria-hidden="true"><i class="ph ph-whatsapp-logo"></i></span><h3>[[Bouton WhatsApp|WhatsApp button]]</h3><p>[[Vos visiteurs vous écrivent en un clic, directement sur WhatsApp.|Visitors message you in one tap, straight on WhatsApp.]]</p></div>
+            <div class="inc-item"><span class="inc-ico" aria-hidden="true"><i class="ph ph-lock-key"></i></span><h3>[[Site sécurisé HTTPS|Secure HTTPS site]]</h3><p>[[Certificat SSL et hébergement configurés pour vous.|SSL certificate and hosting set up for you.]]</p></div>
+            <div class="inc-item"><span class="inc-ico" aria-hidden="true"><i class="ph ph-eye"></i></span><h3>[[Vous validez tout|You approve everything]]</h3><p>[[Chaque maquette est validée avant le développement. Zéro surprise.|Every mockup is approved before development. Zero surprises.]]</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== FAQ ===================== -->
+    <section class="section" id="faq" aria-labelledby="faq-title" style="padding-top:0">
+      <div class="wrap faq-grid">
+        <h2 class="h2 display" id="faq-title">[[Questions fréquentes.|Frequently asked.]]</h2>
+        <div class="faq">
+          <details open>
+            <summary><span>[[Quel est le prix d'un site web au Maroc ?|How much does a website cost in Morocco?]]</span> <i class="ph ph-plus" aria-hidden="true"></i></summary>
+            <p class="ans">[[Chez AMweb, un site vitrine de 3 pages coûte {{prix:vitrine}} MAD et un site e-commerce {{prix:ecommerce}} MAD. La solution premium (application, CRM, SEO avancé) démarre à {{prix:premium}} MAD, avec un prix défini ensemble en rendez-vous. L'hébergement est inclus.|At AMweb, a 3-page showcase site is {{prix:vitrine}} MAD and an e-commerce site {{prix:ecommerce}} MAD. The premium solution (app, CRM, advanced SEO) starts at {{prix:premium}} MAD, with the price set together in a meeting. Hosting is included.]]</p>
+          </details>
+          <details>
+            <summary><span>[[Proposez-vous des facilités de paiement ?|Do you offer payment plans?]]</span> <i class="ph ph-plus" aria-hidden="true"></i></summary>
+            <p class="ans">[[Oui. Toutes nos formules peuvent être réglées en plusieurs fois, selon un échéancier défini ensemble avant le démarrage du projet.|Yes. Every package can be paid in instalments, on a schedule we agree together before the project starts.]]</p>
+          </details>
+          <details>
+            <summary><span>[[Que comprend le Site Premium ?|What does the Premium site include?]]</span> <i class="ph ph-plus" aria-hidden="true"></i></summary>
+            <p class="ans">[[C'est une solution sur mesure : application web ou mobile, CRM et outils de gestion, SEO avancé, design haut de gamme et intégrations API. Le prix démarre à {{prix:premium}} MAD et se définit avec vous lors d'un rendez-vous.|It is a custom solution: web or mobile app, CRM and management tools, advanced SEO, high-end design and API integrations. The price starts at {{prix:premium}} MAD and is set with you in a meeting.]]</p>
+          </details>
+          <details>
+            <summary><span>[[L'hébergement est-il inclus dans le forfait ?|Is hosting included in the package?]]</span> <i class="ph ph-plus" aria-hidden="true"></i></summary>
+            <p class="ans">[[Oui : 1 an pour le Site Vitrine et le Site E-commerce, 2 ans pour le Site Premium.|Yes: 1 year for the Showcase and E-commerce sites, 2 years for the Premium site.]]</p>
+          </details>
+          <details>
+            <summary><span>[[Combien de temps faut-il pour créer mon site ?|How long does it take to build my site?]]</span> <i class="ph ph-plus" aria-hidden="true"></i></summary>
+            <p class="ans">[[Un site vitrine est livré en {{duree:vitrine}} et un site e-commerce en {{duree:ecommerce}}. Pour le Site Premium, le délai est fixé ensemble lors du rendez-vous, selon le périmètre.|A showcase site ships in {{duree:vitrine}} and an e-commerce site in {{duree:ecommerce}}. For the Premium site, the timeline is set together in the meeting, based on scope.]]</p>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== CTA ===================== -->
+    <section class="section" aria-labelledby="cta-title" style="padding-top:0">
+      <div class="wrap">
+        <div class="cta-band">
+          <div class="cta-band-mark" aria-hidden="true"><svg viewBox="0 0 182 96"><use href="#lg-mark"/></svg></div>
+          <div style="position:relative">
+            <h2 class="h2 display" id="cta-title">[[Un projet unique ? Parlons-en.|A unique project? Let's talk.]]</h2>
+            <p>[[Devis gratuit et personnalisé, réponse rapide sur WhatsApp.|Free tailored quote, quick reply on WhatsApp.]]</p>
+            <p class="status status--on-accent" data-status></p>
+          </div>
+          <a href="{{HOME}}index.html#contact" class="btn btn-primary magnetic" style="position:relative">[[Démarrer un projet|Start a project]] <i class="ph ph-arrow-right" aria-hidden="true"></i></a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  {{FOOTER}}
+  {{SCRIPTS}}
+</body>
+</html>
