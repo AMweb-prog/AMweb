@@ -6,10 +6,10 @@
   <meta name="robots" content="noindex, nofollow" />
   <meta name="theme-color" content="#0B0F1A" />
   <title>Admin AMweb</title>
-  <link rel="icon" href="/favicon.ico" />
-  <link rel="preload" href="/admin/vendor/phosphor/admin-icons.woff2" as="font" type="font/woff2" crossorigin />
-  <link rel="stylesheet" href="/admin/vendor/phosphor/admin-icons.css" />
-  <link rel="stylesheet" href="/admin/admin.css" />
+  <link rel="icon" href="../favicon.ico" />
+  <link rel="preload" href="vendor/phosphor/admin-icons.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="stylesheet" href="vendor/phosphor/admin-icons.css" />
+  <link rel="stylesheet" href="admin.css" />
 </head>
 <body>
   <!-- loading -->
@@ -19,8 +19,9 @@
   <section class="auth" id="setupView" hidden>
     <div class="auth-card">
       <div class="brand"><span class="brand-am">AM</span><span class="brand-web">web</span><span class="brand-tag">admin</span></div>
-      <h1>Configuration incomplète</h1>
-      <p class="muted">L'admin ne trouve pas les réglages Supabase. Ajoutez <code>SUPABASE_URL</code> et <code>SUPABASE_ANON_KEY</code> dans Vercel (Settings &gt; Environment Variables), puis redéployez. Tout est expliqué dans <code>GUIDE-ADMIN.md</code>.</p>
+      <h1 id="setupTitle">Configuration incomplète</h1>
+      <p class="muted" id="setupLocal" hidden>Cette page a été ouverte directement depuis ton ordinateur. L'admin ne fonctionne qu'en ligne, sur <strong>amweb.ma/admin</strong>, car elle a besoin du serveur Vercel et de Supabase. Pousse le code sur GitHub, attends la fin du déploiement Vercel, puis ouvre <strong>https://www.amweb.ma/admin/</strong>.</p>
+      <p class="muted" id="setupEnv">L'admin ne trouve pas les réglages Supabase. Ajoutez <code>SUPABASE_URL</code> et <code>SUPABASE_ANON_KEY</code> dans Vercel (Settings &gt; Environment Variables), puis redéployez. Tout est expliqué dans <code>GUIDE-ADMIN.md</code>.</p>
     </div>
   </section>
 
@@ -103,7 +104,7 @@
 
   <div class="toasts" id="toasts" aria-live="polite"></div>
 
-  <script src="/admin/vendor/supabase.js"></script>
-  <script src="/admin/admin.js"></script>
+  <script src="vendor/supabase.js"></script>
+  <script src="admin.js"></script>
 </body>
 </html>

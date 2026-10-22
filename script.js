@@ -490,24 +490,26 @@
       });
     }
 
-    // Services: horizontal pan (desktop)
+    // Services: horizontal pan (desktop, and phones/tablets tall enough to show a full card)
     const hpan = document.getElementById('hpan');
     const hTrack = document.getElementById('hpanTrack');
     const hProg = document.getElementById('hpanProgress');
     if (hpan && hTrack) {
-      mm.add('(min-width: 1024px)', () => {
-        const dist = () => hTrack.scrollWidth - window.innerWidth;
+      mm.add({ desk: '(min-width: 1024px)', touch: '(max-width: 1023px) and (min-height: 560px)' }, ctx => {
+        hpan.classList.add('is-h');
+        const dist = () => Math.max(0, hTrack.scrollWidth - window.innerWidth);
         const tween = gsap.to(hTrack, {
           x: () => -dist(), ease: 'none',
           scrollTrigger: {
             trigger: hpan, start: 'top top', end: () => '+=' + dist(),
-            pin: true, scrub: 1, invalidateOnRefresh: true, anticipatePin: 1,
+            pin: true, scrub: ctx.conditions.desk ? 1 : .5, invalidateOnRefresh: true, anticipatePin: 1,
             onUpdate: self => { if (hProg) hProg.style.transform = `scaleX(${self.progress.toFixed(4)})`; }
           }
         });
         hTrack.querySelectorAll('.panel-media img').forEach(img => {
           gsap.fromTo(img, { scale: 1.22 }, { scale: 1, ease: 'none', scrollTrigger: { trigger: img.closest('.panel'), containerAnimation: tween, start: 'left right', end: 'center center', scrub: true } });
         });
+        return () => hpan.classList.remove('is-h');
       });
     }
 

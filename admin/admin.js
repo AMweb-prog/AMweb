@@ -202,6 +202,13 @@
   }
 
   async function boot() {
+    if (location.protocol === 'file:') {
+      // opened by double-click from the computer: the admin needs the online server
+      $('#setupTitle').textContent = 'À ouvrir en ligne';
+      $('#setupLocal').hidden = false; $('#setupEnv').hidden = true;
+      show('setupView');
+      return;
+    }
     let cfg = null;
     try {
       const r = await fetch('/api/config', { cache: 'no-store' });
