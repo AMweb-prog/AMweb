@@ -172,6 +172,31 @@ Astuces :
 
 ---
 
+## Relier l'admin du site à l'ERP (amweb-erp)
+
+Le site et l'ERP utilisent **le même projet Supabase**, celui de l'ERP (`dddnvcblzwjmlglqiivr`). Les demandes du site sont dans une seule table `demandes`, lue par les deux interfaces :
+
+- un message envoyé sur amweb.ma apparaît dans **amweb.ma/admin** et, en direct, dans la page **Demandes du site** de l'ERP (menu Commercial) ;
+- l'ERP affiche aussi un message à l'écran, un compteur dans le menu et l'alerte dans la cloche ;
+- le statut et les notes changés d'un côté sont visibles de l'autre ;
+- le bouton **Créer le prospect** ajoute la demande au CRM (étape Nouveau, source « Site web ») et garde le lien entre les deux.
+
+Dans l'ERP, les rôles **admin** et **responsable** voient les demandes. Les **membres** ne les voient pas : c'est imposé par la base de données (RLS). Les admins de l'ERP peuvent aussi ouvrir amweb.ma/admin avec le même email et le même mot de passe.
+
+Pour ne jamais gêner l'ERP, les éléments du site portent des noms qui lui sont propres : la fonction `site_is_admin()` et la table `temoignages` pour les avis affichés sur le site. La table `avis` reste celle des avis clients de l'ERP.
+
+Installation, dans le projet Supabase **de l'ERP** (SQL Editor, un fichier par New query) :
+
+1. `supabase/erp-repair.sql` : remet l'ERP exactement comme ses migrations le définissent. Indispensable si une ancienne version de `schema.sql` du site (avant le 24/10/2026) a été lancée dans ce projet, sans effet sinon.
+2. `supabase/schema.sql`, puis `supabase/seed.sql`, puis `supabase/erp-link.sql`.
+3. Authentication > URL Configuration : **garder** la Site URL de l'ERP et **ajouter** `https://www.amweb.ma/admin/` dans Redirect URLs.
+4. Vercel (projet du site) : `SUPABASE_URL`, `SUPABASE_PUBLISHABLE_KEY` (ou `SUPABASE_ANON_KEY`) et `SUPABASE_SECRET_KEY` (ou `SUPABASE_SERVICE_ROLE_KEY`) avec les valeurs du projet de l'ERP, puis **Redeploy**.
+5. Pousser le code du site et celui de l'ERP (son `index.html` compilé inclut la nouvelle page).
+
+Tous ces fichiers peuvent être relancés sans risque.
+
+---
+
 ## Notifications par email (plus tard, avec Brevo)
 
 Quand tu activeras Brevo :

@@ -1,9 +1,13 @@
 -- =====================================================================
 -- AMweb admin: database structure and security
--- Run ONCE in Supabase: SQL Editor > New query > paste this file > Run.
--- Then run seed.sql (current site content), then add your admin account
--- (see GUIDE-ADMIN.md, step 3).
+-- Run in Supabase: SQL Editor > New query > paste this file > Run.
+-- Then run seed.sql (current site content), then erp-link.sql when the
+-- project is shared with the ERP (see GUIDE-ADMIN.md).
 -- Safe to run again: it only creates what is missing.
+--
+-- The site shares its Supabase project with the ERP (amweb-erp), so every
+-- name here is unique to the website: site_is_admin(), temoignages, ...
+-- Never use the ERP names (is_admin, avis, profiles, ...) in this file.
 -- =====================================================================
 
 -- ---------------------------------------------------------------- admins
@@ -13,18 +17,18 @@ create table if not exists public.admins (
   created_at timestamptz not null default now()
 );
 
-create or replace function public.is_admin()
+create or replace function public.site_is_admin()
 returns boolean
 language sql stable security definer
 set search_path = public
 as $$
   select exists (select 1 from public.admins where user_id = auth.uid());
 $$;
-revoke all on function public.is_admin() from public;
-grant execute on function public.is_admin() to authenticated;
+revoke all on function public.site_is_admin() from public;
+grant execute on function public.site_is_admin() to authenticated;
 
 create or replace function public.touch_updated_at()
-returns trigger language plpgsql as $$
+returns trigger language plpgsql set search_path = public as $$
 begin
   new.updated_at = now();
   return new;
@@ -74,8 +78,19 @@ create table if not exists public.realisations (
   updated_at  timestamptz not null default now()
 );
 
--- ---------------------------------------------------------------- client reviews
-create table if not exists public.avis (
+-- ---------------------------------------------------------------- client reviews (testimonials shown on the site)
+-- Older versions named this table "avis", which is also an ERP table: rename the website one if found.
+do $$
+begin
+  if to_regclass('public.temoignages') is null
+     and exists (select 1 from information_schema.columns where table_schema = 'public' and table_name = 'avis' and column_name = 'texte_fr')
+     and not exists (select 1 from information_schema.columns where table_schema = 'public' and table_name = 'avis' and column_name = 'note_etoiles') then
+    alter table public.avis rename to temoignages;
+    drop trigger if exists avis_touch on public.temoignages;
+  end if;
+end $$;
+
+create table if not exists public.temoignages (
   id         uuid primary key default gen_random_uuid(),
   ordre      integer not null default 0,
   nom        text not null,
@@ -121,20 +136,23 @@ create table if not exists public.publications (
 do $$
 declare t text;
 begin
-  foreach t in array array['demandes', 'offres', 'realisations', 'avis', 'articles'] loop
-    if not exists (select 1 from pg_trigger where tgname = t || '_touch') then
+  foreach t in array array['demandes', 'offres', 'realisations', 'temoignages', 'articles'] loop
+    if not exists (select 1 from pg_trigger where tgname = t || '_touch' and tgrelid = format('public.%I', t)::regclass) then
       execute format('create trigger %I before update on public.%I for each row execute function public.touch_updated_at()', t || '_touch', t);
     end if;
   end loop;
 end $$;
 
--- ---------------------------------------------------------------- table access for the API
--- Logged-in users may reach the tables, but the RLS rules below decide what they can really see or change
--- (only admins). The public "anon" role gets nothing. The server key (service_role) is used by /api and the build.
+-- ---------------------------------------------------------------- table access for the API (website tables only)
+-- Logged-in users may reach these tables, but the RLS rules below decide what they can really see or change.
+-- The public "anon" role gets nothing. The server key (service_role) is used by /api and the build.
+-- Only the website tables are touched: the ERP tables keep their own rights.
 grant usage on schema public to authenticated, service_role;
-grant select, insert, update, delete on all tables in schema public to authenticated, service_role;
-grant usage, select on all sequences in schema public to authenticated, service_role;
-revoke all on all tables in schema public from anon;
+grant select, insert, update, delete on public.admins, public.demandes, public.offres, public.realisations,
+  public.temoignages, public.articles, public.publications to authenticated, service_role;
+grant usage, select on sequence public.demandes_id_seq, public.publications_id_seq to authenticated, service_role;
+revoke all on public.admins, public.demandes, public.offres, public.realisations,
+  public.temoignages, public.articles, public.publications from anon;
 
 -- ---------------------------------------------------------------- Row Level Security
 -- Nobody can read or write anything with the public (anon) key.
@@ -144,7 +162,7 @@ alter table public.admins       enable row level security;
 alter table public.demandes     enable row level security;
 alter table public.offres       enable row level security;
 alter table public.realisations enable row level security;
-alter table public.avis         enable row level security;
+alter table public.temoignages  enable row level security;
 alter table public.articles     enable row level security;
 alter table public.publications enable row level security;
 
@@ -155,9 +173,9 @@ create policy "admin reads own row" on public.admins
 do $$
 declare t text;
 begin
-  foreach t in array array['demandes', 'offres', 'realisations', 'avis', 'articles', 'publications'] loop
+  foreach t in array array['demandes', 'offres', 'realisations', 'temoignages', 'articles', 'publications'] loop
     execute format('drop policy if exists "admins manage" on public.%I', t);
-    execute format('create policy "admins manage" on public.%I for all to authenticated using (public.is_admin()) with check (public.is_admin())', t);
+    execute format('create policy "admins manage" on public.%I for all to authenticated using (public.site_is_admin()) with check (public.site_is_admin())', t);
   end loop;
 end $$;
 
@@ -166,9 +184,9 @@ drop policy if exists "admins manage" on public.demandes;
 drop policy if exists "admins read" on public.demandes;
 drop policy if exists "admins update" on public.demandes;
 drop policy if exists "admins delete" on public.demandes;
-create policy "admins read"   on public.demandes for select to authenticated using (public.is_admin());
-create policy "admins update" on public.demandes for update to authenticated using (public.is_admin()) with check (public.is_admin());
-create policy "admins delete" on public.demandes for delete to authenticated using (public.is_admin());
+create policy "admins read"   on public.demandes for select to authenticated using (public.site_is_admin());
+create policy "admins update" on public.demandes for update to authenticated using (public.site_is_admin()) with check (public.site_is_admin());
+create policy "admins delete" on public.demandes for delete to authenticated using (public.site_is_admin());
 
 -- ---------------------------------------------------------------- image storage (projects, articles)
 insert into storage.buckets (id, name, public, file_size_limit, allowed_mime_types)
@@ -177,13 +195,22 @@ on conflict (id) do nothing;
 
 drop policy if exists "admins upload media" on storage.objects;
 create policy "admins upload media" on storage.objects
-  for insert to authenticated with check (bucket_id = 'media' and public.is_admin());
+  for insert to authenticated with check (bucket_id = 'media' and public.site_is_admin());
 drop policy if exists "admins update media" on storage.objects;
 create policy "admins update media" on storage.objects
-  for update to authenticated using (bucket_id = 'media' and public.is_admin());
+  for update to authenticated using (bucket_id = 'media' and public.site_is_admin());
 drop policy if exists "admins delete media" on storage.objects;
 create policy "admins delete media" on storage.objects
-  for delete to authenticated using (bucket_id = 'media' and public.is_admin());
+  for delete to authenticated using (bucket_id = 'media' and public.site_is_admin());
 drop policy if exists "admins list media" on storage.objects;
 create policy "admins list media" on storage.objects
-  for select to authenticated using (bucket_id = 'media' and public.is_admin());
+  for select to authenticated using (bucket_id = 'media' and public.site_is_admin());
+
+-- ---------------------------------------------------------------- live updates (the ERP listens to new requests)
+do $$
+begin
+  if exists (select 1 from pg_publication where pubname = 'supabase_realtime')
+     and not exists (select 1 from pg_publication_tables where pubname = 'supabase_realtime' and schemaname = 'public' and tablename = 'demandes') then
+    alter publication supabase_realtime add table public.demandes;
+  end if;
+end $$;

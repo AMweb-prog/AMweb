@@ -346,7 +346,7 @@
     try {
       const last = await run(S.sb.from('publications').select('created_at,statut').eq('statut', 'ok').order('created_at', { ascending: false }).limit(1));
       S.lastPub = (last.data || [])[0] || null;
-      const tables = ['offres', 'realisations', 'avis', 'articles'];
+      const tables = ['offres', 'realisations', 'temoignages', 'articles'];
       const res = await Promise.all(tables.map(t => S.sb.from(t).select('updated_at').order('updated_at', { ascending: false }).limit(1)));
       let latest = 0;
       res.forEach(r => { if (!r.error && r.data && r.data[0]) latest = Math.max(latest, new Date(r.data[0].updated_at).getTime()); });
@@ -831,7 +831,7 @@
   });
 
   VIEWS.avis = listManager({
-    table: 'avis', title: 'Avis clients', intro: 'Les témoignages affichés sur l’accueil.',
+    table: 'temoignages', title: 'Avis clients', intro: 'Les témoignages affichés sur l’accueil.',
     addLabel: 'Ajouter un avis', newTitle: 'Nouvel avis', emptyIcon: 'chat-centered-text', emptyText: 'Aucun avis pour l’instant. La section reste cachée tant qu’il n’y en a pas.',
     callout: 'Publiez uniquement de vrais avis, avec l’accord du client. Le texte en français est obligatoire ; sans traduction, la version française s’affiche.',
     thumb: () => el('span', { class: 'item-thumb' }, icon('quotes')),

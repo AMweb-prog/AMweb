@@ -33,7 +33,7 @@ def load():
         offres = _get(url, key, 'offres', 'select=*')
         articles = _get(url, key, 'articles', 'select=*&publie=eq.true&order=ordre.asc,slug.asc')
         realisations = _get(url, key, 'realisations', 'select=*&publie=eq.true&order=ordre.asc,created_at.asc')
-        avis = _get(url, key, 'avis', 'select=*&publie=eq.true&order=ordre.asc,created_at.asc')
+        avis = _get(url, key, 'temoignages', 'select=*&publie=eq.true&order=ordre.asc,created_at.asc')  # website testimonials ("avis" is an ERP table)
     except (urllib.error.URLError, OSError, ValueError) as e:
         sys.exit(f'[data] ERROR: cannot read Supabase ({e}). Build stopped so the current site stays online. '
                  'If the Supabase project is paused, restore it from the Supabase dashboard.')
