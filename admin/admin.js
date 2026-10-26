@@ -880,7 +880,7 @@
         el('tbody', null, gs.map(g => {
           const fr = g.v.fr || g.v.en || g.v.ar;
           return el('tr', { tabindex: '0', onclick: () => { location.hash = '#articles/' + g.slug; }, onkeydown: e => { if (e.key === 'Enter') location.hash = '#articles/' + g.slug; } },
-            el('td', null, el('div', { class: 't', text: fr.h1 }), el('div', { class: 'muted small', text: '/conseils/' + g.slug + '.html' })),
+            el('td', null, el('div', { class: 't', text: fr.h1 }), el('div', { class: 'muted small', text: '/conseils/' + g.slug })),
             el('td', { class: 'muted', text: fr.categorie }),
             el('td', null, el('div', { class: 'langs' }, LANGS.map(l => langPill(g.v[l])))),
             el('td', { class: 'muted', text: fr.date_pub ? new Date(fr.date_pub).toLocaleDateString('fr-FR', { day: 'numeric', month: 'short', year: 'numeric' }) : '' }));
@@ -1105,7 +1105,7 @@
         : null;
       box.replaceChildren(el('section', { class: 'page', 'data-article': '' },
         el('a', { class: 'back', href: '#articles' }, icon('arrow-left'), 'Tous les articles'),
-        el('div', { class: 'page-head' }, el('div', null, el('h1', { text: title }), isNew ? null : el('a', { class: 'muted small', href: `/conseils/${slug}.html`, target: '_blank', rel: 'noopener', text: `amweb.ma/conseils/${slug}.html` }))),
+        el('div', { class: 'page-head' }, el('div', null, el('h1', { text: title }), isNew ? null : el('a', { class: 'muted small', href: `/conseils/${slug}`, target: '_blank', rel: 'noopener', text: `amweb.ma/conseils/${slug}` }))),
         slugBox, tabs, content));
       if (isNew) {
         const s = $('[name=slug]', box), h = $('[name=h1]', box);

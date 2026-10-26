@@ -34,70 +34,71 @@
     "@context": "https://schema.org",
     "@graph": [
       {
-        "@type": "LocalBusiness",
+        "@type": "ProfessionalService",
         "@id": "https://www.amweb.ma/#localbusiness",
         "name": "AMweb",
-        "alternateName": "AMweb Studio web & digital",
-        "description": "Studio web et digital basé à Kénitra : sites vitrines, e-commerce, applications et CRM sur mesure, référencement SEO et marketing digital.",
+        "alternateName": ["AMweb agence web Kénitra", "Agence web AMweb", "AMweb studio web et digital"],
+        "description": "__LD_DESC__",
         "url": "https://www.amweb.ma/",
         "logo": { "@type": "ImageObject", "url": "https://www.amweb.ma/assets/img/icon-512.png", "width": 512, "height": 512 },
         "image": "https://www.amweb.ma/assets/img/og-image.jpg",
         "telephone": "+212780611376",
         "email": "contact@amweb.ma",
         "contactPoint": [
-          { "@type": "ContactPoint", "contactType": "sales", "email": "contact@amweb.ma", "telephone": "+212780611376", "availableLanguage": ["fr", "ar", "en"] },
+          { "@type": "ContactPoint", "contactType": "sales", "email": "contact@amweb.ma", "telephone": "+212780611376", "availableLanguage": ["fr", "ar", "en"], "areaServed": "MA" },
           { "@type": "ContactPoint", "contactType": "customer support", "email": "support@amweb.ma" },
           { "@type": "ContactPoint", "contactType": "customer service", "email": "projet@amweb.ma" }
         ],
         "address": { "@type": "PostalAddress", "addressLocality": "Kénitra", "addressRegion": "Rabat-Salé-Kénitra", "addressCountry": "MA" },
         "geo": { "@type": "GeoCoordinates", "latitude": 34.2610, "longitude": -6.5802 },
-        "areaServed": { "@type": "Country", "name": "Maroc" },
-        "serviceArea": [
-          {"@type": "City", "name": "Kénitra"},
-          {"@type": "City", "name": "Rabat"},
-          {"@type": "City", "name": "Salé"},
-          {"@type": "Country", "name": "Maroc"}
+        "areaServed": [
+          { "@type": "City", "name": "Kénitra", "sameAs": "https://fr.wikipedia.org/wiki/K%C3%A9nitra" },
+          { "@type": "City", "name": "Rabat", "sameAs": "https://fr.wikipedia.org/wiki/Rabat" },
+          { "@type": "City", "name": "Salé", "sameAs": "https://fr.wikipedia.org/wiki/Sal%C3%A9" },
+          { "@type": "AdministrativeArea", "name": "Rabat-Salé-Kénitra" },
+          { "@type": "Country", "name": "Maroc", "sameAs": "https://fr.wikipedia.org/wiki/Maroc" }
         ],
+        "knowsAbout": ["Création de site web", "Site vitrine", "Site e-commerce", "Application web sur mesure", "CRM sur mesure", "Référencement naturel (SEO)", "SEO local et Google Business Profile", "Marketing digital", "Google Ads", "Publicité Instagram, TikTok et Facebook"],
+        "keywords": "__LD_KW__",
+        "knowsLanguage": ["fr", "ar", "en"],
         "priceRange": "MAD {{prixnum:vitrine}} - MAD {{prixnum:premium}}+",
         "currenciesAccepted": "MAD",
-        "openingHours": "Mo-Fr 09:00-18:00",
+        "openingHoursSpecification": [{ "@type": "OpeningHoursSpecification", "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"], "opens": "09:00", "closes": "18:00" }],
         "sameAs": ["https://www.instagram.com/amweb.ma/", "https://www.tiktok.com/@amweb.ma"],
         "hasOfferCatalog": {
           "@type": "OfferCatalog",
           "name": "Services digitaux AMweb",
           "itemListElement": [
-            { "@type": "Offer", "name": "Site Vitrine", "price": "{{prixnum:vitrine}}", "priceCurrency": "MAD", "description": "Site vitrine professionnel de 3 pages, design responsive, SEO de base et hébergement 1 an." },
-            { "@type": "Offer", "name": "Site E-commerce", "price": "{{prixnum:ecommerce}}", "priceCurrency": "MAD", "description": "Boutique en ligne complète avec paiement intégré, tableau de bord et SEO avancé." },
-            { "@type": "Offer", "name": "Site Premium", "priceSpecification": { "@type": "PriceSpecification", "minPrice": "{{prixnum:premium}}", "priceCurrency": "MAD" }, "description": "Solution sur mesure : application, CRM, SEO avancé et design haut de gamme. Prix à partir de {{prix:premium}} MAD, défini en rendez-vous." }
+            { "@type": "Offer", "name": "Site Vitrine", "url": "https://www.amweb.ma/offres.html#vitrine", "price": "{{prixnum:vitrine}}", "priceCurrency": "MAD", "description": "Site vitrine professionnel de 3 pages, design responsive, SEO de base et hébergement 1 an." },
+            { "@type": "Offer", "name": "Site E-commerce", "url": "https://www.amweb.ma/offres.html#ecommerce", "price": "{{prixnum:ecommerce}}", "priceCurrency": "MAD", "description": "Boutique en ligne complète avec paiement intégré, tableau de bord et SEO avancé." },
+            { "@type": "Offer", "name": "Site Premium", "url": "https://www.amweb.ma/offres.html#premium", "priceSpecification": { "@type": "PriceSpecification", "minPrice": "{{prixnum:premium}}", "priceCurrency": "MAD" }, "description": "Solution sur mesure : application, CRM, SEO avancé et design haut de gamme. Prix à partir de {{prix:premium}} MAD, défini en rendez-vous." }
           ]
-        }
+        },
+        "subjectOf": [
+          { "@type": "WebPage", "name": "Création de site web à Kénitra", "url": "https://www.amweb.ma/creation-site-web-kenitra.html" },
+          { "@type": "WebPage", "name": "Création de site web à Rabat", "url": "https://www.amweb.ma/creation-site-web-rabat.html" },
+          { "@type": "WebPage", "name": "Création de site web à Salé", "url": "https://www.amweb.ma/creation-site-web-sale.html" }
+        ]
       },
       {
         "@type": "WebSite",
         "@id": "https://www.amweb.ma/#website",
         "url": "https://www.amweb.ma/",
         "name": "AMweb",
-        "description": "Studio web et digital à Kénitra : création de site web, SEO, marketing digital.",
+        "alternateName": ["AMweb.ma"],
+        "description": "__LD_WEBDESC__",
         "publisher": { "@id": "https://www.amweb.ma/#localbusiness" },
-        "inLanguage": ["fr-MA", "en"]
-      },
-      {
-        "@type": "Organization",
-        "@id": "https://www.amweb.ma/#organization",
-        "name": "AMweb",
-        "url": "https://www.amweb.ma/",
-        "logo": "https://www.amweb.ma/assets/img/icon-512.png",
-        "contactPoint": { "@type": "ContactPoint", "telephone": "+212780611376", "contactType": "customer service", "availableLanguage": ["French", "Arabic", "English"] },
-        "sameAs": ["https://www.instagram.com/amweb.ma/", "https://www.tiktok.com/@amweb.ma"]
+        "inLanguage": ["fr-MA", "en", "ar-MA"]
       },
       {
         "@type": "WebPage",
-        "@id": "https://www.amweb.ma/#webpage",
-        "url": "https://www.amweb.ma/",
-        "name": "AMweb | Studio web & digital à Kénitra",
+        "@id": "__LD_URL__#webpage",
+        "url": "__LD_URL__",
+        "name": "__LD_TITLE__",
+        "inLanguage": "__LD_LANG__",
         "isPartOf": {"@id": "https://www.amweb.ma/#website"},
         "about": {"@id": "https://www.amweb.ma/#localbusiness"},
-        "breadcrumb": { "@type": "BreadcrumbList", "itemListElement": [ { "@type": "ListItem", "position": 1, "name": "Accueil", "item": "https://www.amweb.ma/" } ] }
+        "breadcrumb": { "@type": "BreadcrumbList", "itemListElement": [ { "@type": "ListItem", "position": 1, "name": "__LD_HOME__", "item": "__LD_URL__" } ] }
       }
     ]
   }

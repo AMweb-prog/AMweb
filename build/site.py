@@ -123,6 +123,7 @@ def render(tpl, c, meta):
         parts[i] = re.sub(r'>([^<]+)<', lambda m: '>' + re.sub(r'(?<=\d) (?=\d{3}\b|MAD\b|DH\b|درهم|%)', ' ', m.group(1)) + '<', parts[i])
     s = head + sep + ''.join(parts)
     s = sync_faq_schema(s)
+    s = clean_urls(s)
     left = re.findall(r'\{\{[A-Za-z_:]+\}\}|\{(?:prix|prixnum|duree):\w+\}|\[\[', s)
     assert not left, (c.get('page'), c.get('lang'), left[:5])
     for m in re.finditer('[—–]', s):
@@ -164,6 +165,20 @@ def sync_faq_schema(s):
     return re.sub(r'(<script type="application/ld\+json">)(.*?)(</script>)', rep, s, flags=re.S)
 
 
+def clean_urls(s):
+    """Vercel serves the site with cleanUrls: links, canonicals, hreflang, structured data and the
+    sitemap point to amweb.ma/offres (never offres.html) and to amweb.ma/ (never index.html)."""
+    s = re.sub(r'(https://www\.amweb\.ma/(?:[\w-]+/)*)index\.html', r'\1', s)
+    s = re.sub(r'(https://www\.amweb\.ma/(?:[\w-]+/)*[\w-]+)\.html', r'\1', s)
+
+    def rel(m):
+        path, rest = m.group(2), m.group(3) or ''
+        if re.search(r'(^|/)index$', path):
+            path = path[:-5] or './'
+        return f'{m.group(1)}="{path}{rest}"'
+    return re.sub(r'\b(href|action)="((?:\.\./|\./)*(?:[\w-]+/)*[\w-]+)\.html([?#][^"]*)?"', rel, s)
+
+
 def write(path, s):
     full = OUT + path
     os.makedirs(os.path.dirname(full), exist_ok=True)
@@ -171,30 +186,54 @@ def write(path, s):
 
 
 MAIN_META = {
+    # Titles and descriptions are visible (browser tab, Google, WhatsApp previews): no "agence" there.
+    # "Agence web" lives only in the keywords and in the structured data.
     'index': {
         'fr': ('AMweb | Création de site web à Kénitra, e-commerce, applications et CRM au Maroc',
                'AMweb, studio web et digital à Kénitra : sites vitrines dès {{prix:vitrine}} MAD, boutiques en ligne, applications et CRM sur mesure, SEO et marketing digital. Facilités de paiement.',
-               'création site web Kénitra, agence web Kénitra, création site web Maroc, site e-commerce Maroc, application sur mesure Maroc, CRM Maroc, SEO Maroc, agence web Rabat, AMweb'),
+               'agence web Kénitra, agence web Rabat, agence web Salé, agence web Maroc, création site web Kénitra, création site web Rabat, création site web Salé, création site internet Maroc, meilleure agence web Kénitra, site e-commerce Maroc, application sur mesure Maroc, CRM Maroc, SEO Maroc, AMweb'),
         'en': ('AMweb | Web design studio in Kénitra, Morocco: websites, e-commerce, apps and CRM',
                'AMweb is a web and digital studio in Kénitra, Morocco: showcase websites from {{prix:vitrine}} MAD, online stores, custom apps and CRM, SEO and digital marketing. Payment plans available.',
-               'web design Morocco, website Kénitra, web agency Morocco, e-commerce Morocco, custom app Morocco, CRM Morocco, SEO Morocco'),
+               'web agency Morocco, web agency Kénitra, web agency Rabat, web design agency Morocco, best web agency Morocco, website design Kénitra, website creation Morocco, e-commerce Morocco, custom app Morocco, CRM Morocco, SEO Morocco'),
         'ar': ('AMweb | تصميم مواقع الويب في القنيطرة، متاجر إلكترونية وتطبيقات وCRM بالمغرب',
                'AMweb استوديو ويب ورقمي في القنيطرة: مواقع تعريفية ابتداءً من {{prix:vitrine}} درهم، متاجر إلكترونية، تطبيقات وأنظمة CRM حسب الطلب، تحسين محركات البحث والتسويق الرقمي. تسهيلات في الأداء.',
-               'تصميم مواقع القنيطرة, إنشاء موقع إلكتروني المغرب, متجر إلكتروني المغرب, تطبيقات حسب الطلب, CRM المغرب, تحسين محركات البحث'),
+               'وكالة ويب القنيطرة, وكالة تصميم مواقع الرباط, وكالة ويب سلا, وكالة رقمية المغرب, تصميم مواقع القنيطرة, إنشاء موقع إلكتروني المغرب, متجر إلكتروني المغرب, تطبيقات حسب الطلب, CRM المغرب, تحسين محركات البحث'),
     },
     'offres': {
         'fr': ('Prix site web Maroc 2026 : offres dès {{prix:vitrine}} MAD | AMweb Kénitra',
                'Tarifs AMweb : Site Vitrine 3 pages {{prix:vitrine}} MAD, Site E-commerce {{prix:ecommerce}} MAD, Site Premium avec application et CRM dès {{prix:premium}} MAD. Hébergement inclus, facilités de paiement, devis gratuit.',
-               'prix site web Maroc, tarif création site web Maroc, prix site e-commerce Maroc, devis site web Kénitra, forfait site vitrine Maroc, AMweb offres'),
+               'prix site web Maroc, tarif création site web Maroc, prix agence web Maroc, prix site e-commerce Maroc, devis site web Kénitra, devis site web Rabat, forfait site vitrine Maroc, AMweb offres'),
         'en': ('Website prices in Morocco: packages from {{prix:vitrine}} MAD | AMweb',
                'AMweb packages: 3-page showcase site {{prix:vitrine}} MAD, e-commerce site {{prix:ecommerce}} MAD, premium with app and CRM from {{prix:premium}} MAD. Hosting included, payment plans, free quote.',
-               'website price Morocco, e-commerce price Morocco, web design quote Morocco'),
+               'website price Morocco, web agency prices Morocco, e-commerce price Morocco, web design quote Morocco'),
         'ar': ('أسعار إنشاء المواقع في المغرب: عروض ابتداءً من {{prix:vitrine}} درهم | AMweb',
                'عروض AMweb: موقع تعريفي من 3 صفحات بـ {{prix:vitrine}} درهم، متجر إلكتروني بـ {{prix:ecommerce}} درهم، باقة بريميوم مع تطبيق وCRM ابتداءً من {{prix:premium}} درهم. الاستضافة مشمولة، تسهيلات في الأداء، عرض سعر مجاني.',
-               'سعر موقع إلكتروني المغرب, سعر متجر إلكتروني المغرب, عرض سعر موقع'),
+               'سعر موقع إلكتروني المغرب, أسعار وكالة ويب المغرب, سعر متجر إلكتروني المغرب, عرض سعر موقع'),
     },
 }
 
+
+# Structured data of the home page, per language (kept out of the visible page).
+HOME_LD = {
+    'fr': dict(desc="Agence web à Kénitra (studio web et digital) : création de site web, sites vitrines, e-commerce, applications et CRM sur mesure, SEO local et marketing digital pour les entreprises de Kénitra, Rabat, Salé et de tout le Maroc.",
+               web="AMweb, agence web à Kénitra : création de site web, e-commerce, applications, SEO et marketing digital au Maroc.",
+               home='Accueil', lang='fr-MA'),
+    'en': dict(desc="Web agency in Kénitra, Morocco (web and digital studio): website design, showcase websites, e-commerce, custom apps and CRM, local SEO and digital marketing for businesses in Kénitra, Rabat, Salé and across Morocco.",
+               web="AMweb, web agency in Kénitra: website design, e-commerce, apps, SEO and digital marketing in Morocco.",
+               home='Home', lang='en'),
+    'ar': dict(desc="وكالة ويب في القنيطرة (استوديو ويب ورقمي): إنشاء المواقع الإلكترونية، مواقع تعريفية، متاجر إلكترونية، تطبيقات وأنظمة CRM حسب الطلب، تحسين الظهور المحلي في Google والتسويق الرقمي للشركات في القنيطرة والرباط وسلا وكل المغرب.",
+               web="AMweb، وكالة ويب في القنيطرة: إنشاء المواقع، المتاجر الإلكترونية، التطبيقات، تحسين محركات البحث والتسويق الرقمي في المغرب.",
+               home='الرئيسية', lang='ar-MA'),
+}
+
+
+def home_ld(tpl, lang, title, kw):
+    d = HOME_LD[lang]
+    j = lambda v: json.dumps(v, ensure_ascii=False)[1:-1]
+    for k, v in (('__LD_DESC__', d['desc']), ('__LD_WEBDESC__', d['web']), ('__LD_HOME__', d['home']), ('__LD_LANG__', d['lang']),
+                 ('__LD_URL__', BASE + DIRS[lang]), ('__LD_TITLE__', title), ('__LD_KW__', kw)):
+        tpl = tpl.replace(k, j(v))
+    return tpl
 
 
 def build_main():
@@ -207,7 +246,8 @@ def build_main():
             alts = {l: (up + DIRS[l] + fn) if l != lang else fn for l in DIRS}
             c = dict(lang=lang, root=up, home='', page=page, alts=alts, blog='conseils.html')
             t, de, kw = MAIN_META[page][lang]
-            s = render(tpl, c, headmeta(tokens(t, lang), tokens(de, lang), kw, d + fn, lang, alts_abs))
+            src = home_ld(tpl, lang, tokens(t, lang), kw) if page == 'index' else tpl
+            s = render(src, c, headmeta(tokens(t, lang), tokens(de, lang), kw, d + fn, lang, alts_abs))
             write(d + fn, s)
             print(d + fn, len(s))
 
@@ -327,7 +367,7 @@ def build_sitemap(fr_only, blog_pages):
     xml = ('<?xml version="1.0" encoding="UTF-8"?>\n<!-- SITEMAP.XML - AMweb.ma, generated on ' + D + ' -->\n'
            '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">\n'
            + '\n'.join(rows) + '\n</urlset>\n')
-    write('sitemap.xml', xml)
+    write('sitemap.xml', clean_urls(xml))
     print('sitemap', len(rows), 'urls')
 
 

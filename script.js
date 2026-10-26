@@ -357,7 +357,9 @@
         const offset = url.hash === '#hero' || url.hash === '#top' ? 0 : (url.hash === '#services' ? 0 : -24);
         if (window.__lenis) window.__lenis.scrollTo(target, { offset, duration: 1.4 });
         else target.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth' });
-        history.replaceState(null, '', url.search + url.hash);
+        // keep the address bar clean: amweb.ma/ rather than amweb.ma/#services
+        history.replaceState(null, '', location.pathname + url.search);
+        if (url.hash === '#main') { target.setAttribute('tabindex', '-1'); target.focus({ preventScroll: true }); }
       });
     });
   }
@@ -736,7 +738,7 @@
       });
       const n = note(p);
       $('frNote').hidden = !n; $('frNote').textContent = n;
-      $('frChoose').href = `index.html?plan=${p}#contact`;
+      $('frChoose').href = `./?plan=${p}#contact`;
       card.dataset.result = p;
       result.hidden = false;
       track('finder_complete', { plan: p });

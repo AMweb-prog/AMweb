@@ -192,7 +192,7 @@ def city_page(c):
             <a href="offres.html" class="btn btn-ghost magnetic">Voir les offres</a>
           </div>
         </div>
-        <figure class="page-art"><div class="art"><img src="assets/img/art/{'about' if c['slug']=='kenitra' else ('web' if c['slug']=='rabat' else 'seo')}.webp" alt="Illustration 3D AMweb" width="1200" height="1400" decoding="async" /></div></figure>
+        <figure class="page-art"><div class="art"><img src="assets/img/art/{'about' if c['slug']=='kenitra' else ('web' if c['slug']=='rabat' else 'seo')}.webp" alt="Création de site web à {name}, illustration 3D AMweb" width="1200" height="1400" decoding="async" /></div></figure>
       </div>
     </section>
 
@@ -245,18 +245,28 @@ def city_page(c):
       </div>
     </section>'''
     path = f"creation-site-web-{c['slug']}.html"
+    where = 'à Kénitra' if c['slug'] == 'kenitra' else f'pour les entreprises de {name}'
     schema = {"@context": "https://schema.org", "@graph": [
-        {"@type": "Service", "name": f"Création de site web à {name}", "serviceType": "Création de site web",
-         "provider": ORG, "areaServed": {"@type": "City", "name": name},
-         "description": c['lead'],
-         "offers": [{"@type": "Offer", "name": "Site Vitrine", "price": "{{prixnum:vitrine}}", "priceCurrency": "MAD"},
-                    {"@type": "Offer", "name": "Site E-commerce", "price": "{{prixnum:ecommerce}}", "priceCurrency": "MAD"},
-                    {"@type": "AggregateOffer", "name": "Site Premium", "lowPrice": "{{prixnum:premium}}", "priceCurrency": "MAD"}]},
+        {"@type": "WebPage", "@id": BASE + path + "#webpage", "url": BASE + path, "inLanguage": "fr-MA",
+         "name": f"Création de site web à {name}", "isPartOf": {"@id": BASE + "#website"},
+         "about": {"@id": BASE + path + "#service"}, "primaryImageOfPage": BASE + "assets/img/og-image.jpg"},
+        {"@type": "Service", "@id": BASE + path + "#service", "name": f"Création de site web à {name}",
+         "alternateName": [f"Agence web {name}", f"Création site internet {name}", f"Agence de création de site web {name}"],
+         "serviceType": ["Création de site web", "Agence web", "Site e-commerce", "Application web", "CRM sur mesure", "Référencement SEO local"],
+         "provider": ORG,
+         "areaServed": [{"@type": "City", "name": name, "sameAs": WIKI[c['wiki']][0]},
+                        {"@type": "AdministrativeArea", "name": "Rabat-Salé-Kénitra"}],
+         "description": f"Création de site web à {name} par AMweb, agence web basée à Kénitra : sites vitrines, boutiques en ligne, applications, CRM, SEO local et marketing digital, avec des prix affichés et des facilités de paiement.",
+         "availableChannel": {"@type": "ServiceChannel", "servicePhone": "+212780611376", "availableLanguage": ["fr", "ar", "en"]},
+         "offers": [{"@type": "Offer", "name": "Site Vitrine", "price": "{{prixnum:vitrine}}", "priceCurrency": "MAD", "url": BASE + "offres.html#vitrine"},
+                    {"@type": "Offer", "name": "Site E-commerce", "price": "{{prixnum:ecommerce}}", "priceCurrency": "MAD", "url": BASE + "offres.html#ecommerce"},
+                    {"@type": "AggregateOffer", "name": "Site Premium", "lowPrice": "{{prixnum:premium}}", "priceCurrency": "MAD", "url": BASE + "offres.html#premium"}]},
         faq_schema(c['faq']),
         crumbs_schema([('Accueil', ''), (f'Création site web {name}', path)])]}
     title = f"Création site web {name} | Sites, e-commerce et applications | AMweb"
     desc = f"Création de site web à {name} : sites vitrines dès {{prix:vitrine}} MAD, boutiques en ligne, applications et CRM, SEO local. Studio AMweb, facilités de paiement, devis gratuit."
-    kw = f"création site web {name}, agence web {name}, site internet {name}, développeur web {name}, SEO {name}"
+    kw = (f"agence web {name}, création site web {name}, création site internet {name}, meilleure agence web {name}, agence digitale {name}, "
+          f"site e-commerce {name}, développeur web {name}, SEO {name}, référencement {name}, agence web Maroc")
     return path, shell(main, schema, 'city'), title, desc, kw
 
 

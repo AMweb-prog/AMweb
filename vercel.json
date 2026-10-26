@@ -3,6 +3,7 @@
   "framework": null,
   "buildCommand": "python3 build/site.py",
   "outputDirectory": "dist",
+  "cleanUrls": true,
   "crons": [
     {
       "path": "/api/keepalive",
