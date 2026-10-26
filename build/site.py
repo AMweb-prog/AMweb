@@ -332,8 +332,8 @@ def copy_static():
             shutil.copytree(src, OUT + name)
         elif os.path.exists(src):
             shutil.copy2(src, OUT + name)
-    for f in os.listdir(REPO):            # Google Search Console verification files
-        if re.match(r'google[0-9a-f]+\.html$', f):
+    for f in os.listdir(REPO):            # Search Console verification files and the IndexNow key
+        if re.match(r'google[0-9a-f]+\.html$', f) or re.match(r'[0-9a-f]{32}\.txt$', f):   # + IndexNow key
             shutil.copy2(os.path.join(REPO, f), OUT + f)
     write('robots.txt', open(os.path.join(HERE, 'robots.txt'), encoding='utf-8').read())
 
