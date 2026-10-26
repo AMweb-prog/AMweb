@@ -25,12 +25,12 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <!-- End Google Tag Manager (noscript) -->"""
 
 GA = """<!-- [ANALYTICS] Google Analytics 4 -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-RQTW7E5SFS"></script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-5NZMHFDLNQ"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
-    gtag('config', 'G-RQTW7E5SFS');
+    gtag('config', 'G-5NZMHFDLNQ');
   </script>"""
 
 BOOT = """<script>
