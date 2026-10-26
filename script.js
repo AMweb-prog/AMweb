@@ -1039,5 +1039,9 @@
     initActiveNav();
     initMicro();
     intro();
+    // arriving from another page on amweb.ma/#about: scroll there, then show only amweb.ma/
+    if (location.hash) window.addEventListener('load', () => setTimeout(() => {
+      history.replaceState(null, '', location.pathname + location.search);
+    }, 1500));
   });
 })();

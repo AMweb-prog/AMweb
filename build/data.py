@@ -17,8 +17,15 @@ def _get(url, key, table, query):
     if key.startswith('eyJ'):  # legacy service_role JWT; new sb_secret_ keys go in "apikey" only
         headers['Authorization'] = f'Bearer {key}'
     req = urllib.request.Request(f'{url}/rest/v1/{table}?{query}', headers=headers)
-    with urllib.request.urlopen(req, timeout=30) as r:
-        return json.load(r)
+    try:
+        with urllib.request.urlopen(req, timeout=30) as r:
+            return json.load(r)
+    except urllib.error.HTTPError as e:
+        detail = e.read().decode('utf-8', 'ignore')[:300]
+        hint = {404: f'table "{table}" not found in {url}: run supabase/schema.sql then supabase/seed.sql in THIS Supabase project, and check SUPABASE_URL',
+                401: 'key refused: put the secret key of THIS Supabase project in SUPABASE_SECRET_KEY',
+                403: 'key refused: put the secret key of THIS Supabase project in SUPABASE_SECRET_KEY'}.get(e.code, '')
+        raise OSError(f'HTTP {e.code} on table "{table}". {hint}. Supabase said: {detail}') from None
 
 
 def load():
