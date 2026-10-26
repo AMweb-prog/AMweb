@@ -24,7 +24,7 @@ LOC = {
         hub_h1='Conseils pour réussir <span class="accent">en ligne</span> au Maroc.',
         hub_lead='Prix, choix du site, référencement, vente en ligne : des réponses claires aux questions que nos clients nous posent, avec des sources vérifiables.',
         hub_title='Conseils web pour entreprises au Maroc : prix, SEO, e-commerce | AMweb',
-        hub_desc="Guides pratiques pour réussir en ligne au Maroc : prix d'un site web, site vitrine ou e-commerce, Google Maps, CRM, vente en ligne. Par le studio AMweb à Kénitra.",
+        hub_desc="Guides pratiques pour réussir en ligne au Maroc : prix d'un site web, site vitrine ou e-commerce, Google Maps, CRM, vente en ligne. Par AMweb, Kénitra.",
         hub_kw='conseils site web Maroc, blog web Maroc, prix site web Maroc, SEO Maroc, e-commerce Maroc',
         blog_name='Conseils AMweb', inlang='fr-MA'),
     'en': dict(
@@ -38,7 +38,7 @@ LOC = {
         hub_h1='Advice to succeed <span class="accent">online</span> in Morocco.',
         hub_lead='Prices, choosing a website, SEO, selling online: clear answers to the questions our clients ask us, with verifiable sources.',
         hub_title='Web advice for businesses in Morocco: prices, SEO, e-commerce | AMweb',
-        hub_desc='Practical guides to succeed online in Morocco: website prices, showcase site or online store, Google Maps, CRM, selling online. By the AMweb studio in Kénitra.',
+        hub_desc='Practical guides to succeed online in Morocco: website prices, showcase site or online store, Google Maps, CRM, selling online. By AMweb, Kénitra.',
         hub_kw='website advice Morocco, web blog Morocco, website price Morocco, SEO Morocco, e-commerce Morocco',
         blog_name='AMweb Blog', inlang='en'),
     'ar': dict(
@@ -51,8 +51,8 @@ LOC = {
         send='أرسل سؤالي', note='يصلنا سؤالك مباشرة. رد سريع، دون أي التزام.', form='اطرح سؤالاً',
         hub_h1='نصائح للنجاح <span class="accent">على الإنترنت</span> في المغرب.',
         hub_lead='الأسعار، اختيار نوع الموقع، تحسين الظهور في Google، البيع عبر الإنترنت: إجابات واضحة عن الأسئلة التي يطرحها علينا عملاؤنا، مع مصادر يمكن التحقق منها.',
-        hub_title='نصائح الويب للشركات في المغرب: الأسعار، تحسين محركات البحث، التجارة الإلكترونية | AMweb',
-        hub_desc='أدلة عملية للنجاح على الإنترنت في المغرب: سعر الموقع، موقع تعريفي أم متجر إلكتروني، الظهور على خرائط Google، أنظمة CRM، البيع عبر الإنترنت. من استوديو AMweb في القنيطرة.',
+        hub_title='نصائح الويب للشركات في المغرب: الأسعار، SEO، التجارة الإلكترونية | AMweb',
+        hub_desc='أدلة عملية للنجاح على الإنترنت في المغرب: سعر الموقع، موقع تعريفي أم متجر إلكتروني، الظهور على خرائط Google، أنظمة CRM، البيع عبر الإنترنت.',
         hub_kw='نصائح موقع إلكتروني المغرب, سعر موقع إلكتروني المغرب, تحسين محركات البحث المغرب, متجر إلكتروني المغرب',
         blog_name='نصائح AMweb', inlang='ar-MA'),
 }

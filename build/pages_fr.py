@@ -264,7 +264,7 @@ def city_page(c):
         faq_schema(c['faq']),
         crumbs_schema([('Accueil', ''), (f'Création site web {name}', path)])]}
     title = f"Création site web {name} | Sites, e-commerce et applications | AMweb"
-    desc = f"Création de site web à {name} : sites vitrines dès {{prix:vitrine}} MAD, boutiques en ligne, applications et CRM, SEO local. Studio AMweb, facilités de paiement, devis gratuit."
+    desc = f"Création de site web à {name} : sites vitrines dès {{prix:vitrine}} MAD, boutiques en ligne, applications et CRM, SEO local. Studio AMweb, facilités de paiement."
     kw = (f"agence web {name}, création site web {name}, création site internet {name}, meilleure agence web {name}, agence digitale {name}, "
           f"site e-commerce {name}, développeur web {name}, SEO {name}, référencement {name}, agence web Maroc")
     return path, shell(main, schema, 'city'), title, desc, kw

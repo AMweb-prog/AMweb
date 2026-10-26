@@ -80,7 +80,30 @@ def tr(s, lang):
     return re.sub(r'\[\[(.+?)\|(.+?)\]\]', rep, s, flags=re.S)
 
 
+TITLE_MAX, DESC_MAX = 70, 160      # Bing Webmaster Tools limits (Google cuts at about the same length)
+
+
+def fit_title(t):
+    """Too long: drop the " | AMweb..." ending first (Google and Bing show the site name anyway)."""
+    if len(t) > TITLE_MAX:
+        t = re.sub(r'\s*\|\s*AMweb[^|]*$', '', t)
+    return t
+
+
+def fit_desc(d):
+    """Too long: cut at the last full word and end with an ellipsis."""
+    if len(d) <= DESC_MAX:
+        return d
+    head = d[:DESC_MAX - 1]
+    for sep in ('. ', ', ', ' : ', '، '):               # prefer ending on a full clause
+        i = head.rfind(sep)
+        if i >= 110:
+            return head[:i].rstrip(' ,;:.،') + '…'
+    return head.rsplit(' ', 1)[0].rstrip(' ,;:.،') + '…'
+
+
 def headmeta(title, desc, keywords, path, lang, alts_abs=None):
+    title, desc = fit_title(title), fit_desc(desc)
     url = BASE + path.replace('index.html', '')
     h = [f'<title>{html.escape(title)}</title>',
          f'<meta name="description" content="{html.escape(desc, quote=True)}" />']
@@ -189,25 +212,25 @@ MAIN_META = {
     # Titles and descriptions are visible (browser tab, Google, WhatsApp previews): no "agence" there.
     # "Agence web" lives only in the keywords and in the structured data.
     'index': {
-        'fr': ('AMweb | Création de site web à Kénitra, e-commerce, applications et CRM au Maroc',
-               'AMweb, studio web et digital à Kénitra : sites vitrines dès {{prix:vitrine}} MAD, boutiques en ligne, applications et CRM sur mesure, SEO et marketing digital. Facilités de paiement.',
+        'fr': ('AMweb | Création de site web à Kénitra, e-commerce et CRM au Maroc',
+               'AMweb, studio web et digital à Kénitra : sites vitrines dès {{prix:vitrine}} MAD, boutiques en ligne, applications et CRM sur mesure, SEO et marketing digital.',
                'agence web Kénitra, agence web Rabat, agence web Salé, agence web Maroc, création site web Kénitra, création site web Rabat, création site web Salé, création site internet Maroc, meilleure agence web Kénitra, site e-commerce Maroc, application sur mesure Maroc, CRM Maroc, SEO Maroc, AMweb'),
-        'en': ('AMweb | Web design studio in Kénitra, Morocco: websites, e-commerce, apps and CRM',
-               'AMweb is a web and digital studio in Kénitra, Morocco: showcase websites from {{prix:vitrine}} MAD, online stores, custom apps and CRM, SEO and digital marketing. Payment plans available.',
+        'en': ('AMweb | Web design studio in Kénitra, Morocco: websites and e-commerce',
+               'AMweb is a web and digital studio in Kénitra, Morocco: showcase websites from {{prix:vitrine}} MAD, online stores, custom apps and CRM, SEO and digital marketing.',
                'web agency Morocco, web agency Kénitra, web agency Rabat, web design agency Morocco, best web agency Morocco, website design Kénitra, website creation Morocco, e-commerce Morocco, custom app Morocco, CRM Morocco, SEO Morocco'),
-        'ar': ('AMweb | تصميم مواقع الويب في القنيطرة، متاجر إلكترونية وتطبيقات وCRM بالمغرب',
-               'AMweb استوديو ويب ورقمي في القنيطرة: مواقع تعريفية ابتداءً من {{prix:vitrine}} درهم، متاجر إلكترونية، تطبيقات وأنظمة CRM حسب الطلب، تحسين محركات البحث والتسويق الرقمي. تسهيلات في الأداء.',
+        'ar': ('AMweb | تصميم مواقع الويب والمتاجر الإلكترونية في القنيطرة بالمغرب',
+               'AMweb استوديو ويب ورقمي في القنيطرة: مواقع تعريفية ابتداءً من {{prix:vitrine}} درهم، متاجر إلكترونية، تطبيقات وأنظمة CRM حسب الطلب، تحسين محركات البحث والتسويق الرقمي.',
                'وكالة ويب القنيطرة, وكالة تصميم مواقع الرباط, وكالة ويب سلا, وكالة رقمية المغرب, تصميم مواقع القنيطرة, إنشاء موقع إلكتروني المغرب, متجر إلكتروني المغرب, تطبيقات حسب الطلب, CRM المغرب, تحسين محركات البحث'),
     },
     'offres': {
         'fr': ('Prix site web Maroc 2026 : offres dès {{prix:vitrine}} MAD | AMweb Kénitra',
-               'Tarifs AMweb : Site Vitrine 3 pages {{prix:vitrine}} MAD, Site E-commerce {{prix:ecommerce}} MAD, Site Premium avec application et CRM dès {{prix:premium}} MAD. Hébergement inclus, facilités de paiement, devis gratuit.',
+               'Tarifs AMweb : Site Vitrine 3 pages {{prix:vitrine}} MAD, Site E-commerce {{prix:ecommerce}} MAD, Site Premium dès {{prix:premium}} MAD. Hébergement inclus, facilités de paiement, devis gratuit.',
                'prix site web Maroc, tarif création site web Maroc, prix agence web Maroc, prix site e-commerce Maroc, devis site web Kénitra, devis site web Rabat, forfait site vitrine Maroc, AMweb offres'),
         'en': ('Website prices in Morocco: packages from {{prix:vitrine}} MAD | AMweb',
-               'AMweb packages: 3-page showcase site {{prix:vitrine}} MAD, e-commerce site {{prix:ecommerce}} MAD, premium with app and CRM from {{prix:premium}} MAD. Hosting included, payment plans, free quote.',
+               'AMweb packages: 3-page showcase site {{prix:vitrine}} MAD, e-commerce site {{prix:ecommerce}} MAD, premium with app and CRM from {{prix:premium}} MAD. Hosting included, payment plans.',
                'website price Morocco, web agency prices Morocco, e-commerce price Morocco, web design quote Morocco'),
         'ar': ('أسعار إنشاء المواقع في المغرب: عروض ابتداءً من {{prix:vitrine}} درهم | AMweb',
-               'عروض AMweb: موقع تعريفي من 3 صفحات بـ {{prix:vitrine}} درهم، متجر إلكتروني بـ {{prix:ecommerce}} درهم، باقة بريميوم مع تطبيق وCRM ابتداءً من {{prix:premium}} درهم. الاستضافة مشمولة، تسهيلات في الأداء، عرض سعر مجاني.',
+               'عروض AMweb: موقع تعريفي من 3 صفحات بـ {{prix:vitrine}} درهم، متجر إلكتروني بـ {{prix:ecommerce}} درهم، بريميوم ابتداءً من {{prix:premium}} درهم. الاستضافة مشمولة، تسهيلات في الأداء.',
                'سعر موقع إلكتروني المغرب, أسعار وكالة ويب المغرب, سعر متجر إلكتروني المغرب, عرض سعر موقع'),
     },
 }
