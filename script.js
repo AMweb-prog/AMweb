@@ -974,7 +974,7 @@
     document.getElementById('realGrid').innerHTML = projects.map(p => `
       <article class="real">
         ${p.url ? `<a class="tile-link" href="${esc(p.url)}" target="_blank" rel="noopener" aria-label="${esc(pickT(p.name))}"></a>` : ''}
-        <div class="real-media"><img src="${esc(img(p.image))}" alt="${esc(pickT(p.alt) || pickT(p.name))}" loading="lazy" decoding="async" width="1600" height="1000" /></div>
+        <div class="real-media"><img src="${esc(img(p.image))}"${/\/assets\/img\/realisations\/[\w-]+\.webp$/.test(p.image) ? ` srcset="${esc(img(p.image).replace(/\.webp$/, '-800.webp'))} 800w, ${esc(img(p.image))} 1600w" sizes="(max-width: 767px) 92vw, 60vw"` : ''} alt="${esc(pickT(p.alt) || pickT(p.name))}" loading="lazy" decoding="async" width="1600" height="1000" /></div>
         <div class="real-body"><div><h3>${esc(pickT(p.name))}</h3><p>${esc(pickT(p.sector))}${p.result ? ' · ' + esc(pickT(p.result)) : ''}</p></div>${p.url ? '<span class="tile-arrow" aria-hidden="true"><i class="ph ph-arrow-up-right"></i></span>' : ''}</div>
       </article>`).join('');
     if (quotes.length) {
@@ -990,7 +990,7 @@
     const box = document.getElementById('consent');
     if (!box) return;
     let choice = null; try { choice = localStorage.getItem('amweb_consent'); } catch (e) { /* ignore */ }
-    if (!choice) setTimeout(() => { box.hidden = false; }, 1800);
+    if (!choice) setTimeout(() => { box.hidden = false; }, 4000);   // after the intro, so it never delays the main content
     box.querySelectorAll('[data-consent]').forEach(b => b.addEventListener('click', () => {
       const v = b.dataset.consent;
       store.set('amweb_consent', v);
@@ -1032,8 +1032,8 @@
     if (!loader || doc.classList.contains('no-loader') || reduce) { ready(); return; }
     try { sessionStorage.setItem('amweb_intro', '1'); } catch (e) { /* ignore */ }
     const fonts = document.fonts && document.fonts.ready ? document.fonts.ready : Promise.resolve();
-    const minTime = new Promise(r => setTimeout(r, 1500));
-    Promise.race([Promise.all([fonts, minTime]), new Promise(r => setTimeout(r, 2600))]).then(() => {
+    const minTime = new Promise(r => setTimeout(r, 700));
+    Promise.race([Promise.all([fonts, minTime]), new Promise(r => setTimeout(r, 1500))]).then(() => {
       loader.classList.add('is-done');
       setTimeout(ready, 380);
       setTimeout(() => { loader.style.display = 'none'; }, 1100);

@@ -147,6 +147,7 @@ def render(tpl, c, meta):
     s = head + sep + ''.join(parts)
     s = sync_faq_schema(s)
     s = clean_urls(s)
+    s = art_srcset(s)
     left = re.findall(r'\{\{[A-Za-z_:]+\}\}|\{(?:prix|prixnum|duree):\w+\}|\[\[', s)
     assert not left, (c.get('page'), c.get('lang'), left[:5])
     for m in re.finditer('[—–]', s):
@@ -200,6 +201,14 @@ def clean_urls(s):
             path = path[:-5] or './'
         return f'{m.group(1)}="{path}{rest}"'
     return re.sub(r'\b(href|action)="((?:\.\./|\./)*(?:[\w-]+/)*[\w-]+)\.html([?#][^"]*)?"', rel, s)
+
+
+def art_srcset(s):
+    """Phones get the 800px version of the 3D illustrations (assets/img/art/*-800.webp)."""
+    return re.sub(r'<img src="((?:\.\./)*)assets/img/art/([\w-]+?)\.webp"',
+                  lambda m: (m.group(0) if m.group(2).endswith('-800') else
+                             f'<img src="{m.group(1)}assets/img/art/{m.group(2)}.webp" srcset="{m.group(1)}assets/img/art/{m.group(2)}-800.webp 800w, '
+                             f'{m.group(1)}assets/img/art/{m.group(2)}.webp 1200w" sizes="(max-width: 767px) 92vw, 45vw"'), s)
 
 
 def write(path, s):

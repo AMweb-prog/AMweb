@@ -299,6 +299,8 @@ body::after {
 .hero-sub { max-width: 40ch; font-size: clamp(1.05rem, 1.25vw, 1.22rem); color: var(--muted); margin-bottom: 38px; }
 .hero-actions { display: flex; flex-wrap: wrap; gap: 12px; }
 .js .hero-sub, .js .hero-actions { opacity: 0; transform: translateY(18px); }
+/* not 0: an element at opacity 0 is ignored by Largest Contentful Paint, so the subtitle counts from the first paint */
+.js .hero-sub { opacity: .01; }
 .is-ready .hero-sub, .is-ready .hero-actions { opacity: 1; transform: none; transition: opacity 1s var(--ease) .35s, transform 1s var(--ease) .35s; }
 .is-ready .hero-actions { transition-delay: .45s; }
 
@@ -554,7 +556,7 @@ body::after {
 .js .footer-logo.is-in .lg-ob, .js .footer-logo.is-in .lg-of { stroke-dashoffset: 0; }
 .footer-grid { display: grid; grid-template-columns: 1.4fr 1fr 1fr; gap: 40px; padding-bottom: 48px; }
 .footer-tag { font-family: var(--font-display); font-weight: 500; font-size: clamp(1.2rem, 1.8vw, 1.6rem); letter-spacing: -.03em; line-height: 1.25; max-width: 20ch; }
-.footer h4 { font-family: var(--font-mono); font-weight: 500; font-size: 12px; letter-spacing: .14em; text-transform: uppercase; color: var(--muted); margin-bottom: 18px; }
+.footer h3 { font-family: var(--font-mono); font-weight: 500; font-size: 12px; letter-spacing: .14em; text-transform: uppercase; color: var(--muted); margin-bottom: 18px; }
 .footer-grid ul { display: grid; gap: 10px; }
 .footer-grid ul a { color: var(--text); transition: color .25s; }
 .footer-grid ul a:hover { color: var(--accent-fg); }
@@ -901,7 +903,7 @@ a.inc-link:hover h3 { color: var(--accent-fg); }
 .maint-list span strong { color: var(--text); font-size: 16px; }
 
 /* ---------- Right-to-left (Arabic) ---------- */
-[lang="ar"] body, [lang="ar"] .display, [lang="ar"] .eyebrow, [lang="ar"] .tile-kicker, [lang="ar"] .mono, [lang="ar"] .tag, [lang="ar"] .marquee-item, [lang="ar"] .manifesto, [lang="ar"] h1, [lang="ar"] h2, [lang="ar"] h3, [lang="ar"] .stat-num, [lang="ar"] .price, [lang="ar"] .footer h4, [lang="ar"] .faq summary, [lang="ar"] .menu-links a, [lang="ar"] .btn { letter-spacing: 0; }
+[lang="ar"] body, [lang="ar"] .display, [lang="ar"] .eyebrow, [lang="ar"] .tile-kicker, [lang="ar"] .mono, [lang="ar"] .tag, [lang="ar"] .marquee-item, [lang="ar"] .manifesto, [lang="ar"] h1, [lang="ar"] h2, [lang="ar"] h3, [lang="ar"] .stat-num, [lang="ar"] .price, [lang="ar"] .footer h3, [lang="ar"] .faq summary, [lang="ar"] .menu-links a, [lang="ar"] .btn { letter-spacing: 0; }
 [lang="ar"] .hero-title { line-height: 1.32; }
 [lang="ar"] .display, [lang="ar"] .h2, [lang="ar"] .manifesto, [lang="ar"] .contact-title, [lang="ar"] .market-title, [lang="ar"] .audit-title, [lang="ar"] .pcard-verb, [lang="ar"] .fstep-q, [lang="ar"] .fresult-name { line-height: 1.32; }
 [lang="ar"] body { font-size: 17.5px; line-height: 1.75; }

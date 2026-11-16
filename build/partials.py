@@ -10,27 +10,31 @@ CONSENT_HEAD = """<script>
   try { if (localStorage.getItem('amweb_consent') === 'granted') gtag('consent', 'update', { analytics_storage: 'granted' }); } catch (e) {}
   </script>"""
 
-GTM_HEAD = CONSENT_HEAD + """
-  <!-- Google Tag Manager -->
-<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-})(window,document,'script','dataLayer','GTM-WCVJZSS4');</script>
-<!-- End Google Tag Manager -->"""
+GTM_HEAD = CONSENT_HEAD   # Tag Manager itself is loaded later, by GA below
 
 GTM_BODY = """<!-- Google Tag Manager (noscript) -->
 <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WCVJZSS4"
 height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <!-- End Google Tag Manager (noscript) -->"""
 
-GA = """<!-- [ANALYTICS] Google Analytics 4 -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-5NZMHFDLNQ"></script>
+GA = """<!-- [ANALYTICS] Google Analytics 4 + Google Tag Manager, loaded after the page (first interaction, or 2.5 s after load)
+       so they never slow down the first display. Consent Mode defaults are set earlier in CONSENT_HEAD. -->
   <script>
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
     gtag('config', 'G-5NZMHFDLNQ');
+    (function(){
+      var done = false;
+      function load(){
+        if (done) return; done = true;
+        var s = document.createElement('script'); s.async = true; s.src = 'https://www.googletagmanager.com/gtag/js?id=G-5NZMHFDLNQ'; document.head.appendChild(s);
+        dataLayer.push({'gtm.start': new Date().getTime(), event: 'gtm.js'});
+        var t = document.createElement('script'); t.async = true; t.src = 'https://www.googletagmanager.com/gtm.js?id=GTM-WCVJZSS4'; document.head.appendChild(t);
+      }
+      ['pointerdown', 'keydown', 'touchstart', 'scroll'].forEach(function(e){ addEventListener(e, load, {once: true, passive: true}); });
+      addEventListener('load', function(){ setTimeout(load, 2500); });
+    })();
   </script>"""
 
 BOOT = """<script>
@@ -197,7 +201,7 @@ def footer(c):
           </div>
         </div>
         <nav aria-label="[[Navigation secondaire|Secondary navigation]]">
-          <h4>[[Navigation|Navigation]]</h4>
+          <h3>[[Navigation|Navigation]]</h3>
           <ul>
             <li><a href="{H('services')}">[[Services|Services]]</a></li>
             <li><a href="{c['home']}offres.html">[[Nos offres|Our offers]]</a></li>
@@ -207,7 +211,7 @@ def footer(c):
           </ul>
         </nav>
         <div>
-          <h4>[[Contact|Contact]]</h4>
+          <h3>[[Contact|Contact]]</h3>
           <ul>
             <li><a href="mailto:contact@amweb.ma">contact@amweb.ma</a></li>
             <li class="mail-sub"><small>[[Suivi de projet|Project follow-up]]</small><a href="mailto:projet@amweb.ma">projet@amweb.ma</a></li>
