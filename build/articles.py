@@ -182,7 +182,7 @@ def article_page(a, siblings, lang, shell):
     others = [o for o in siblings if o['slug'] != a['slug']][:3]
     rel = ''.join(f'''
           <a class="post post--sm" href="{o['slug']}.html">
-            <div class="post-media"><div class="art"><img src="{img_src(o['image'], '../' * (d.count('/') + 1))}" alt="" width="1200" height="1400" loading="lazy" decoding="async" /></div></div>
+            <div class="post-media"><div class="art"><img src="{img_src(o['image'], '../' * (d.count('/') + 1))}" alt="{card_alt(L, o)}" width="1200" height="1400" loading="lazy" decoding="async" /></div></div>
             <div class="post-body"><span class="post-cat">{o['categorie']}</span><h3>{o['h1']}</h3></div>
           </a>''' for o in others)
     root = '../' * (d.count('/') + 1)
@@ -233,6 +233,11 @@ def article_page(a, siblings, lang, shell):
     return path, shell(main, schema, 'article', ogtype='article'), a['titre_seo'] or a['h1'] + ' | AMweb', a['description'], a.get('mots_cles') or ''
 
 
+def card_alt(L, o):
+    """Alt text for article cards (Bing flags empty alt attributes)."""
+    return html.escape(L['alt'] + re.sub('<[^>]+>', '', o['h1']), quote=True)
+
+
 def hub_page(arts, lang, shell):
     L = LOC[lang]
     d = DIRS[lang]
@@ -240,7 +245,7 @@ def hub_page(arts, lang, shell):
     first, rest = arts[0], arts[1:]
     cards = ''.join(f'''
           <a class="post" href="conseils/{o['slug']}.html">
-            <div class="post-media"><div class="art"><img src="{img_src(o['image'], root)}" alt="" width="1200" height="1400" loading="lazy" decoding="async" /></div></div>
+            <div class="post-media"><div class="art"><img src="{img_src(o['image'], root)}" alt="{card_alt(L, o)}" width="1200" height="1400" loading="lazy" decoding="async" /></div></div>
             <div class="post-body"><span class="post-cat">{o['categorie']}</span><h3>{o['h1']}</h3><p>{o['description']}</p></div>
           </a>''' for o in rest)
     main = f'''
@@ -255,7 +260,7 @@ def hub_page(arts, lang, shell):
     <section class="section" aria-label="{L['articles']}" style="padding-top:clamp(32px,5vw,64px)">
       <div class="wrap">
         <a class="post post--feature" href="conseils/{first['slug']}.html">
-          <div class="post-media"><div class="art"><img src="{img_src(first['image'], root)}" alt="" width="1200" height="1500" decoding="async" /></div></div>
+          <div class="post-media"><div class="art"><img src="{img_src(first['image'], root)}" alt="{card_alt(L, first)}" width="1200" height="1500" decoding="async" /></div></div>
           <div class="post-body"><span class="post-cat">{first['categorie']}</span><h2 class="display">{first['h1']}</h2><p>{first['description']}</p><span class="btn btn-primary">{L['read']} <i class="ph ph-arrow-right" aria-hidden="true"></i></span></div>
         </a>
         <div class="post-grid-3" style="margin-top:16px">{cards}

@@ -402,6 +402,8 @@ def main():
     build_main()
     import pages_fr, articles
     pages_fr.build(fr_page)
+    import metiers
+    write('llms.txt', tokens(metiers.llms_txt(), 'fr'))
     articles.build(CONTENT['articles'], blog_page, pages_fr.shell)
     site_data_js()
     build_sitemap(pages_fr.PAGES_FR, articles.PAGES)

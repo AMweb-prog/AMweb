@@ -157,6 +157,9 @@ CITIES = [
          lead="AMweb est un studio web basé à Kénitra. On crée des sites vitrines, des boutiques en ligne et des applications pour les entreprises de la ville et de toute la région Rabat-Salé-Kénitra.",
          local=f"""<p>Kénitra change vite. Avec l'Atlantic Free Zone et l'usine Stellantis, la ville attire des entreprises, des sous-traitants et de nouveaux habitants. Pour un commerce, un cabinet ou une PME, ce sont autant de clients qui cherchent d'abord sur Google, depuis leur téléphone.</p>
 <p>Travailler avec un studio basé à Kénitra, c'est pouvoir se rencontrer facilement et avancer avec une équipe qui connaît le marché local, ses quartiers et ses habitudes. On vous reçoit au studio sur rendez-vous, ou on échange en visio et par téléphone.</p>""",
+         market="""<p>À Kénitra, on accompagne beaucoup de commerces de quartier, de Maamora à Bir Rami, du Val Fleuri à Ouled Oujih : cafés, restaurants, salons, boutiques. Leur premier besoin est simple : apparaître quand un habitant cherche « près de moi », avec des horaires justes et un numéro qui répond.</p>
+<p>La ville compte aussi des sous-traitants industriels autour de l'Atlantic Free Zone, qui ont besoin d'un site sérieux, souvent en français et en anglais, pour rassurer des donneurs d'ordre. Et avec les étudiants de l'université Ibn Tofail et l'été à Mehdia, les activités saisonnières (location, restauration, loisirs) gagnent à préparer leur site avant la haute saison.</p>""",
+         ideas=['restaurant', 'coffee-shop', 'barbier-coiffeur', 'location-voiture'],
          faq=[("Où se trouve AMweb ?", "Notre studio est à Kénitra. On vous reçoit sur rendez-vous, et on peut aussi travailler en visio ou par téléphone."),
               ("Combien coûte un site web à Kénitra ?", "Chez AMweb : Site Vitrine {{prix:vitrine}} MAD, Site E-commerce {{prix:ecommerce}} MAD, Site Premium dès {{prix:premium}} MAD, avec facilités de paiement."),
               ("Pouvez-vous m'aider à apparaître sur Google Maps à Kénitra ?", "Oui. Notre offre SEO inclut l'optimisation de votre fiche Google Business Profile et du référencement local. Consultez aussi notre guide pour apparaître sur Google Maps à Kénitra.")]),
@@ -164,6 +167,9 @@ CITIES = [
          lead="Vous êtes à Rabat et vous cherchez un studio web réactif, avec des prix clairs ? AMweb, basé à Kénitra à moins d'une heure de la capitale, accompagne les entreprises de la capitale, de la première maquette au premier client.",
          local=f"""<p>Capitale administrative du Maroc, Rabat concentre ministères, institutions, professions libérales et PME de services. La concurrence en ligne y est forte : un site professionnel, rapide et bien référencé fait la différence entre être appelé ou être oublié.</p>
 <p>On travaille avec vous en visio, par téléphone ou en rendez-vous selon votre projet, avec des étapes claires et des maquettes validées avant chaque développement.</p>""",
+         market="""<p>À Rabat, une grande part de nos échanges se fait avec des professions libérales et des sociétés de services : cabinets, fiduciaires, médecins, centres de formation, consultants. À l'Agdal, à Hay Riad ou à Souissi, la clientèle compare sur Google et attend un site sobre, rapide et souvent bilingue français-arabe.</p>
+<p>La capitale accueille aussi des écoles privées, des commerces haut de gamme et des restaurants qui visent une clientèle exigeante, y compris étrangère. Pour eux, la qualité des photos, la clarté des prix et la version anglaise comptent autant que le référencement.</p>""",
+         ideas=['avocat', 'fiduciaire', 'cabinet-medical', 'ecole-privee'],
          faq=[("Travaillez-vous avec des entreprises à Rabat ?", "Oui. Basés à Kénitra, à moins d'une heure de Rabat, nous accompagnons des entreprises de toute la région Rabat-Salé-Kénitra, en visio, par téléphone ou en rendez-vous."),
               ("Combien coûte un site web à Rabat avec AMweb ?", "Les mêmes prix pour toute la région : Site Vitrine {{prix:vitrine}} MAD, Site E-commerce {{prix:ecommerce}} MAD, Site Premium dès {{prix:premium}} MAD, avec facilités de paiement."),
               ("Pouvez-vous créer un site bilingue français et arabe ?", "Oui, nous créons des sites multilingues, y compris en arabe avec une mise en page adaptée à la lecture de droite à gauche.")]),
@@ -171,6 +177,9 @@ CITIES = [
          lead="Commerçants, artisans, cabinets et PME de Salé : AMweb crée votre site web sur mesure, votre boutique en ligne ou votre application, avec des prix affichés et des facilités de paiement.",
          local=f"""<p>Ville jumelle de Rabat, sur l'autre rive du Bouregreg, Salé compte un tissu dense de commerces, d'artisans et de nouvelles zones d'activité. Beaucoup de clients comparent désormais les adresses sur Google avant de se déplacer : votre site et votre fiche Google sont votre première vitrine.</p>
 <p>Basés à Kénitra, nous travaillons avec les entreprises de Salé en visio, par téléphone ou en rendez-vous, avec la même méthode et les mêmes prix pour toute la région.</p>""",
+         market="""<p>À Salé, le tissu est fait de commerces de proximité, d'artisans et de petites entreprises, de Tabriquet à Hay Karima et Sala Al Jadida. Beaucoup vendent déjà sur WhatsApp et Instagram : un site leur permet de présenter leurs produits proprement, d'afficher leurs prix et de recevoir des commandes sans répondre à chaque message.</p>
+<p>Les artisans, comme ceux de la poterie de l'Oulja, peuvent toucher une clientèle de tout le Maroc et de l'étranger avec une boutique en ligne. Et les entreprises installées à Technopolis ou dans les zones d'activité ont besoin d'un site professionnel pour leurs clients et leurs recrutements.</p>""",
+         ideas=['boutique-vetements', 'boulangerie-patisserie', 'garage-auto', 'animalerie'],
          faq=[("Intervenez-vous à Salé ?", "Oui. Nous accompagnons les entreprises de Salé et de toute la région Rabat-Salé-Kénitra, en visio, par téléphone ou en rendez-vous."),
               ("Quel site choisir pour un commerce à Salé ?", "Pour présenter votre activité et être trouvé sur Google, le Site Vitrine à {{prix:vitrine}} MAD est un excellent départ. Pour vendre en ligne, choisissez le Site E-commerce à {{prix:ecommerce}} MAD."),
               ("Proposez-vous des facilités de paiement ?", "Oui, sur toutes nos formules, avec un échéancier défini ensemble avant le démarrage du projet.")]),
@@ -178,6 +187,7 @@ CITIES = [
 
 
 def city_page(c):
+    import metiers
     name = c['name']
     others = [x for x in CITIES if x['slug'] != c['slug']]
     main = f'''
@@ -219,6 +229,15 @@ def city_page(c):
       </div>
     </section>
 
+    <section class="section" aria-labelledby="market-title" style="padding-top:0">
+      <div class="wrap split-text">
+        <h2 class="h2 display" id="market-title">Les entreprises qu'on accompagne à {name}.</h2>
+        <div class="prose">{c['market']}
+          <p>Des exemples par métier : {metiers.links_for(c['ideas'])}.</p>
+        </div>
+      </div>
+    </section>
+
     <section class="section" aria-labelledby="prices-title" style="padding-top:0">
       <div class="wrap">
         <h2 class="h2 display" id="prices-title" style="margin-bottom:clamp(32px,5vw,56px)">Des prix clairs, à {name} comme ailleurs.</h2>
@@ -241,7 +260,7 @@ def city_page(c):
           </div>
           <a href="index.html#audit" class="btn btn-primary magnetic" style="position:relative">Recevoir mon audit <i class="ph ph-arrow-right" aria-hidden="true"></i></a>
         </div>
-        <p class="related-links">Nous intervenons aussi à <a href="creation-site-web-{others[0]['slug']}.html">{others[0]['name']}</a> et à <a href="creation-site-web-{others[1]['slug']}.html">{others[1]['name']}</a>. Lisez nos <a href="conseils.html">conseils pour réussir en ligne</a>.</p>
+        <p class="related-links">Nous intervenons aussi à <a href="creation-site-web-{others[0]['slug']}.html">{others[0]['name']}</a> et à <a href="creation-site-web-{others[1]['slug']}.html">{others[1]['name']}</a>. Lisez nos <a href="conseils.html">conseils pour réussir en ligne</a>.{metiers.city_links_html()}</p>
       </div>
     </section>'''
     path = f"creation-site-web-{c['slug']}.html"
@@ -349,9 +368,10 @@ PAGES_FR = []
 
 
 def build(fr_page):
-    """French-only pages: city landing pages and legal pages (Conseils articles come from build/articles.py)."""
+    """French-only pages: city pages, trade pages (metiers.py) and legal pages (Conseils articles come from build/articles.py)."""
     PAGES_FR.clear()
-    jobs = [city_page(c) for c in CITIES] + legal_pages()
+    import metiers
+    jobs = [city_page(c) for c in CITIES] + metiers.pages() + legal_pages()
     for path, tpl, title, desc, kw in jobs:
         page = 'city' if path.startswith('creation') else 'legal'
         fr_page(path, page, tpl, title, desc, kw)

@@ -197,6 +197,25 @@ Tous ces fichiers peuvent être relancés sans risque.
 
 ---
 
+## Pages « Création de site web pour… » (SEO par métier)
+
+Le site contient une page par métier (restaurant, barbier, parapharmacie, coffee shop, animalerie, avocat, école...) et une page qui les regroupe : `amweb.ma/creation-site-web-par-metier`. Elles servent à apparaître sur Google pour des recherches comme « création site web barbier » ou « création site web parapharmacie ».
+
+- Le contenu est dans `build/metiers_data.py` : une fiche par métier (texte d'introduction, fonctions, pages conseillées, conseils, formule, questions fréquentes).
+- Pour ajouter un métier, copie une fiche et **réécris tous les textes**. Google pénalise les pages où seul le nom du métier change.
+- Le mot « agence » ne doit pas apparaître dans les textes visibles : il est seulement dans les mots-clés et les données structurées.
+- Après un push, quand Vercel affiche « Ready », préviens Bing et les autres moteurs (IndexNow) en collant ce bloc dans le terminal PowerShell de VS Code :
+
+  ```powershell
+  [xml]$sm = (Invoke-WebRequest "https://www.amweb.ma/sitemap.xml" -UseBasicParsing).Content
+  $urls = @($sm.urlset.url | ForEach-Object { $_.loc })
+  $body = @{ host = "www.amweb.ma"; key = "3d1a167b246d445a6eb654fe50899a16"; keyLocation = "https://www.amweb.ma/3d1a167b246d445a6eb654fe50899a16.txt"; urlList = $urls } | ConvertTo-Json
+  $r = Invoke-WebRequest "https://api.indexnow.org/indexnow" -Method Post -ContentType "application/json; charset=utf-8" -Body $body -UseBasicParsing
+  "OK ($($r.StatusCode)) : $($urls.Count) pages envoyees a IndexNow"
+  ```
+
+Le fichier `amweb.ma/llms.txt` résume le site pour les assistants IA (ChatGPT, Claude, Perplexity). Il est créé automatiquement.
+
 ## Notifications par email (plus tard, avec Brevo)
 
 Quand tu activeras Brevo :
