@@ -112,7 +112,7 @@ def ask_block(topic=''):
         <div class="ask">
           <div class="ask-copy">
             <h2 class="ask-title display" id="ask-title">Une question sur ce sujet ?</h2>
-            <p class="lead">Posez-la ici. On vous répond personnellement sur WhatsApp, sans engagement.</p>
+            <p class="lead">Posez-la ici. On vous répond personnellement sur WhatsApp sous 2 h en semaine, sans engagement.</p>
             <p class="status" data-status></p>
           </div>
           <form class="form ask-form" data-topic="{html.escape(topic, quote=True)}" novalidate aria-label="Poser une question">
@@ -187,7 +187,7 @@ CITIES = [
 
 
 def city_page(c):
-    import metiers
+    import metiers, leads
     name = c['name']
     others = [x for x in CITIES if x['slug'] != c['slug']]
     main = f'''
@@ -249,6 +249,7 @@ def city_page(c):
       </div>
     </section>
 {faq_html(c['faq'], f'Questions fréquentes à {name}.')}
+{leads.guide_block()}
 
     <section class="section" aria-labelledby="more-title" style="padding-top:0">
       <div class="wrap">
@@ -256,9 +257,12 @@ def city_page(c):
           <div class="cta-band-mark" aria-hidden="true"><svg viewBox="0 0 182 96"><use href="#lg-mark"/></svg></div>
           <div style="position:relative">
             <h2 class="h2 display" id="more-title">Audit gratuit de votre site en 48h.</h2>
-            <p>Découvrez ce qui vous fait perdre des clients à {name}. Réponse sur WhatsApp, sans engagement.</p>
+            <p>Découvrez ce qui vous fait perdre des clients à {name}. Premier retour sous 2 h en semaine, sur WhatsApp, sans engagement.</p>
           </div>
-          <a href="index.html#audit" class="btn btn-primary magnetic" style="position:relative">Recevoir mon audit <i class="ph ph-arrow-right" aria-hidden="true"></i></a>
+          <div class="cta-band-actions" style="position:relative">
+            <a href="index.html#audit" class="btn btn-primary magnetic">Recevoir mon audit <i class="ph ph-arrow-right" aria-hidden="true"></i></a>
+            {leads.visio_btn()}
+          </div>
         </div>
         <p class="related-links">Nous intervenons aussi à <a href="creation-site-web-{others[0]['slug']}.html">{others[0]['name']}</a> et à <a href="creation-site-web-{others[1]['slug']}.html">{others[1]['name']}</a>. Lisez nos <a href="conseils.html">conseils pour réussir en ligne</a>.{metiers.city_links_html()}</p>
       </div>

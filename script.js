@@ -183,7 +183,7 @@
           box.setAttribute('role', 'status');
           box.innerHTML = '<i class="ph ph-check-circle" aria-hidden="true"></i><div><strong></strong><span></span></div>';
           box.querySelector('strong').textContent = opts.okTitle || T3("Merci, c'est bien reçu !", 'Thank you, we got it!', 'شكراً، توصلنا بطلبك!');
-          box.querySelector('span').textContent = opts.okText || T3('On vous répond sous 24h ouvrées.', 'We will reply within one business day.', 'سنرد عليك خلال 24 ساعة عمل.');
+          box.querySelector('span').textContent = opts.okText || T3('On vous répond sous 2 h (du lundi au vendredi, 9 h - 18 h).', 'We reply within 2 hours (Monday to Friday, 9am - 6pm).', 'نرد عليك خلال ساعتين (من الاثنين إلى الجمعة، 9:00 - 18:00).');
           if (!opts.noBox) place(box);
           if (opts.onDone) opts.onDone();
           return true;
@@ -839,22 +839,24 @@
       const day = daysBox.querySelector('.is-on');
       const time = document.querySelector('#bookTimes .is-on');
       const mode = document.querySelector('#bookModes .is-on');
-      const name = document.getElementById('bkName'), phone = document.getElementById('bkPhone');
+      const name = document.getElementById('bkName'), phone = document.getElementById('bkPhone'), mail = document.getElementById('bkEmail');
       let bad = null;
       if (!day) { daysBox.closest('.book-set').classList.add('has-error'); bad = bad || daysBox; }
       if (!time) { const tb = document.getElementById('bookTimes'); tb.closest('.book-set').classList.add('has-error'); bad = bad || tb; }
       if (!name.value.trim()) { name.closest('.field').classList.add('has-error'); bad = bad || name; }
       if (!phoneOk(phone.value)) { phone.closest('.field').classList.add('has-error'); bad = bad || phone; }
+      const email = mail ? mail.value.trim() : '';
+      if (email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { mail.closest('.field').classList.add('has-error'); bad = bad || mail; }
       if (bad) { if (bad.focus) bad.focus(); return; }
       const plan = PLANS[dlg.dataset.plan] ? PLANS[dlg.dataset.plan][lang] : '';
       const modeTxt = mode ? mode.textContent.trim() : '';
       const msg = T3(
-        `Bonjour AMweb 👋\n\nJe souhaite réserver un rendez-vous.\n\n${plan ? `*Forfait :* ${plan}\n` : ''}*Date :* ${day.dataset.label}\n*Heure :* ${time.dataset.time}\n*Format :* ${modeTxt}\n*Nom :* ${name.value.trim()}\n*Téléphone :* ${phone.value.trim()}\n\nMerci de confirmer !`,
-        `Hello AMweb 👋\n\nI would like to book a meeting.\n\n${plan ? `*Package:* ${plan}\n` : ''}*Date:* ${day.dataset.label}\n*Time:* ${time.dataset.time}\n*Format:* ${modeTxt}\n*Name:* ${name.value.trim()}\n*Phone:* ${phone.value.trim()}\n\nPlease confirm!`,
-        `مرحباً AMweb 👋\n\nأرغب في حجز موعد.\n\n${plan ? `*العرض:* ${plan}\n` : ''}*التاريخ:* ${day.dataset.label}\n*الساعة:* ${time.dataset.time}\n*الطريقة:* ${modeTxt}\n*الاسم:* ${name.value.trim()}\n*الهاتف:* ${phone.value.trim()}\n\nالمرجو التأكيد!`);
+        `Bonjour AMweb 👋\n\nJe souhaite réserver un appel de 30 minutes.\n\n${plan ? `*Forfait :* ${plan}\n` : ''}*Date :* ${day.dataset.label}\n*Heure :* ${time.dataset.time}\n*Format :* ${modeTxt}\n*Nom :* ${name.value.trim()}\n*Téléphone :* ${phone.value.trim()}\n\nMerci de confirmer !`,
+        `Hello AMweb 👋\n\nI would like to book a 30-minute call.\n\n${plan ? `*Package:* ${plan}\n` : ''}*Date:* ${day.dataset.label}\n*Time:* ${time.dataset.time}\n*Format:* ${modeTxt}\n*Name:* ${name.value.trim()}\n*Phone:* ${phone.value.trim()}\n\nPlease confirm!`,
+        `مرحباً AMweb 👋\n\nأرغب في حجز مكالمة لمدة 30 دقيقة.\n\n${plan ? `*العرض:* ${plan}\n` : ''}*التاريخ:* ${day.dataset.label}\n*الساعة:* ${time.dataset.time}\n*الطريقة:* ${modeTxt}\n*الاسم:* ${name.value.trim()}\n*الهاتف:* ${phone.value.trim()}\n\nالمرجو التأكيد!`);
       sendLead({
-        type: 'rdv', nom: name.value.trim(), telephone: phone.value.trim(),
-        details: { forfait: plan || null, date: day.dataset.label, heure: time.dataset.time, format: modeTxt || null },
+        type: 'rdv', nom: name.value.trim(), telephone: phone.value.trim(), email: email || null,
+        details: { forfait: plan || null, date: day.dataset.label, heure: time.dataset.time, format: modeTxt || null, duree: '30 min' },
       }, {
         form, waMsg: msg, noBox: true,
         onDone: () => {
@@ -862,7 +864,7 @@
           form.reset();
           form.querySelectorAll('.chip.is-on').forEach(c => { c.classList.remove('is-on'); c.setAttribute('aria-pressed', 'false'); });
           close();
-          toast(T3('Rendez-vous demandé : on vous confirme rapidement.', 'Meeting requested: we will confirm quickly.', 'تم طلب الموعد: سنؤكده لك بسرعة.'));
+          toast(T3('Appel demandé : on vous confirme sous 2 h en semaine, avec le lien visio.', 'Call requested: we confirm within 2 hours on weekdays, with the video link.', 'تم طلب المكالمة: نؤكدها خلال ساعتين في أيام العمل مع رابط الفيديو.'));
         },
       });
     });
@@ -900,6 +902,34 @@
     });
   }
 
+  /* ---------------- Free guide (PDF in exchange for an email, French pages) ---------------- */
+  function initGuide() {
+    document.querySelectorAll('.guide-form').forEach(form => {
+      const dl = form.querySelector('.guide-dl');
+      form.querySelectorAll('input').forEach(inp => inp.addEventListener('input', () => { const f = inp.closest('.field'); if (f) f.classList.remove('has-error'); }));
+      form.addEventListener('submit', e => {
+        e.preventDefault();
+        const name = form.querySelector('[name="gname"]'), email = form.querySelector('[name="gemail"]'), phone = form.querySelector('[name="gphone"]');
+        let bad = null;
+        if (!name.value.trim()) { name.closest('.field').classList.add('has-error'); bad = bad || name; }
+        if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.value.trim())) { email.closest('.field').classList.add('has-error'); bad = bad || email; }
+        if (bad) { bad.focus(); return; }
+        const open = () => { if (!dl) return; dl.hidden = false; try { dl.click(); } catch (err) { /* the visible button stays */ } };
+        const msg = `Bonjour AMweb 👋\n\nJe souhaite recevoir le guide « 12 points à vérifier avant de créer votre site ».\n\n*Nom :* ${name.value.trim()}\n*Email :* ${email.value.trim()}${phone.value.trim() ? `\n*WhatsApp :* ${phone.value.trim()}` : ''}`;
+        sendLead({
+          type: 'contact', nom: name.value.trim(), email: email.value.trim(), telephone: phone.value.trim() || null,
+          message: 'Demande du guide gratuit « 12 points à vérifier avant de créer votre site ».',
+          details: { demande: 'Guide gratuit', page_guide: location.pathname },
+        }, {
+          form, waMsg: msg,
+          okTitle: 'Votre guide est prêt.',
+          okText: "Le téléchargement démarre. Sinon, cliquez sur « Ouvrir le guide ». Une question ? On vous répond sous 2 h en semaine.",
+          onDone: () => { track('guide_download', { page: location.pathname }); },
+        }).then(() => open());   // the guide is given even if saving the request failed
+      });
+    });
+  }
+
   /* ---------------- Question forms (Conseils pages) ---------------- */
   function initQuestions() {
     document.querySelectorAll('.ask-form').forEach(form => {
@@ -923,7 +953,7 @@
           details: { article: topic || null },
         }, {
           form, waMsg: msg,
-          okText: T3('On vous répond personnellement, très vite.', 'We will reply personally, very soon.', 'سنجيبك شخصياً في أقرب وقت.'),
+          okText: T3('On vous répond personnellement sous 2 h en semaine.', 'We reply personally within 2 hours on weekdays.', 'نجيبك شخصياً خلال ساعتين في أيام العمل.'),
           onDone: () => { track('ask_question', { topic: topic || 'general' }); form.reset(); },
         });
       });
@@ -1030,6 +1060,7 @@
     initBooking();
     initAudit();
     initQuestions();
+    initGuide();
     initRealisations();
     initConsent();
     initMbar();

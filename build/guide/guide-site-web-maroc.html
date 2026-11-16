@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<!-- Source of the free guide (PDF). Regenerate with:  python3 build/guide/make_pdf.py
+     The PDF goes to assets/guide/guide-site-web-maroc-amweb.pdf. No prices here on purpose:
+     prices change in the admin, the guide points to amweb.ma/offres instead. -->
+<html lang="fr">
+<head>
+<meta charset="UTF-8" />
+<title>12 points à vérifier avant de créer votre site web au Maroc | AMweb</title>
+<style>
+@font-face { font-family: 'Unbounded'; src: url('../../assets/fonts/unbounded-latin-600-normal.woff2') format('woff2'); font-weight: 600; }
+@font-face { font-family: 'Unbounded'; src: url('../../assets/fonts/unbounded-latin-500-normal.woff2') format('woff2'); font-weight: 500; }
+@font-face { font-family: 'Geist'; src: url('../../assets/fonts/geist-sans-latin-400-normal.woff2') format('woff2'); font-weight: 400; }
+@font-face { font-family: 'Geist'; src: url('../../assets/fonts/geist-sans-latin-600-normal.woff2') format('woff2'); font-weight: 600; }
+@font-face { font-family: 'JetBrains Mono'; src: url('../../assets/fonts/jetbrains-mono-latin-500-normal.woff2') format('woff2'); font-weight: 500; }
+@page { size: A4; margin: 0; }
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+body { font-family: 'Geist', Arial, sans-serif; color: #0B0F1A; background: #F5F3EE; font-size: 10.6pt; line-height: 1.55; }
+.page { width: 210mm; height: 297mm; padding: 20mm 18mm 16mm; position: relative; page-break-after: always; overflow: hidden; }
+.page:last-child { page-break-after: auto; }
+.cover { background: #0B0F1A; color: #F5F3EE; padding: 0; display: flex; flex-direction: column; }
+.cover img { width: 100%; display: block; }
+.cover .in { padding: 14mm 18mm 0; flex: 1; display: flex; flex-direction: column; }
+.eyebrow { font-family: 'JetBrains Mono', monospace; font-size: 8.5pt; letter-spacing: .08em; text-transform: uppercase; color: #3CF0C5; }
+h1 { font-family: 'Unbounded', Arial, sans-serif; font-weight: 600; font-size: 30pt; line-height: 1.08; letter-spacing: -.03em; margin: 6mm 0 7mm; }
+h1 em { font-style: normal; color: #3CF0C5; }
+.cover p.lead { font-size: 12pt; color: #C9CED8; max-width: 150mm; }
+.cover .who { margin-top: auto; padding: 10mm 0 14mm; border-top: 1px solid rgba(245,243,238,.15); display: flex; justify-content: space-between; font-size: 9.5pt; color: #8A93A6; }
+.cover .who strong { color: #F5F3EE; }
+.head { display: flex; justify-content: space-between; align-items: baseline; font-family: 'JetBrains Mono', monospace; font-size: 8pt; color: #6B7385; border-bottom: 1px solid rgba(11,15,26,.12); padding-bottom: 3mm; margin-bottom: 8mm; }
+.head b { color: #0B0F1A; font-weight: 500; }
+h2 { font-family: 'Unbounded', Arial, sans-serif; font-weight: 600; font-size: 17pt; letter-spacing: -.03em; line-height: 1.15; margin-bottom: 5mm; }
+.point { display: grid; grid-template-columns: 13mm 1fr; gap: 4mm; padding: 4.2mm 0; border-top: 1px solid rgba(11,15,26,.1); }
+.point:first-of-type { border-top: 0; }
+.num { font-family: 'Unbounded', Arial, sans-serif; font-weight: 600; font-size: 15pt; color: #0B0F1A; line-height: 1.1; }
+.num span { display: block; width: 8mm; height: 1.4mm; background: #3CF0C5; margin-top: 2mm; border-radius: 1mm; }
+h3 { font-family: 'Unbounded', Arial, sans-serif; font-weight: 500; font-size: 11.5pt; letter-spacing: -.02em; margin-bottom: 1.5mm; }
+.point p { color: #2C3242; }
+.ask { margin-top: 2mm; font-size: 9.6pt; color: #0B0F1A; background: #E9E6DF; border-radius: 2.5mm; padding: 2.2mm 3mm; }
+.ask b { font-family: 'JetBrains Mono', monospace; font-weight: 500; font-size: 8pt; text-transform: uppercase; letter-spacing: .06em; margin-right: 2mm; }
+.foot { position: absolute; left: 18mm; right: 18mm; bottom: 10mm; display: flex; justify-content: space-between; font-family: 'JetBrains Mono', monospace; font-size: 7.5pt; color: #8A93A6; }
+.check { list-style: none; columns: 2; column-gap: 8mm; margin-top: 4mm; }
+.check li { break-inside: avoid; padding: 2.4mm 0 2.4mm 8mm; position: relative; border-bottom: 1px solid rgba(11,15,26,.1); font-size: 10pt; }
+.check li::before { content: ""; position: absolute; left: 0; top: 3.2mm; width: 4mm; height: 4mm; border: 1.4px solid #0B0F1A; border-radius: 1mm; }
+.cta { margin-top: 10mm; background: #0B0F1A; color: #F5F3EE; border-radius: 5mm; padding: 9mm 10mm; }
+.cta h2 { color: #F5F3EE; font-size: 16pt; }
+.cta p { color: #C9CED8; margin-bottom: 4mm; }
+.cta ul { list-style: none; display: grid; gap: 2mm; font-size: 10.5pt; }
+.cta li b { color: #3CF0C5; font-weight: 600; display: inline-block; min-width: 30mm; }
+</style>
+</head>
+<body>
+
+<section class="page cover">
+  <img src="../../assets/img/og-image.jpg" alt="AMweb" />
+  <div class="in">
+    <span class="eyebrow">Guide gratuit · Édition 2026</span>
+    <h1>12 points à vérifier avant de créer votre <em>site web</em> au Maroc.</h1>
+    <p class="lead">Les questions à poser avant de signer un devis, les pièges qui coûtent cher plus tard, et ce qu'un site doit faire pour vous apporter des clients. Pour les commerçants, artisans, cabinets et PME de Kénitra, Rabat, Salé et de tout le Maroc.</p>
+    <div class="who"><span><strong>AMweb</strong> · Studio web et digital à Kénitra</span><span>amweb.ma · +212 780 611 376</span></div>
+  </div>
+</section>
+
+<section class="page">
+  <div class="head"><b>AMweb · Guide</b><span>Avant le projet</span></div>
+  <h2>Avant de commencer.</h2>
+
+  <div class="point"><div class="num">01<span></span></div><div>
+    <h3>Votre objectif, en une phrase</h3>
+    <p>Être trouvé sur Google ? Recevoir des appels ? Vendre en ligne ? Prendre des rendez-vous ? Un site qui veut tout faire à la fois ne fait rien bien. Écrivez l'objectif principal avant de demander un devis : il décide du type de site, des pages et du budget.</p>
+    <p class="ask"><b>À demander</b>« Quel type de site me conseillez-vous pour cet objectif, et pourquoi ? »</p>
+  </div></div>
+
+  <div class="point"><div class="num">02<span></span></div><div>
+    <h3>Le nom de domaine, à votre nom</h3>
+    <p>Votre adresse (monentreprise.ma ou .com) est un actif de votre entreprise. Elle doit être enregistrée à votre nom, pas à celui du prestataire. Sinon, changer de prestataire peut vouloir dire perdre votre adresse, vos emails et votre référencement.</p>
+    <p class="ask"><b>À demander</b>« Au nom de qui sera enregistré le domaine, et comment le récupérer ? »</p>
+  </div></div>
+
+  <div class="point"><div class="num">03<span></span></div><div>
+    <h3>L'hébergement et son renouvellement</h3>
+    <p>Un hébergement « offert » ne l'est souvent que la première année. Vérifiez la durée incluse, le prix du renouvellement, la fréquence des sauvegardes et la présence du HTTPS (le cadenas dans le navigateur).</p>
+    <p class="ask"><b>À demander</b>« Que coûte le site la deuxième année, tout compris ? »</p>
+  </div></div>
+
+  <div class="point"><div class="num">04<span></span></div><div>
+    <h3>Le site pensé pour le téléphone</h3>
+    <p>Au Maroc, la grande majorité des visites se fait depuis un smartphone. Le site doit être conçu d'abord pour le mobile : textes lisibles, boutons faciles à toucher, numéro cliquable, WhatsApp à portée de pouce.</p>
+    <p class="ask"><b>À demander</b>« Puis-je voir un site que vous avez réalisé, sur mon téléphone ? »</p>
+  </div></div>
+
+  <div class="foot"><span>amweb.ma</span><span>2</span></div>
+</section>
+
+<section class="page">
+  <div class="head"><b>AMweb · Guide</b><span>Être trouvé</span></div>
+  <h2>Être trouvé et contacté.</h2>
+
+  <div class="point"><div class="num">05<span></span></div><div>
+    <h3>La vitesse de chargement</h3>
+    <p>Une page qui met plusieurs secondes à s'afficher fait partir les visiteurs, surtout en 4G. Testez les sites du prestataire avec l'outil gratuit de Google, PageSpeed Insights : un bon score sur mobile est un bon signe.</p>
+    <p class="ask"><b>À demander</b>« Comment optimisez-vous les images et la vitesse ? »</p>
+  </div></div>
+
+  <div class="point"><div class="num">06<span></span></div><div>
+    <h3>Le référencement de base, dès le départ</h3>
+    <p>Un titre et une description pour chaque page, une page par service, des textes écrits pour vos clients, un plan du site envoyé à Google Search Console. Ajouté après coup, le référencement coûte plus cher et prend plus de temps.</p>
+    <p class="ask"><b>À demander</b>« Qu'est-ce qui est inclus pour le référencement, concrètement ? »</p>
+  </div></div>
+
+  <div class="point"><div class="num">07<span></span></div><div>
+    <h3>Votre fiche Google Business Profile</h3>
+    <p>Pour un commerce ou un cabinet, c'est souvent elle qui apporte le plus d'appels : elle s'affiche dans Google Maps et en haut des recherches locales. Le nom, l'adresse et le téléphone doivent être identiques sur la fiche et sur le site.</p>
+    <p class="ask"><b>À demander</b>« Vous occupez-vous de la fiche Google et de son lien avec le site ? »</p>
+  </div></div>
+
+  <div class="point"><div class="num">08<span></span></div><div>
+    <h3>Des moyens de contact simples</h3>
+    <p>Bouton WhatsApp, numéro cliquable, formulaire court, horaires visibles. Chaque étape en trop fait perdre des demandes. Et les demandes doivent vous arriver quelque part où vous les verrez vraiment.</p>
+    <p class="ask"><b>À demander</b>« Où vais-je recevoir les messages du formulaire ? »</p>
+  </div></div>
+
+  <div class="foot"><span>amweb.ma</span><span>3</span></div>
+</section>
+
+<section class="page">
+  <div class="head"><b>AMweb · Guide</b><span>Contenu, paiement, règles</span></div>
+  <h2>Contenu, paiement et règles.</h2>
+
+  <div class="point"><div class="num">09<span></span></div><div>
+    <h3>Les textes, les photos et les langues</h3>
+    <p>Qui écrit les textes ? Qui fournit les photos ? Des photos réelles de votre activité inspirent plus confiance qu'une banque d'images. Décidez aussi des langues : français seul, ou aussi arabe et anglais, avec une mise en page adaptée à l'arabe.</p>
+    <p class="ask"><b>À demander</b>« Les textes et les photos sont-ils inclus dans le prix ? »</p>
+  </div></div>
+
+  <div class="point"><div class="num">10<span></span></div><div>
+    <h3>Le paiement, si vous vendez en ligne</h3>
+    <p>Le paiement à la livraison reste très utilisé au Maroc, et le paiement par carte passe par une banque et le Centre Monétique Interbancaire (CMI), avec un contrat au nom de votre entreprise. Prévoyez les deux, et une confirmation des commandes par téléphone ou WhatsApp.</p>
+    <p class="ask"><b>À demander</b>« Quels modes de paiement le site pourra-t-il accepter, et avec quelles démarches ? »</p>
+  </div></div>
+
+  <div class="point"><div class="num">11<span></span></div><div>
+    <h3>Le cadre légal</h3>
+    <p>Des mentions légales, une politique de confidentialité conforme à la loi 09-08 sur les données personnelles (contrôlée par la CNDP) dès que vous collectez des noms ou des numéros, et des conditions générales de vente si vous vendez en ligne.</p>
+    <p class="ask"><b>À demander</b>« Ces pages sont-elles prévues dans le devis ? »</p>
+  </div></div>
+
+  <div class="point"><div class="num">12<span></span></div><div>
+    <h3>L'après mise en ligne</h3>
+    <p>Pourrez-vous changer vous-même un prix, une photo, un horaire ? Qui fait les mises à jour et la sécurité ? Comment saurez-vous combien de visites et de demandes le site vous apporte ? Un bon devis répond à ces questions par écrit.</p>
+    <p class="ask"><b>À demander</b>« Que se passe-t-il le mois suivant la mise en ligne ? »</p>
+  </div></div>
+
+  <div class="foot"><span>amweb.ma</span><span>4</span></div>
+</section>
+
+<section class="page">
+  <div class="head"><b>AMweb · Guide</b><span>Récapitulatif</span></div>
+  <h2>Votre check-list avant de signer.</h2>
+  <ul class="check">
+    <li>Mon objectif principal est écrit</li>
+    <li>Le domaine sera à mon nom</li>
+    <li>Je connais le prix de la 2e année</li>
+    <li>Les sauvegardes et le HTTPS sont inclus</li>
+    <li>Le site est conçu d'abord pour le mobile</li>
+    <li>Les sites du prestataire sont rapides</li>
+    <li>Titres, descriptions et pages par service prévus</li>
+    <li>La fiche Google Business est prévue</li>
+    <li>WhatsApp et téléphone sont cliquables</li>
+    <li>Je sais où arrivent les demandes</li>
+    <li>Textes, photos et langues sont clarifiés</li>
+    <li>Les modes de paiement sont définis</li>
+    <li>Mentions légales et confidentialité prévues</li>
+    <li>Je peux modifier le contenu moi-même</li>
+    <li>La maintenance est décrite par écrit</li>
+    <li>Le devis détaille tout ce qui est inclus</li>
+  </ul>
+
+  <div class="cta">
+    <span class="eyebrow">AMweb · Studio web et digital à Kénitra</span>
+    <h2 style="margin-top:3mm">Vous voulez qu'on regarde votre projet ensemble ?</h2>
+    <p>On répond à ces 12 points par écrit, avec des prix affichés et des facilités de paiement. Premier échange gratuit et sans engagement, en visio de 30 minutes, au téléphone ou au studio.</p>
+    <ul>
+      <li><b>Nos offres</b>amweb.ma/offres</li>
+      <li><b>Appel visio</b>amweb.ma, bouton « Réserver un appel »</li>
+      <li><b>WhatsApp</b>+212 780 611 376 · réponse sous 2 h en semaine</li>
+      <li><b>Email</b>contact@amweb.ma</li>
+    </ul>
+  </div>
+  <div class="foot"><span>amweb.ma</span><span>5</span></div>
+</section>
+
+</body>
+</html>

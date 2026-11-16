@@ -3,6 +3,7 @@
 (build/data/defaults.json or Supabase). An article is identified by its slug; each language
 version is optional except French."""
 import html, re, zlib
+from leads import guide_block
 
 BASE = 'https://www.amweb.ma/'
 DIRS = {'fr': '', 'en': 'en/', 'ar': 'ar/'}
@@ -17,7 +18,7 @@ LOC = {
         home='Accueil', blog='Conseils', crumbs="Fil d'Ariane", minread='min de lecture', toc='Sommaire',
         sources='Sources et références', related='À lire aussi.', faq='Questions fréquentes.', audit='Audit gratuit',
         read="Lire l'article", alt="Illustration 3D AMweb pour l'article : ", articles='Articles',
-        ask_title='Une question sur ce sujet ?', ask_lead='Posez-la ici. On vous répond personnellement, sans engagement.',
+        ask_title='Une question sur ce sujet ?', ask_lead='Posez-la ici. On vous répond personnellement sous 2 h en semaine, sans engagement.', visio='Appel visio de 30 min',
         name='Nom', name_err='Indiquez votre nom.', contact='WhatsApp ou email', contact_err='Indiquez un numéro ou un email.',
         q='Votre question', q_ph='Par exemple : combien de temps pour mettre ma boutique en ligne ?', q_err='Écrivez votre question.',
         send='Envoyer ma question', note='Votre question nous arrive directement. Réponse rapide, sans engagement.', form='Poser une question',
@@ -31,7 +32,7 @@ LOC = {
         home='Home', blog='Blog', crumbs='Breadcrumb', minread='min read', toc='Contents',
         sources='Sources and references', related='Read also.', faq='Frequently asked questions.', audit='Free audit',
         read='Read the article', alt='3D illustration by AMweb for the article: ', articles='Articles',
-        ask_title='A question about this topic?', ask_lead='Ask it here. We reply personally, with no commitment.',
+        ask_title='A question about this topic?', ask_lead='Ask it here. We reply personally within 2 hours on weekdays, with no commitment.', visio='30-min video call',
         name='Name', name_err='Please enter your name.', contact='WhatsApp or email', contact_err='Please enter a number or an email.',
         q='Your question', q_ph='For example: how long does it take to put my store online?', q_err='Please write your question.',
         send='Send my question', note='Your question comes straight to us. Quick reply, no commitment.', form='Ask a question',
@@ -45,7 +46,7 @@ LOC = {
         home='الرئيسية', blog='نصائح', crumbs='مسار التصفح', minread='دقائق للقراءة', toc='المحتويات',
         sources='المصادر والمراجع', related='اقرأ أيضاً.', faq='أسئلة شائعة.', audit='تدقيق مجاني',
         read='اقرأ المقال', alt='رسم ثلاثي الأبعاد من AMweb لمقال: ', articles='المقالات',
-        ask_title='لديك سؤال حول هذا الموضوع؟', ask_lead='اطرحه هنا. نجيبك شخصياً، دون أي التزام.',
+        ask_title='لديك سؤال حول هذا الموضوع؟', ask_lead='اطرحه هنا. نجيبك شخصياً خلال ساعتين في أيام العمل، دون أي التزام.', visio='مكالمة فيديو لمدة 30 دقيقة',
         name='الاسم', name_err='يرجى إدخال اسمك.', contact='واتساب أو بريد إلكتروني', contact_err='يرجى إدخال رقم أو بريد إلكتروني.',
         q='سؤالك', q_ph='مثلاً: كم من الوقت يلزم لإطلاق متجري على الإنترنت؟', q_err='يرجى كتابة سؤالك.',
         send='أرسل سؤالي', note='يصلنا سؤالك مباشرة. رد سريع، دون أي التزام.', form='اطرح سؤالاً',
@@ -201,6 +202,7 @@ def article_page(a, siblings, lang, shell):
       <div class="wrap post-grid">
         <aside class="post-aside">{_toc(body, L)}
           <a class="btn btn-primary btn-full" href="../index.html#audit">{L['audit']} <i class="ph ph-arrow-right" aria-hidden="true"></i></a>
+          <button type="button" class="btn btn-ghost btn-full" data-book style="margin-top:10px"><i class="ph ph-calendar-check" aria-hidden="true"></i> {L['visio']}</button>
         </aside>
         <div class="prose">{body}
           {_sources(a.get('sources') or [], L)}
@@ -208,6 +210,7 @@ def article_page(a, siblings, lang, shell):
       </div>
     </article>
 {_faq(faq, L)}
+{guide_block(root) if lang == 'fr' else ''}
 {ask_block(a['h1'], L)}
 '''
     if rel:
@@ -267,6 +270,7 @@ def hub_page(arts, lang, shell):
         </div>
       </div>
     </section>
+{guide_block(root) if lang == 'fr' else ''}
 {ask_block('', L)}'''
     schema = {"@context": "https://schema.org", "@graph": [
         {"@type": "Blog", "name": L['blog_name'], "url": BASE + d + "conseils.html", "inLanguage": L['inlang'], "publisher": {"@id": BASE + "#localbusiness"},

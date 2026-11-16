@@ -216,6 +216,17 @@ Le site contient une page par métier (restaurant, barbier, parapharmacie, coffe
 
 Le fichier `amweb.ma/llms.txt` résume le site pour les assistants IA (ChatGPT, Claude, Perplexity). Il est créé automatiquement.
 
+## Prise de contact : réponse sous 2 h, appel visio, guide gratuit
+
+- Le site promet une **réponse sous 2 h, du lundi au vendredi de 9 h à 18 h** (formulaires, page d'accueil, pages SEO). Si ce délai change, modifie-le dans `build/templates/index.tpl.html`, `build/partials.py`, `build/articles.py`, `build/pages_fr.py`, `build/metiers.py` et `script.js`.
+- Le bouton **« Appel visio de 30 min »** ouvre la fenêtre de réservation (visio, téléphone ou studio). La demande arrive dans l'admin et l'ERP comme un **Rendez-vous**, avec la date, l'heure, le format et l'email pour envoyer le lien Google Meet ou WhatsApp vidéo.
+- Le **guide gratuit** (« 12 points à vérifier avant de créer votre site », PDF de 5 pages) est proposé sur les pages en français : Conseils, articles, villes et métiers. La personne laisse son nom et son email, le PDF se télécharge, et la demande arrive comme un **Contact** avec « Guide gratuit » dans les détails.
+  - Le PDF est dans `assets/guide/`. Sa source est `build/guide/guide-site-web-maroc.html`. Pour le régénérer après une modification : `python build/guide/make_pdf.py` (Python et Playwright nécessaires).
+
+## Ajouter les nouveaux articles Conseils en ligne
+
+Le site en ligne lit les articles dans Supabase. Après avoir ajouté des articles dans `build/data/defaults.json` (puis `python build/make_seed.py`), exécute `supabase/seed.sql` dans le SQL Editor de Supabase : les articles déjà présents ne sont ni dupliqués ni modifiés, seuls les nouveaux sont ajoutés. Clique ensuite sur **Publier** dans l'admin.
+
 ## Notifications par email (plus tard, avec Brevo)
 
 Quand tu activeras Brevo :

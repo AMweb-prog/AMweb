@@ -7,6 +7,7 @@ that word only appears in meta keywords and structured data.
 import html, re
 from pages_fr import BASE, ORG, WIKI, shell, crumbs, crumbs_schema, faq_schema, faq_html
 from metiers_data import CATS, METIERS
+from leads import guide_block, visio_btn
 
 HUB = 'creation-site-web-par-metier.html'
 OFFERS = {
@@ -129,6 +130,7 @@ def metier_page(m):
       </div>
     </section>
 {faq_html(m['faq'], 'Questions fréquentes.')}
+{guide_block()}
 
     <section class="section" aria-labelledby="more-title" style="padding-top:0">
       <div class="wrap">
@@ -136,9 +138,12 @@ def metier_page(m):
           <div class="cta-band-mark" aria-hidden="true"><svg viewBox="0 0 182 96"><use href="#lg-mark"/></svg></div>
           <div style="position:relative">
             <h2 class="h2 display" id="more-title">Parlons de votre projet.</h2>
-            <p>Décrivez votre activité en deux lignes : on vous répond sur WhatsApp avec une proposition adaptée, sans engagement.</p>
+            <p>Décrivez votre activité en deux lignes : on vous répond sous 2 h en semaine avec une proposition adaptée, sans engagement. Ou réservez un appel visio de 30 minutes.</p>
           </div>
-          <a href="index.html#contact" class="btn btn-primary magnetic" style="position:relative">Démarrer mon projet <i class="ph ph-arrow-right" aria-hidden="true"></i></a>
+          <div class="cta-band-actions" style="position:relative">
+            <a href="index.html#contact" class="btn btn-primary magnetic">Démarrer mon projet <i class="ph ph-arrow-right" aria-hidden="true"></i></a>
+            {visio_btn()}
+          </div>
         </div>
         <p class="related-links">Nous créons aussi des sites pour : {rel_links}. Voir <a href="{HUB}">tous les métiers</a>. Nous travaillons à {city_links} et partout au Maroc.</p>
       </div>
@@ -204,6 +209,7 @@ def hub_page():
       </div>
     </section>
 {''.join(groups)}
+{guide_block()}
 
     <section class="section" aria-labelledby="more-title" style="padding-top:0">
       <div class="wrap">
@@ -211,9 +217,12 @@ def hub_page():
           <div class="cta-band-mark" aria-hidden="true"><svg viewBox="0 0 182 96"><use href="#lg-mark"/></svg></div>
           <div style="position:relative">
             <h2 class="h2 display" id="more-title">Votre métier n'est pas dans la liste ?</h2>
-            <p>On crée des sites pour toutes les activités. Décrivez la vôtre, on vous répond sur WhatsApp.</p>
+            <p>On crée des sites pour toutes les activités. Décrivez la vôtre : réponse sous 2 h en semaine, ou appel visio de 30 minutes.</p>
           </div>
-          <a href="index.html#contact" class="btn btn-primary magnetic" style="position:relative">Nous écrire <i class="ph ph-arrow-right" aria-hidden="true"></i></a>
+          <div class="cta-band-actions" style="position:relative">
+            <a href="index.html#contact" class="btn btn-primary magnetic">Nous écrire <i class="ph ph-arrow-right" aria-hidden="true"></i></a>
+            {visio_btn()}
+          </div>
         </div>
         <p class="related-links">Nous travaillons à {city_links} et partout au Maroc. Lisez aussi nos <a href="conseils.html">conseils pour réussir en ligne</a>.</p>
       </div>

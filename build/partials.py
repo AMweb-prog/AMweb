@@ -143,7 +143,7 @@ def chrome_bottom(c):
     """Mobile contact bar, booking dialog, consent banner (all pages)."""
     H = lambda a: home_link(c, a)
     r = c['root']
-    times = ''.join(f'<button type="button" class="chip" data-time="{t}">{t}</button>' for t in ('10:00', '11:30', '14:30', '16:00'))
+    times = ''.join(f'<button type="button" class="chip" data-time="{t}">{t}</button>' for t in ('09:30', '10:30', '11:30', '14:30', '15:30', '16:30'))
     return f"""<div class="mbar" id="mbar">
     <a class="mbar-wa" href="{WA}" rel="noopener" aria-label="WhatsApp"><i class="ph ph-whatsapp-logo" aria-hidden="true"></i><span>WhatsApp</span></a>
     <a class="btn btn-primary mbar-cta" href="{H('contact')}">[[Démarrer un projet|Start a project]] <i class="ph ph-arrow-right" aria-hidden="true"></i></a>
@@ -153,21 +153,22 @@ def chrome_bottom(c):
     <form class="book-inner" id="bookForm" novalidate>
       <div class="hp" aria-hidden="true"><label>Website<input type="text" name="website" tabindex="-1" autocomplete="off" /></label></div>
       <button class="book-x" type="button" data-close aria-label="[[Fermer|Close]]"><i class="ph ph-x" aria-hidden="true"></i></button>
-      <span class="eyebrow">[[Rendez-vous gratuit|Free meeting]]</span>
-      <h2 class="book-title display" id="bookTitle">[[Réservons un créneau.|Let's book a slot.]]</h2>
-      <p class="book-lead">[[Choisissez un jour, une heure et un format. On vous confirme le rendez-vous rapidement.|Pick a day, a time and a format. We confirm the meeting quickly.]]</p>
+      <span class="eyebrow">[[Appel gratuit · 30 minutes|Free call · 30 minutes]]</span>
+      <h2 class="book-title display" id="bookTitle">[[Réservons 30 minutes ensemble.|Let's book 30 minutes together.]]</h2>
+      <p class="book-lead">[[Un échange gratuit et sans engagement pour parler de votre projet. Choisissez un jour, une heure et un format : on vous confirme sous 2 h en semaine, avec le lien visio.|A free, no-commitment chat about your project. Pick a day, a time and a format: we confirm within 2 hours on weekdays, with the video link.]]</p>
       <fieldset class="book-set"><legend>[[Jour|Day]]</legend><div class="chips" id="bookDays"></div><span class="err" id="bookDayErr">[[Choisissez un jour.|Pick a day.]]</span></fieldset>
       <fieldset class="book-set"><legend>[[Heure|Time]]</legend><div class="chips" id="bookTimes">{times}</div><span class="err" id="bookTimeErr">[[Choisissez une heure.|Pick a time.]]</span></fieldset>
       <fieldset class="book-set"><legend>[[Format|Format]]</legend><div class="chips" id="bookModes">
-        <button type="button" class="chip is-on" data-mode="studio" aria-pressed="true">[[Au studio à Kénitra|At the studio in Kénitra]]</button>
-        <button type="button" class="chip" data-mode="video" aria-pressed="false">[[Visio|Video call]]</button>
+        <button type="button" class="chip is-on" data-mode="video" aria-pressed="true">[[Visio (Google Meet ou WhatsApp)|Video call (Google Meet or WhatsApp)]]</button>
+        <button type="button" class="chip" data-mode="studio" aria-pressed="false">[[Au studio à Kénitra|At the studio in Kénitra]]</button>
         <button type="button" class="chip" data-mode="phone" aria-pressed="false">[[Téléphone|Phone]]</button>
       </div></fieldset>
       <div class="form-row">
         <div class="field"><label for="bkName">[[Nom complet|Full name]]</label><input id="bkName" type="text" autocomplete="name" required aria-describedby="bkName-err" /><span class="err" id="bkName-err">[[Indiquez votre nom.|Please enter your name.]]</span></div>
         <div class="field"><label for="bkPhone">[[Téléphone / WhatsApp|Phone / WhatsApp]]</label><input id="bkPhone" type="tel" autocomplete="tel" required placeholder="+212 6XX XXX XXX" aria-describedby="bkPhone-err" /><span class="err" id="bkPhone-err">[[Indiquez un numéro valide.|Enter a valid number.]]</span></div>
       </div>
-      <button type="submit" class="btn btn-primary btn-full"><i class="ph ph-calendar-check" aria-hidden="true"></i> [[Réserver ce créneau|Book this slot]]</button>
+      <div class="field"><label for="bkEmail">[[Email pour recevoir le lien visio|Email to receive the video link]] <span class="opt">[[(facultatif)|(optional)]]</span></label><input id="bkEmail" type="email" autocomplete="email" placeholder="vous@exemple.ma" /><span class="err">[[Saisissez une adresse email valide.|Enter a valid email address.]]</span></div>
+      <button type="submit" class="btn btn-primary btn-full"><i class="ph ph-calendar-check" aria-hidden="true"></i> [[Réserver mon appel de 30 min|Book my 30-min call]]</button>
     </form>
   </dialog>
 
